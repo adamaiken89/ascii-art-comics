@@ -59,6 +59,16 @@ Each stage is a pure subagent. No shared mutable state. See `references/validati
 - Border sets, gutter math → `references/panels.md`
 - Seam contracts, audit checklist → `references/validation.md`
 - Wrap rules per language → `references/dialogue.md`
+- **Debugging misaligned boxes / wrong widths → `references/debugging.md`** (CJK + emoji gotchas, 5 common bugs, diagnostic checklist)
 - Face registry → `assets/faces.json`
+- Component library (71 components: faces, bodies, gestures, props, scene, frames, bubbles, separators) → `assets/components.json`, source in `assets/components-src/`
 - Subagent specs → `agents/`
 - Style guides → `references/styles/`
+- Example comics + runnable fixtures → `assets/examples/`
+
+## Component library
+
+`assets/components.json` (built from `assets/components-src/<category>/*.txt`) is a registry of reusable ASCII art pieces — faces, bodies, gestures, props, scene elements, frames, separators, speech bubbles. Each component has pre-computed `width` and `height` for layout planning.
+
+Build: `node scripts/build-library.mjs`
+Render report: `python3 scripts/render-components.py` → `assets/components-renders/REPORT.md`

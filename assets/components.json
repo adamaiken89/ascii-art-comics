@@ -1,0 +1,1324 @@
+{
+  "version": 1,
+  "generated": "2026-08-29T03:32:51.611Z",
+  "count": 71,
+  "categories": {
+    "body": [
+      {
+        "id": "body/shrug",
+        "name": "shrug",
+        "category": "body",
+        "lines": [
+          " ¯\\_(ツ)_/¯"
+        ],
+        "width": 11,
+        "height": 1,
+        "tags": [
+          "body",
+          "shrug",
+          "shrug",
+          "gesture"
+        ]
+      },
+      {
+        "id": "body/stick-arms-up",
+        "name": "stick-arms-up",
+        "category": "body",
+        "lines": [
+          " o ",
+          "\\|/",
+          " | ",
+          "/ \\"
+        ],
+        "width": 3,
+        "height": 4,
+        "tags": [
+          "body",
+          "stick arms up",
+          "stick",
+          "arms-up",
+          "celebrating"
+        ]
+      },
+      {
+        "id": "body/stick-basic",
+        "name": "stick-basic",
+        "category": "body",
+        "lines": [
+          " o ",
+          "/|\\"
+        ],
+        "width": 3,
+        "height": 2,
+        "tags": [
+          "body",
+          "stick basic",
+          "stick",
+          "basic"
+        ]
+      },
+      {
+        "id": "body/stick-pointing",
+        "name": "stick-pointing",
+        "category": "body",
+        "lines": [
+          " o      ",
+          "/|\\     ",
+          "  \\     ",
+          "   >--->"
+        ],
+        "width": 8,
+        "height": 4,
+        "tags": [
+          "body",
+          "stick pointing",
+          "pointing",
+          "gesture"
+        ]
+      },
+      {
+        "id": "body/stick-running",
+        "name": "stick-running",
+        "category": "body",
+        "lines": [
+          " o ",
+          "/|\\",
+          " | ",
+          " | ",
+          "  >"
+        ],
+        "width": 3,
+        "height": 5,
+        "tags": [
+          "body",
+          "stick running",
+          "stick",
+          "running"
+        ]
+      },
+      {
+        "id": "body/stick-sitting",
+        "name": "stick-sitting",
+        "category": "body",
+        "lines": [
+          " o ",
+          "\\|\\",
+          " | ",
+          "/ \\"
+        ],
+        "width": 3,
+        "height": 4,
+        "tags": [
+          "body",
+          "stick sitting",
+          "stick",
+          "sitting"
+        ]
+      },
+      {
+        "id": "body/stick-walking",
+        "name": "stick-walking",
+        "category": "body",
+        "lines": [
+          " o ",
+          "/|\\",
+          " | ",
+          " | "
+        ],
+        "width": 3,
+        "height": 4,
+        "tags": [
+          "body",
+          "stick walking",
+          "stick",
+          "walking"
+        ]
+      },
+      {
+        "id": "body/stick-with-legs",
+        "name": "stick-with-legs",
+        "category": "body",
+        "lines": [
+          " o ",
+          "/|\\",
+          "   ",
+          "/ \\"
+        ],
+        "width": 3,
+        "height": 4,
+        "tags": [
+          "body",
+          "stick with legs",
+          "stick",
+          "with body"
+        ]
+      }
+    ],
+    "bubble": [
+      {
+        "id": "bubble/cjk-bracket",
+        "name": "cjk-bracket",
+        "category": "bubble",
+        "lines": [
+          "「   」"
+        ],
+        "width": 7,
+        "height": 1,
+        "tags": [
+          "bubble",
+          "cjk bracket",
+          "bubble",
+          "bracket",
+          "cjk"
+        ]
+      },
+      {
+        "id": "bubble/en-quote",
+        "name": "en-quote",
+        "category": "bubble",
+        "lines": [
+          "\"   \""
+        ],
+        "width": 5,
+        "height": 1,
+        "tags": [
+          "bubble",
+          "en quote",
+          "bubble",
+          "quote",
+          "en"
+        ]
+      },
+      {
+        "id": "bubble/rounded",
+        "name": "rounded",
+        "category": "bubble",
+        "lines": [
+          "╭──────────╮",
+          "│         │ ",
+          "╰────╮    ╯ ",
+          "     ╰────╯ "
+        ],
+        "width": 12,
+        "height": 4,
+        "tags": [
+          "bubble",
+          "rounded",
+          "bubble",
+          "rounded",
+          "cjk"
+        ]
+      },
+      {
+        "id": "bubble/shout",
+        "name": "shout",
+        "category": "bubble",
+        "lines": [
+          "\\!!!!!!!/",
+          " \\!!!!!/ ",
+          "  \\!!!/  ",
+          "   \\!/   "
+        ],
+        "width": 9,
+        "height": 4,
+        "tags": [
+          "bubble",
+          "shout",
+          "bubble",
+          "shout",
+          "jagged"
+        ]
+      },
+      {
+        "id": "bubble/thought",
+        "name": "thought",
+        "category": "bubble",
+        "lines": [
+          "   _   ",
+          "  ( )  ",
+          " (   ) ",
+          "(     )",
+          " \\___/ ",
+          "    o  "
+        ],
+        "width": 7,
+        "height": 6,
+        "tags": [
+          "bubble",
+          "thought",
+          "bubble",
+          "thought",
+          "cloud"
+        ]
+      },
+      {
+        "id": "bubble/whisper",
+        "name": "whisper",
+        "category": "bubble",
+        "lines": [
+          "(   )"
+        ],
+        "width": 5,
+        "height": 1,
+        "tags": [
+          "bubble",
+          "whisper",
+          "bubble",
+          "whisper",
+          "small"
+        ]
+      }
+    ],
+    "face": [
+      {
+        "id": "face/angry",
+        "name": "angry",
+        "category": "face",
+        "lines": [
+          "(╬ Ò﹏Ó)"
+        ],
+        "width": 8,
+        "height": 1,
+        "tags": [
+          "face",
+          "angry",
+          "angry",
+          "mad",
+          "kaomoji",
+          "width-8"
+        ]
+      },
+      {
+        "id": "face/chibi-angry",
+        "name": "chibi-angry",
+        "category": "face",
+        "lines": [
+          "╭─────╮",
+          "│╬_╬ │ ",
+          "╰─────╯"
+        ],
+        "width": 7,
+        "height": 3,
+        "tags": [
+          "face",
+          "chibi angry",
+          "angry",
+          "chibi",
+          "width-7"
+        ]
+      },
+      {
+        "id": "face/chibi-happy",
+        "name": "chibi-happy",
+        "category": "face",
+        "lines": [
+          "╭─────╮",
+          "│◕‿◕ │ ",
+          "╰─────╯"
+        ],
+        "width": 7,
+        "height": 3,
+        "tags": [
+          "face",
+          "chibi happy",
+          "happy",
+          "positive",
+          "chibi",
+          "width-7"
+        ]
+      },
+      {
+        "id": "face/chibi-panic",
+        "name": "chibi-panic",
+        "category": "face",
+        "lines": [
+          "╭─────╮",
+          "│⊙_⊙ │ ",
+          "╰─────╯"
+        ],
+        "width": 7,
+        "height": 3,
+        "tags": [
+          "face",
+          "chibi panic",
+          "panic",
+          "chibi",
+          "width-7"
+        ]
+      },
+      {
+        "id": "face/chibi-sad",
+        "name": "chibi-sad",
+        "category": "face",
+        "lines": [
+          "╭─────╮",
+          "│╥﹏╥│ ",
+          "╰─────╯"
+        ],
+        "width": 7,
+        "height": 3,
+        "tags": [
+          "face",
+          "chibi sad",
+          "sad",
+          "crying",
+          "chibi",
+          "width-7"
+        ]
+      },
+      {
+        "id": "face/chibi-smug",
+        "name": "chibi-smug",
+        "category": "face",
+        "lines": [
+          "╭─────╮",
+          "│◑‿◑ │ ",
+          "╰─────╯"
+        ],
+        "width": 7,
+        "height": 3,
+        "tags": [
+          "face",
+          "chibi smug",
+          "smug",
+          "chibi",
+          "width-7"
+        ]
+      },
+      {
+        "id": "face/confused",
+        "name": "confused",
+        "category": "face",
+        "lines": [
+          "(゜-゜)"
+        ],
+        "width": 7,
+        "height": 1,
+        "tags": [
+          "face",
+          "confused",
+          "confused",
+          "kaomoji",
+          "width-7"
+        ]
+      },
+      {
+        "id": "face/dead",
+        "name": "dead",
+        "category": "face",
+        "lines": [
+          "(×_×)"
+        ],
+        "width": 5,
+        "height": 1,
+        "tags": [
+          "face",
+          "dead",
+          "dead",
+          "x-eyes",
+          "kaomoji"
+        ]
+      },
+      {
+        "id": "face/excited",
+        "name": "excited",
+        "category": "face",
+        "lines": [
+          "\\(★▽★)/"
+        ],
+        "width": 7,
+        "height": 1,
+        "tags": [
+          "face",
+          "excited",
+          "excited",
+          "kaomoji"
+        ]
+      },
+      {
+        "id": "face/happy",
+        "name": "happy",
+        "category": "face",
+        "lines": [
+          "(◕‿◕)"
+        ],
+        "width": 5,
+        "height": 1,
+        "tags": [
+          "face",
+          "happy",
+          "happy",
+          "positive",
+          "kaomoji"
+        ]
+      },
+      {
+        "id": "face/panic",
+        "name": "panic",
+        "category": "face",
+        "lines": [
+          "(⊙_⊙)"
+        ],
+        "width": 5,
+        "height": 1,
+        "tags": [
+          "face",
+          "panic",
+          "panic",
+          "shocked",
+          "kaomoji"
+        ]
+      },
+      {
+        "id": "face/sad",
+        "name": "sad",
+        "category": "face",
+        "lines": [
+          "(╥﹏╥)"
+        ],
+        "width": 6,
+        "height": 1,
+        "tags": [
+          "face",
+          "sad",
+          "sad",
+          "crying",
+          "kaomoji",
+          "width-6"
+        ]
+      },
+      {
+        "id": "face/shocked",
+        "name": "shocked",
+        "category": "face",
+        "lines": [
+          "(°□°)"
+        ],
+        "width": 5,
+        "height": 1,
+        "tags": [
+          "face",
+          "shocked",
+          "shocked",
+          "surprised",
+          "kaomoji"
+        ]
+      },
+      {
+        "id": "face/smug",
+        "name": "smug",
+        "category": "face",
+        "lines": [
+          "(¬‿¬)"
+        ],
+        "width": 5,
+        "height": 1,
+        "tags": [
+          "face",
+          "smug",
+          "smug",
+          "sly",
+          "kaomoji"
+        ]
+      },
+      {
+        "id": "face/thinking",
+        "name": "thinking",
+        "category": "face",
+        "lines": [
+          "(¬_¬)"
+        ],
+        "width": 5,
+        "height": 1,
+        "tags": [
+          "face",
+          "thinking",
+          "thinking",
+          "side-eye",
+          "kaomoji"
+        ]
+      }
+    ],
+    "frame": [
+      {
+        "id": "frame/ascii-bottom",
+        "name": "ascii-bottom",
+        "category": "frame",
+        "lines": [
+          "+--------+"
+        ],
+        "width": 10,
+        "height": 1,
+        "tags": [
+          "frame",
+          "ascii bottom",
+          "frame",
+          "ascii",
+          "bottom"
+        ]
+      },
+      {
+        "id": "frame/ascii-top",
+        "name": "ascii-top",
+        "category": "frame",
+        "lines": [
+          "+--------+"
+        ],
+        "width": 10,
+        "height": 1,
+        "tags": [
+          "frame",
+          "ascii top",
+          "frame",
+          "ascii",
+          "top"
+        ]
+      },
+      {
+        "id": "frame/heavy-bottom",
+        "name": "heavy-bottom",
+        "category": "frame",
+        "lines": [
+          "╚══════════════════╝"
+        ],
+        "width": 20,
+        "height": 1,
+        "tags": [
+          "frame",
+          "heavy bottom",
+          "frame",
+          "heavy",
+          "bottom"
+        ]
+      },
+      {
+        "id": "frame/heavy-top",
+        "name": "heavy-top",
+        "category": "frame",
+        "lines": [
+          "╔══════════════════╗"
+        ],
+        "width": 20,
+        "height": 1,
+        "tags": [
+          "frame",
+          "heavy top",
+          "frame",
+          "heavy",
+          "top"
+        ]
+      },
+      {
+        "id": "frame/light-bottom",
+        "name": "light-bottom",
+        "category": "frame",
+        "lines": [
+          "└──────────┘"
+        ],
+        "width": 12,
+        "height": 1,
+        "tags": [
+          "frame",
+          "light bottom",
+          "frame",
+          "light",
+          "bottom"
+        ]
+      },
+      {
+        "id": "frame/light-top",
+        "name": "light-top",
+        "category": "frame",
+        "lines": [
+          "┌──────────┐"
+        ],
+        "width": 12,
+        "height": 1,
+        "tags": [
+          "frame",
+          "light top",
+          "frame",
+          "light",
+          "top"
+        ]
+      }
+    ],
+    "gesture": [
+      {
+        "id": "gesture/fist",
+        "name": "fist",
+        "category": "gesture",
+        "lines": [
+          " _  ",
+          "(👊)"
+        ],
+        "width": 4,
+        "height": 2,
+        "tags": [
+          "gesture",
+          "fist",
+          "fist",
+          "hand"
+        ]
+      },
+      {
+        "id": "gesture/ok",
+        "name": "ok",
+        "category": "gesture",
+        "lines": [
+          " _  ",
+          "(👌)"
+        ],
+        "width": 4,
+        "height": 2,
+        "tags": [
+          "gesture",
+          "ok",
+          "ok",
+          "hand"
+        ]
+      },
+      {
+        "id": "gesture/peace",
+        "name": "peace",
+        "category": "gesture",
+        "lines": [
+          " _  ",
+          "(✌)"
+        ],
+        "width": 4,
+        "height": 2,
+        "tags": [
+          "gesture",
+          "peace",
+          "peace",
+          "hand"
+        ]
+      },
+      {
+        "id": "gesture/thumbs-down",
+        "name": "thumbs-down",
+        "category": "gesture",
+        "lines": [
+          " _  ",
+          "(👎)"
+        ],
+        "width": 4,
+        "height": 2,
+        "tags": [
+          "gesture",
+          "thumbs down",
+          "thumbs-down",
+          "hand"
+        ]
+      },
+      {
+        "id": "gesture/thumbs-up",
+        "name": "thumbs-up",
+        "category": "gesture",
+        "lines": [
+          " _  ",
+          "(👍)"
+        ],
+        "width": 4,
+        "height": 2,
+        "tags": [
+          "gesture",
+          "thumbs up",
+          "thumbs-up",
+          "hand"
+        ]
+      },
+      {
+        "id": "gesture/wave",
+        "name": "wave",
+        "category": "gesture",
+        "lines": [
+          " _    ",
+          "( ゝ◡)"
+        ],
+        "width": 6,
+        "height": 2,
+        "tags": [
+          "gesture",
+          "wave",
+          "wave",
+          "hand"
+        ]
+      }
+    ],
+    "prop": [
+      {
+        "id": "prop/bomb",
+        "name": "bomb",
+        "category": "prop",
+        "lines": [
+          "  _  ",
+          " ( ) ",
+          " /|\\ ",
+          "/ | \\",
+          "|   |",
+          "|   |",
+          "|   |",
+          "|   |",
+          "|   |"
+        ],
+        "width": 5,
+        "height": 9,
+        "tags": [
+          "prop",
+          "bomb",
+          "bomb",
+          "danger"
+        ]
+      },
+      {
+        "id": "prop/book",
+        "name": "book",
+        "category": "prop",
+        "lines": [
+          " ___ ",
+          "/   \\",
+          "|   |",
+          "\\___/"
+        ],
+        "width": 5,
+        "height": 4,
+        "tags": [
+          "prop",
+          "book",
+          "book",
+          "reading"
+        ]
+      },
+      {
+        "id": "prop/bug",
+        "name": "bug",
+        "category": "prop",
+        "lines": [
+          "  /\\  ",
+          " /  \\ ",
+          "/    \\",
+          "\\    /",
+          " \\  / ",
+          "  \\/  "
+        ],
+        "width": 6,
+        "height": 6,
+        "tags": [
+          "prop",
+          "bug",
+          "bug",
+          "error",
+          "insect"
+        ]
+      },
+      {
+        "id": "prop/clock",
+        "name": "clock",
+        "category": "prop",
+        "lines": [
+          "   __  ",
+          "  /  \\ ",
+          " | 12 |",
+          "  \\__/ "
+        ],
+        "width": 7,
+        "height": 4,
+        "tags": [
+          "prop",
+          "clock",
+          "clock",
+          "time"
+        ]
+      },
+      {
+        "id": "prop/coffee",
+        "name": "coffee",
+        "category": "prop",
+        "lines": [
+          "~ ~ ~",
+          " ) ) ",
+          "( _ )",
+          "|   |",
+          " ===="
+        ],
+        "width": 5,
+        "height": 5,
+        "tags": [
+          "prop",
+          "coffee",
+          "coffee",
+          "drink",
+          "cup"
+        ]
+      },
+      {
+        "id": "prop/envelope",
+        "name": "envelope",
+        "category": "prop",
+        "lines": [
+          "  ___  ",
+          " /   \\ ",
+          "|  *  |",
+          " \\___/ "
+        ],
+        "width": 7,
+        "height": 4,
+        "tags": [
+          "prop",
+          "envelope",
+          "envelope",
+          "mail"
+        ]
+      },
+      {
+        "id": "prop/fire",
+        "name": "fire",
+        "category": "prop",
+        "lines": [
+          "  )( ",
+          " (  )",
+          "(   )",
+          "  )  "
+        ],
+        "width": 5,
+        "height": 4,
+        "tags": [
+          "prop",
+          "fire",
+          "fire",
+          "alert",
+          "hot"
+        ]
+      },
+      {
+        "id": "prop/gear",
+        "name": "gear",
+        "category": "prop",
+        "lines": [
+          "  _",
+          "/ \\",
+          "\\_/"
+        ],
+        "width": 3,
+        "height": 3,
+        "tags": [
+          "prop",
+          "gear",
+          "gear",
+          "settings",
+          "cogs"
+        ]
+      },
+      {
+        "id": "prop/key",
+        "name": "key",
+        "category": "prop",
+        "lines": [
+          " _  ",
+          "( ) ",
+          " |\\ ",
+          " | \\"
+        ],
+        "width": 4,
+        "height": 4,
+        "tags": [
+          "prop",
+          "key",
+          "key",
+          "secret"
+        ]
+      },
+      {
+        "id": "prop/laptop",
+        "name": "laptop",
+        "category": "prop",
+        "lines": [
+          " _____ ",
+          "/     \\",
+          "|     |",
+          "\\_____/"
+        ],
+        "width": 7,
+        "height": 4,
+        "tags": [
+          "prop",
+          "laptop",
+          "laptop",
+          "work"
+        ]
+      },
+      {
+        "id": "prop/money",
+        "name": "money",
+        "category": "prop",
+        "lines": [
+          "$   ",
+          "$$  ",
+          "$$$ ",
+          "$$$$"
+        ],
+        "width": 4,
+        "height": 4,
+        "tags": [
+          "prop",
+          "money",
+          "money",
+          "cash",
+          "dollar"
+        ]
+      },
+      {
+        "id": "prop/phone",
+        "name": "phone",
+        "category": "prop",
+        "lines": [
+          " _ ",
+          "|_|",
+          "|_|"
+        ],
+        "width": 3,
+        "height": 3,
+        "tags": [
+          "prop",
+          "phone",
+          "phone",
+          "mobile"
+        ]
+      }
+    ],
+    "scene": [
+      {
+        "id": "scene/arrow-down",
+        "name": "arrow-down",
+        "category": "scene",
+        "lines": [
+          "  |",
+          "  |",
+          "  v"
+        ],
+        "width": 3,
+        "height": 3,
+        "tags": [
+          "scene",
+          "arrow down",
+          "arrow-down",
+          "transition"
+        ]
+      },
+      {
+        "id": "scene/arrow-right",
+        "name": "arrow-right",
+        "category": "scene",
+        "lines": [
+          "  >"
+        ],
+        "width": 3,
+        "height": 1,
+        "tags": [
+          "scene",
+          "arrow right",
+          "arrow-right",
+          "transition"
+        ]
+      },
+      {
+        "id": "scene/arrow-up",
+        "name": "arrow-up",
+        "category": "scene",
+        "lines": [
+          "  ^",
+          "  |",
+          "  |"
+        ],
+        "width": 3,
+        "height": 3,
+        "tags": [
+          "scene",
+          "arrow up",
+          "arrow-up",
+          "transition"
+        ]
+      },
+      {
+        "id": "scene/cloud",
+        "name": "cloud",
+        "category": "scene",
+        "lines": [
+          "  _    ",
+          " (   ) ",
+          "(     )"
+        ],
+        "width": 7,
+        "height": 3,
+        "tags": [
+          "scene",
+          "cloud",
+          "cloud",
+          "weather"
+        ]
+      },
+      {
+        "id": "scene/house",
+        "name": "house",
+        "category": "scene",
+        "lines": [
+          "    /\\   ",
+          "   /  \\  ",
+          "  /    \\ ",
+          " /______\\",
+          " |  __  |",
+          " | |  | |",
+          " | |__| |",
+          " |______|"
+        ],
+        "width": 9,
+        "height": 8,
+        "tags": [
+          "scene",
+          "house",
+          "house",
+          "home"
+        ]
+      },
+      {
+        "id": "scene/lightning",
+        "name": "lightning",
+        "category": "scene",
+        "lines": [
+          "  /\\  ",
+          " /  \\ ",
+          "/    \\",
+          " \\    "
+        ],
+        "width": 6,
+        "height": 4,
+        "tags": [
+          "scene",
+          "lightning",
+          "lightning",
+          "thunder",
+          "storm"
+        ]
+      },
+      {
+        "id": "scene/moon",
+        "name": "moon",
+        "category": "scene",
+        "lines": [
+          "  _ ",
+          " ( )",
+          "  - "
+        ],
+        "width": 4,
+        "height": 3,
+        "tags": [
+          "scene",
+          "moon",
+          "moon",
+          "night"
+        ]
+      },
+      {
+        "id": "scene/rain",
+        "name": "rain",
+        "category": "scene",
+        "lines": [
+          "  . ",
+          ". . ",
+          " .  ",
+          ".  .",
+          " .  ",
+          ". . "
+        ],
+        "width": 4,
+        "height": 6,
+        "tags": [
+          "scene",
+          "rain",
+          "rain",
+          "weather"
+        ]
+      },
+      {
+        "id": "scene/snow",
+        "name": "snow",
+        "category": "scene",
+        "lines": [
+          "  *",
+          "  *",
+          "*  ",
+          "  *",
+          "  *"
+        ],
+        "width": 3,
+        "height": 5,
+        "tags": [
+          "scene",
+          "snow",
+          "snow",
+          "weather",
+          "winter"
+        ]
+      },
+      {
+        "id": "scene/star",
+        "name": "star",
+        "category": "scene",
+        "lines": [
+          "  * ",
+          " * *",
+          "  * "
+        ],
+        "width": 4,
+        "height": 3,
+        "tags": [
+          "scene",
+          "star",
+          "star",
+          "sparkle"
+        ]
+      },
+      {
+        "id": "scene/sun",
+        "name": "sun",
+        "category": "scene",
+        "lines": [
+          "\\ | /",
+          " \\|/ ",
+          "──O──",
+          " /|\\ ",
+          "/ | \\"
+        ],
+        "width": 5,
+        "height": 5,
+        "tags": [
+          "scene",
+          "sun",
+          "sun",
+          "weather",
+          "day"
+        ]
+      },
+      {
+        "id": "scene/tree",
+        "name": "tree",
+        "category": "scene",
+        "lines": [
+          "   ^  ",
+          "  ^^^ ",
+          " ^^^^^",
+          "   |  ",
+          "   |  "
+        ],
+        "width": 6,
+        "height": 5,
+        "tags": [
+          "scene",
+          "tree",
+          "tree",
+          "nature"
+        ]
+      }
+    ],
+    "separator": [
+      {
+        "id": "separator/ascii",
+        "name": "ascii",
+        "category": "separator",
+        "lines": [
+          "--------------------"
+        ],
+        "width": 20,
+        "height": 1,
+        "tags": [
+          "separator",
+          "ascii",
+          "divider",
+          "ascii"
+        ]
+      },
+      {
+        "id": "separator/dotted",
+        "name": "dotted",
+        "category": "separator",
+        "lines": [
+          "- - - - - - - - - -"
+        ],
+        "width": 19,
+        "height": 1,
+        "tags": [
+          "separator",
+          "dotted",
+          "divider",
+          "dotted"
+        ]
+      },
+      {
+        "id": "separator/double",
+        "name": "double",
+        "category": "separator",
+        "lines": [
+          "════════════════════"
+        ],
+        "width": 20,
+        "height": 1,
+        "tags": [
+          "separator",
+          "double",
+          "divider",
+          "double"
+        ]
+      },
+      {
+        "id": "separator/line",
+        "name": "line",
+        "category": "separator",
+        "lines": [
+          "────────────────────"
+        ],
+        "width": 20,
+        "height": 1,
+        "tags": [
+          "separator",
+          "line",
+          "divider",
+          "line"
+        ]
+      },
+      {
+        "id": "separator/star",
+        "name": "star",
+        "category": "separator",
+        "lines": [
+          "* * * * * * * * * *"
+        ],
+        "width": 19,
+        "height": 1,
+        "tags": [
+          "separator",
+          "star",
+          "divider",
+          "star"
+        ]
+      },
+      {
+        "id": "separator/wavy",
+        "name": "wavy",
+        "category": "separator",
+        "lines": [
+          "~^~^~^~^~^~^~^~^~^~^~^~^~"
+        ],
+        "width": 25,
+        "height": 1,
+        "tags": [
+          "separator",
+          "wavy",
+          "divider",
+          "wavy"
+        ]
+      }
+    ]
+  }
+}

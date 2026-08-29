@@ -1,0 +1,6 @@
+@tags: sun, weather, day
+\ | /
+ \|/
+──O──
+ /|\
+/ | \

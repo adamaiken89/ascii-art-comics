@@ -1,10 +1,10 @@
 {
-  "defaultTarget": 20,
+  "defaultTarget": 22,
   "panels": [
-    { "panelId": 0, "lang": "cjk", "mood": "happy",    "style": "B", "lines": ["  ╭──╮  ", "  │◕‿◕│ ", "  ╰──╯  ", " 「今天」"] },
-    { "panelId": 1, "lang": "cjk", "mood": "thinking", "style": "B", "lines": ["  ╭──╮  ", "  │◑_◑│ ", "  ╰──╯  ", " 「吃啥?」"] },
-    { "panelId": 2, "lang": "cjk", "mood": "neutral",  "style": "B", "lines": ["  ╭──╮  ", "  │╥_╥│ ", "  ╰──╯  ", " 「隨便」"] },
-    { "panelId": 3, "lang": "cjk", "mood": "happy",    "style": "B", "lines": ["  ╭──╮  ", "  │>_<│ ", "  ╰──╯  ", " 「吃飯」"] }
+    { "panelId": 0, "lang": "cjk", "mood": "happy",    "style": "B", "lines": ["  ╭─────╮  ", "  │◕‿◕ │  ", "  ╰─────╯  ", "  「今天」  "] },
+    { "panelId": 1, "lang": "cjk", "mood": "thinking", "style": "B", "lines": ["  ╭─────╮  ", "  │◑_◑ │  ", "  ╰─────╯  ", "  「吃啥?」 "] },
+    { "panelId": 2, "lang": "cjk", "mood": "neutral",  "style": "B", "lines": ["  ╭─────╮  ", "  │╥_╥ │  ", "  ╰─────╯  ", "  「隨便」  "] },
+    { "panelId": 3, "lang": "cjk", "mood": "happy",    "style": "B", "lines": ["  ╭─────╮  ", "  │>_< │  ", "  ╰─────╯  ", "  「吃飯」  "] }
   ],
   "layout": { "cols": 4, "gap": 1, "align": "top" }
 }
