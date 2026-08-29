@@ -56,60 +56,91 @@ type WrappedBlock = {
 
 ## Reference implementation
 
+The wrapper is a pure deterministic script, **not** an LLM call. Invoke:
+
+```bash
+node scripts/box-wrap.mjs < request.json
+```
+
+Exit codes:
+- `0` — every panel OK
+- `1` — width/overflow failure (retry Stage 1)
+- `2` — bad input (missing panels, malformed JSON)
+
+### Border set mapping
+
+Spec vocabulary → script vocabulary:
+
+| Spec (`borderSet`) | Script (`style`) | Chars |
+|---|---|---|
+| `heavy` | `A` | ╔ ═ ╗ ║ ╚ ╝ |
+| `light` | `B` | ┌ ─ ┐ │ └ ┘ |
+| `ascii` | `C` | + - \| |
+
+### request.json shape
+
+```json
+{
+  "panels": [
+    {
+      "style": "A",
+      "lines": ["line1", "line2", "..."],
+      "width": 28,
+      "target": 30
+    }
+  ],
+  "layout": { "cols": 0, "gap": 3, "align": "center" }
+}
+```
+
+- `style` — required, one of A/B/C
+- `lines` — required, content from Stage 1 (no trailing whitespace)
+- `width` — optional fixed innerW; if set, content MUST fit
+- `target` — optional outerW target; script derives innerW = target - 2
+- `layout.cols` — 0/1 = vertical stack, >1 = grid with N columns
+- `layout.gap` — cells between panels (default 3)
+
+### Stage 1 → script translation
+
+Before calling `box-wrap.mjs`, translate the Stage 1 contract to the script's:
+
 ```ts
-import stringWidth from 'string-width'
-import GraphemeSplitter from 'grapheme-splitter'
-
-const splitter = new GraphemeSplitter()
-
-function visibleWidth(s: string): number {
-  return splitter.splitGraphemes(s).reduce((sum, g) => sum + stringWidth(g), 0)
+// Stage 1 returns
+type Stage1Output = {
+  panels: Array<{
+    panelId: number
+    lines: string[]
+    measured: number[]
+    target: number
+    borderSet: 'heavy' | 'light' | 'ascii'
+  }>
 }
 
-const BORDERS = {
-  heavy: { TL: '╔', T: '═', TR: '╗', L: '║', R: '║', BL: '╚', B: '═', BR: '╝' },
-  light: { TL: '┌', T: '─', TR: '┐', L: '│', R: '│', BL: '└', B: '─', BR: '┘' },
-  ascii: { TL: '+', T: '-', TR: '+', L: '|', R: '|', BL: '+', B: '-', BR: '+' }
+// Translate to script input
+const request = {
+  panels: Stage1Output.panels.map(p => ({
+    style: { heavy: 'A', light: 'B', ascii: 'C' }[p.borderSet],
+    lines: p.lines,
+    width: p.target,
+  }))
 }
+```
 
-function wrap(input: Input): WrappedBlock {
-  const b = BORDERS[input.borderSet]
-  const outerW = Math.max(...input.measured) + 2
+### Output parsing
 
-  // Verify Stage 1's promise
-  for (let i = 0; i < input.lines.length; i++) {
-    if (input.measured[i] > input.target) {
-      return { panelId: input.panelId, block: [], outerW, borderSet: input.borderSet, ok: false,
-        diff: [{ line: i, measured: input.measured[i], expected: input.target }] }
-    }
-  }
-
-  const top = b.TL + b.T.repeat(outerW - 2) + b.TR
-  const bot = b.BL + b.T.repeat(outerW - 2) + b.BR
-
-  const block: string[] = [top]
-  for (const line of input.lines) {
-    const w = visibleWidth(line)
-    const padCount = outerW - 2 - w
-    const padded = line + '\u00A0'.repeat(padCount)
-    block.push(b.L + padded + b.R)
-  }
-  block.push(bot)
-
-  // Self-verify
-  for (let i = 0; i < block.length; i++) {
-    if (visibleWidth(block[i]) !== outerW) {
-      return { panelId: input.panelId, block, outerW, borderSet: input.borderSet, ok: false,
-        diff: [{ line: i, measured: visibleWidth(block[i]), expected: outerW }] }
-    }
-  }
-
-  return { panelId: input.panelId, block, outerW, borderSet: input.borderSet, ok: true }
+```ts
+const result = JSON.parse(scriptStdout)
+if (!result.ok) {
+  // result.errors[] has details
+  // retry Stage 1
 }
+// result.block is the final rendered comic
+// result.outerW is the widest outer line
+// result.panels[] has per-panel diagnostics
 ```
 
 ## Failure handling
 
-- `measured[i] > target`: structural problem, return `ok: false`. Caller retries Stage 1.
-- Self-verify fails: bug in this agent. Caller retries Stage 1 (this should not happen).
-- Empty `lines`: return empty block with `ok: true` (degenerate but valid).
+- Script exits `1` with `ok: false`: width overflow, padding failure, or post-wrap mismatch. Caller retries Stage 1 (treat as bug).
+- Script exits `2`: malformed input. Caller fixes request shape.
+- Script exits `0` with `ok: true`: pass to Stage 3 (auditor) regardless of `outerW`.

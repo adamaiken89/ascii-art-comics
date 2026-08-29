@@ -43,12 +43,28 @@ type ContentBlock = {
 2. **Face glyph lookup** in `assets/faces.json`. If mood missing, generate kaomoji and register it.
 3. **Wrap rules** per `references/dialogue.md`.
 4. **Width math** via `string-width` + `grapheme-splitter`. Never `length`, `padEnd`, regex.
-5. **No border chars** in output. No `║`, `╔`, `─`, `+`. No `│` either (gutter concern is Stage 2/3).
-6. **Kaomoji / CJK / ZWJ** kept as single graphemes. Do not split.
-7. **For style C:** no face box, faces are inline `o_o` etc.
-8. **For style A:** face typically on its own line, dialogue below.
-9. **For style B:** face is `╭──╮ │x_x│ ╰──╯` block, 3 lines, centered.
-10. **Return shape strictly typed.** Caller (main thread) parses JSON.
+5. **No `║` in content** (would visually merge with style A panel sides). Other border chars (`─`, `│`, `╔`, etc.) are OK inside speech bubbles (`╭─╮`/`╰─╯`).
+6. **No NBSP in content.** Stage 2 owns NBSP padding. Strip any `\u00A0` before returning.
+7. **Kaomoji / CJK / ZWJ** kept as single graphemes. Do not split.
+8. **For style C:** no face box, faces are inline `o_o` etc.
+9. **For style A:** face typically on its own line, dialogue below.
+10. **For style B:** face is `╭──╮ │x_x│ ╰──╯` block, 3 lines, centered.
+11. **Return shape strictly typed.** Caller (main thread) parses JSON.
+12. **After generating lines, validate via `scripts/content-generator.mjs`.** Exit 0 = ready for Stage 2. Exit 1 = retry with shorter text.
+
+## Validation via script
+
+After generating lines, pipe through the validator to catch overflow and NBSP leaks early:
+
+```bash
+echo '{"defaultTarget":30,"panels":[{"panelId":0,"lines":[...]}]}' \
+  | node scripts/content-generator.mjs
+```
+
+Exit codes:
+- `0` — ok: true, ready for Stage 2
+- `1` — ok: false, errors[] populated (overflow, NBSP leak, etc.) — retry
+- `2` — bad input (missing panels, malformed JSON) — caller bug
 
 ## Failure modes
 
