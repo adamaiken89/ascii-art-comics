@@ -197,3 +197,31 @@ else
   echo "  SOME FAILED"
   exit 1
 fi
+
+# --- Fixture rendering (end-to-end) ---
+echo ""
+echo "--- fixtures ---"
+FX_DIR=assets/examples/fixtures
+RENDER_OUT=$FX_DIR/renders
+mkdir -p "$RENDER_OUT"
+
+# Run render-fixtures.py and verify all pass.
+python3 scripts/render-fixtures.py 2>&1 | tail -8
+
+# Verify each fixture has a render and outerW > 0.
+for fx in "$FX_DIR"/*.json; do
+  name=$(basename "$fx" .json)
+  if [ ! -s "$RENDER_OUT/${name}.txt" ]; then
+    echo "  FAIL  fixture $name: no render produced"
+    FAIL=1
+  else
+    echo "  PASS  fixture $name: $(wc -l < "$RENDER_OUT/${name}.txt") lines"
+  fi
+done
+
+if [ $FAIL -eq 0 ]; then
+  echo "  FIXTURES ALL PASS"
+else
+  echo "  FIXTURES FAILED"
+  exit 1
+fi

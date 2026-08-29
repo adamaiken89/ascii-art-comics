@@ -1,0 +1,32 @@
+{
+  "defaultTarget": 28,
+  "panels": [
+    {
+      "panelId": 0,
+      "lang": "en",
+      "mood": "neutral",
+      "style": "A",
+      "lines": [
+        "      (•_•)        ",
+        "       /|          ",
+        "  ╭────────────────╮",
+        "  │ pushing to prod │",
+        "  ╰────────────────╯"
+      ]
+    },
+    {
+      "panelId": 1,
+      "lang": "en",
+      "mood": "panic",
+      "style": "A",
+      "lines": [
+        "      (╥﹏╥)        ",
+        "       /|          ",
+        "  ╭────────────────╮",
+        "  │ prod is on fire │",
+        "  ╰────────────────╯"
+      ]
+    }
+  ],
+  "layout": { "cols": 0, "gap": 3 }
+}

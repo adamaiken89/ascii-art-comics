@@ -1,0 +1,8 @@
+{
+  "defaultTarget": 20,
+  "panels": [
+    { "panelId": 0, "lang": "cjk", "mood": "neutral", "style": "C", "lines": ["        o_o", "", "  「server down 咗」"] },
+    { "panelId": 1, "lang": "cjk", "mood": "sad",     "style": "C", "lines": ["", "        T_T", "", "  「永遠都係 DNS」"] }
+  ],
+  "layout": { "cols": 0, "gap": 2 }
+}

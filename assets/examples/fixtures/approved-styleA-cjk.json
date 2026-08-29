@@ -1,0 +1,18 @@
+{
+  "defaultTarget": 28,
+  "panels": [
+    {
+      "panelId": 0,
+      "lang": "cjk",
+      "mood": "happy",
+      "style": "A",
+      "lines": [
+        "    (◕‿◕)          ",
+        "  ╭────────────────╮",
+        "  │  好,approve了  │",
+        "  ╰────────────────╯"
+      ]
+    }
+  ],
+  "layout": { "cols": 0, "gap": 3 }
+}

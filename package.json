@@ -7,6 +7,7 @@
   "scripts": {
     "wrap": "node scripts/box-wrap.mjs",
     "generate": "node scripts/content-generator.mjs",
+    "render:fixtures": "python3 scripts/render-fixtures.py",
     "test": "bash scripts/test.sh"
   },
   "dependencies": {
