@@ -1,0 +1,109 @@
+{
+  "title": "Monday Morning",
+  "cell": { "w": 10, "h": 18 },
+  "panels": [
+    {
+      "panelId": 0,
+      "style": "A",
+      "width": 30,
+      "speaker": "left",
+      "lines": [
+        "                              ",
+        "        ╭─────╮              ",
+        "        │◕‿◕ │              ",
+        "        ╰─────╯              ",
+        "           |                 ",
+        "          /                  ",
+        "         /                   ",
+        "                              "
+      ]
+    },
+    {
+      "panelId": 1,
+      "style": "A",
+      "width": 30,
+      "speaker": "right",
+      "lines": [
+        "                              ",
+        "              ╭─────╮        ",
+        "              │ ◑‿◑│        ",
+        "              ╰─────╯        ",
+        "                   |         ",
+        "                    \\        ",
+        "                     \\       ",
+        "                              "
+    ]
+    },
+    {
+      "panelId": 2,
+      "style": "A",
+      "width": 30,
+      "speaker": "left",
+      "lines": [
+        "                              ",
+        "        ╭─────╮              ",
+        "        │╥﹏╥ │              ",
+        "        ╰─────╯              ",
+        "           |                 ",
+        "          /                  ",
+        "         /                   ",
+        "                              "
+      ]
+    },
+    {
+      "panelId": 3,
+      "style": "A",
+      "width": 30,
+      "speaker": "right",
+      "lines": [
+        "                              ",
+        "              ╭─────╮        ",
+        "              │ ◑‿◑│        ",
+        "              ╰─────╯        ",
+        "                   |         ",
+        "                    \\        ",
+        "                     \\       ",
+        "                              "
+    ]
+    }
+  ],
+  "layout": { "cols": 2, "gap": 4 },
+  "dialogue": [
+    {
+      "panelId": 0,
+      "x": 12,
+      "y": 20,
+      "w": 180,
+      "h": 44,
+      "text": "「Monday again?」",
+      "tail": { "side": "bottom-left", "size": 14 }
+    },
+    {
+      "panelId": 1,
+      "x": 12,
+      "y": 20,
+      "w": 220,
+      "h": 44,
+      "text": "「死線 = today, ready?」",
+      "tail": { "side": "bottom-right", "size": 14 }
+    },
+    {
+      "panelId": 2,
+      "x": 12,
+      "y": 20,
+      "w": 200,
+      "h": 44,
+      "text": "「no, send help」",
+      "tail": { "side": "bottom-left", "size": 14 }
+    },
+    {
+      "panelId": 3,
+      "x": 12,
+      "y": 20,
+      "w": 200,
+      "h": 44,
+      "text": "「coffee first, panic later」",
+      "tail": { "side": "bottom-right", "size": 14 }
+    }
+  ]
+}

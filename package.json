@@ -9,8 +9,10 @@
     "generate": "node scripts/content-generator.mjs",
     "render:svg": "node scripts/svg-render.mjs",
     "render:bubbles": "node scripts/bubble-render.mjs",
+    "render:comic": "node scripts/comic-render.mjs",
     "render:fixtures": "python3 scripts/render-fixtures.py",
     "render:fixtures:svg": "python3 scripts/render-fixtures-svg.py",
+    "render:fixtures:comic": "python3 scripts/render-comic-svg.py assets/examples/fixtures/monday-morning-comic.json",
     "render:bubbles:fixtures": "python3 scripts/render-bubbles-svg.py",
     "build:library": "node scripts/build-library.mjs",
     "test": "bash scripts/test.sh"

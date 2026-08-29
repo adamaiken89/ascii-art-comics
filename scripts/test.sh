@@ -210,6 +210,10 @@ python3 scripts/render-fixtures-svg.py 2>&1 | tail -8
 # Verify each non-C fixture produced a valid SVG
 for fx in "$FX_DIR"/*.json; do
   name=$(basename "$fx" .json)
+  case "$name" in
+    bubbles-*) continue ;;
+    *-comic) continue ;;
+  esac
   # Skip if fixture is pure style C (borderless)
   has_border=$(python3 -c "
 import json, sys
@@ -245,6 +249,7 @@ for fx in "$FX_DIR"/*.json; do
   name=$(basename "$fx" .json)
   case "$name" in
     bubbles-*) continue ;;
+    *-comic) continue ;;
   esac
   if [ ! -s "$RENDER_OUT/${name}.txt" ]; then
     echo "  FAIL  fixture $name: no render produced"
@@ -280,6 +285,7 @@ for fx in "$FX_DIR"/*.json; do
   case "$name" in
     bubbles-*) continue ;;
     dns-styleC) continue ;;  # style C = borderless, no SVG
+    *-comic) continue ;;     # comic fixtures handled by comic-render
   esac
   if [ ! -s "$RENDER_OUT_SVG/${name}.svg" ]; then
     echo "  FAIL  svg $name: no svg produced"
@@ -293,5 +299,30 @@ if [ $FAIL -eq 0 ]; then
   echo "  ALL FIXTURES + SVG + BUBBLES PASS"
 else
   echo "  SOMETHING FAILED"
+  exit 1
+fi
+
+# --- Comic SVG (panels + bubbles) ---
+echo ""
+echo "--- comic svg ---"
+COMIC_OUT=assets/examples/comics
+mkdir -p "$COMIC_OUT"
+for fx in "$FX_DIR"/monday-morning-comic.json; do
+  [ -f "$fx" ] || continue
+  python3 scripts/render-comic-svg.py "$fx" 2>&1 | tail -2
+  name=$(basename "$fx" .json)
+  if [ ! -s "$COMIC_OUT/${name}.svg" ]; then
+    echo "  FAIL  comic $name: no svg produced"
+    FAIL=1
+  else
+    bytes=$(wc -c < "$COMIC_OUT/${name}.svg")
+    echo "  PASS  comic $name: $bytes bytes"
+  fi
+done
+
+if [ $FAIL -eq 0 ]; then
+  echo "  COMIC SVG PASS"
+else
+  echo "  COMIC FAILED"
   exit 1
 fi

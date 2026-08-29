@@ -38,7 +38,7 @@ def run(script: Path, stdin: str) -> dict:
 
 def main() -> int:
     fixtures = sorted(FIX.glob("*.json"))
-    fixtures = [f for f in fixtures if not f.name.startswith("bubbles-")]
+    fixtures = [f for f in fixtures if not f.name.startswith("bubbles-") and not f.name.endswith("-comic.json")]
     if not fixtures:
         print("no panel fixtures found")
         return 1

@@ -34,7 +34,7 @@ def main() -> int:
     fails = 0
     for fx in sorted(FIX.glob("*.json")):
         name = fx.stem
-        if name.startswith("bubbles-"):
+        if name.startswith("bubbles-") or name.endswith("-comic"):
             continue
         print(f"=== {name} ===")
         data = json.loads(fx.read_text(encoding="utf-8"))
