@@ -4,106 +4,62 @@
   "panels": [
     {
       "panelId": 0,
-      "width": 30,
-      "speaker": "left",
+      "width": 24,
+      "speaker": { "x": 4, "y": 2 },
       "bubbleHeight": 70,
       "lines": [
-        "                              ",
-        "  Alice                        ",
-        "                              ",
-        "    ╭─────╮                    ",
-        "    │◕‿◕ │                    ",
-        "    ╰─────╯                    ",
-        "                              ",
-        "                              "
+        "  Alice",
+        "",
+        "  ╭─────╮",
+        "  │◕‿◕ │",
+        "  ╰─────╯"
       ]
     },
     {
       "panelId": 1,
-      "width": 30,
-      "speaker": "right",
+      "width": 24,
+      "speaker": { "x": 14, "y": 2 },
       "bubbleHeight": 70,
       "lines": [
-        "                              ",
-        "                    Bob       ",
-        "                              ",
-        "                    ╭─────╮  ",
-        "                    │ ◑‿◑│  ",
-        "                    ╰─────╯  ",
-        "                              ",
-        "                              "
+        "                Bob",
+        "",
+        "                ╭─────╮",
+        "                │ ◑‿◑│",
+        "                ╰─────╯"
       ]
     },
     {
       "panelId": 2,
-      "width": 30,
-      "speaker": "left",
+      "width": 24,
+      "speaker": { "x": 4, "y": 2 },
       "bubbleHeight": 70,
       "lines": [
-        "                              ",
-        "  Alice                        ",
-        "                              ",
-        "    ╭─────╮                    ",
-        "    │╥﹏╥ │                    ",
-        "    ╰─────╯                    ",
-        "                              ",
-        "                              "
+        "  Alice",
+        "",
+        "  ╭─────╮",
+        "  │╥﹏╥ │",
+        "  ╰─────╯"
       ]
     },
     {
       "panelId": 3,
-      "width": 30,
-      "speaker": "right",
+      "width": 24,
+      "speaker": { "x": 14, "y": 2 },
       "bubbleHeight": 70,
       "lines": [
-        "                              ",
-        "                    Bob       ",
-        "                              ",
-        "                    ╭─────╮  ",
-        "                    │ ◕‿◕│  ",
-        "                    ╰─────╯  ",
-        "                              ",
-        "                              "
+        "                Bob",
+        "",
+        "                ╭─────╮",
+        "                │ ◕‿◕│",
+        "                ╰─────╯"
       ]
     }
   ],
-  "layout": { "cols": 2, "gap": 16 },
+  "layout": { "cols": 2, "gap": 24 },
   "dialogue": [
-    {
-      "panelId": 0,
-      "x": 12,
-      "y": 12,
-      "w": 200,
-      "h": 40,
-      "text": "「Monday again?」",
-      "tail": { "side": "bottom-left", "size": 12 }
-    },
-    {
-      "panelId": 1,
-      "x": 100,
-      "y": 12,
-      "w": 220,
-      "h": 40,
-      "text": "「死線 = today, ready?」",
-      "tail": { "side": "bottom-right", "size": 12 }
-    },
-    {
-      "panelId": 2,
-      "x": 12,
-      "y": 12,
-      "w": 200,
-      "h": 40,
-      "text": "「no, send help」",
-      "tail": { "side": "bottom-left", "size": 12 }
-    },
-    {
-      "panelId": 3,
-      "x": 100,
-      "y": 12,
-      "w": 220,
-      "h": 40,
-      "text": "「coffee first, panic later」",
-      "tail": { "side": "bottom-right", "size": 12 }
-    }
+    { "panelId": 0, "text": "Monday again?", "align": "left" },
+    { "panelId": 1, "text": "死線 = today, ready?", "align": "right" },
+    { "panelId": 2, "text": "no, send help", "align": "left" },
+    { "panelId": 3, "text": "coffee first, panic later", "align": "right" }
   ]
 }

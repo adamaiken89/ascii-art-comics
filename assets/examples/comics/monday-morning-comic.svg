@@ -1,52 +1,44 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 648 503" width="648" height="503">
-<rect x="0" y="0" width="648" height="503" fill="white"/>
-<text x="324" y="23" font-family="sans-serif" font-size="16.2" font-weight="bold" text-anchor="middle" fill="#222">Monday Morning</text>
-<text x="16" y="129" font-family="monospace" font-size="18" fill="#222">                              </text>
-<text x="16" y="147" font-family="monospace" font-size="18" fill="#222">  Alice                        </text>
-<text x="16" y="165" font-family="monospace" font-size="18" fill="#222">                              </text>
-<text x="16" y="183" font-family="monospace" font-size="18" fill="#222">    ╭─────╮                    </text>
-<text x="16" y="201" font-family="monospace" font-size="18" fill="#222">    │◕‿◕ │                    </text>
-<text x="16" y="219" font-family="monospace" font-size="18" fill="#222">    ╰─────╯                    </text>
-<text x="16" y="237" font-family="monospace" font-size="18" fill="#222">                              </text>
-<text x="16" y="255" font-family="monospace" font-size="18" fill="#222">                              </text>
-<rect x="16" y="113" width="300" height="144" fill="#fafafa" stroke="#333" stroke-width="1.5"/>
-<text x="332" y="129" font-family="monospace" font-size="18" fill="#222">                              </text>
-<text x="332" y="147" font-family="monospace" font-size="18" fill="#222">                    Bob       </text>
-<text x="332" y="165" font-family="monospace" font-size="18" fill="#222">                              </text>
-<text x="332" y="183" font-family="monospace" font-size="18" fill="#222">                    ╭─────╮  </text>
-<text x="332" y="201" font-family="monospace" font-size="18" fill="#222">                    │ ◑‿◑│  </text>
-<text x="332" y="219" font-family="monospace" font-size="18" fill="#222">                    ╰─────╯  </text>
-<text x="332" y="237" font-family="monospace" font-size="18" fill="#222">                              </text>
-<text x="332" y="255" font-family="monospace" font-size="18" fill="#222">                              </text>
-<rect x="332" y="113" width="300" height="144" fill="#fafafa" stroke="#333" stroke-width="1.5"/>
-<text x="16" y="359" font-family="monospace" font-size="18" fill="#222">                              </text>
-<text x="16" y="377" font-family="monospace" font-size="18" fill="#222">  Alice                        </text>
-<text x="16" y="395" font-family="monospace" font-size="18" fill="#222">                              </text>
-<text x="16" y="413" font-family="monospace" font-size="18" fill="#222">    ╭─────╮                    </text>
-<text x="16" y="431" font-family="monospace" font-size="18" fill="#222">    │╥﹏╥ │                    </text>
-<text x="16" y="449" font-family="monospace" font-size="18" fill="#222">    ╰─────╯                    </text>
-<text x="16" y="467" font-family="monospace" font-size="18" fill="#222">                              </text>
-<text x="16" y="485" font-family="monospace" font-size="18" fill="#222">                              </text>
-<rect x="16" y="343" width="300" height="144" fill="#fafafa" stroke="#333" stroke-width="1.5"/>
-<text x="332" y="359" font-family="monospace" font-size="18" fill="#222">                              </text>
-<text x="332" y="377" font-family="monospace" font-size="18" fill="#222">                    Bob       </text>
-<text x="332" y="395" font-family="monospace" font-size="18" fill="#222">                              </text>
-<text x="332" y="413" font-family="monospace" font-size="18" fill="#222">                    ╭─────╮  </text>
-<text x="332" y="431" font-family="monospace" font-size="18" fill="#222">                    │ ◕‿◕│  </text>
-<text x="332" y="449" font-family="monospace" font-size="18" fill="#222">                    ╰─────╯  </text>
-<text x="332" y="467" font-family="monospace" font-size="18" fill="#222">                              </text>
-<text x="332" y="485" font-family="monospace" font-size="18" fill="#222">                              </text>
-<rect x="332" y="343" width="300" height="144" fill="#fafafa" stroke="#333" stroke-width="1.5"/>
-<rect x="28" y="55" width="200" height="40" rx="8" ry="8" fill="#fffbe6" stroke="#333" stroke-width="1.5"/>
-<polygon points="68,95 80,95 58,107" fill="#fffbe6" stroke="#333" stroke-width="1.5" stroke-linejoin="round"/>
-<text x="128" y="79.66666666666667" font-family="monospace" font-size="14" text-anchor="middle" fill="#222">「Monday again?」</text>
-<rect x="432" y="55" width="220" height="40" rx="8" ry="8" fill="#fffbe6" stroke="#333" stroke-width="1.5"/>
-<polygon points="608,95 596,95 619,107" fill="#fffbe6" stroke="#333" stroke-width="1.5" stroke-linejoin="round"/>
-<text x="542" y="79.66666666666667" font-family="monospace" font-size="14" text-anchor="middle" fill="#222">「死線 = today, ready?」</text>
-<rect x="28" y="285" width="200" height="40" rx="8" ry="8" fill="#fffbe6" stroke="#333" stroke-width="1.5"/>
-<polygon points="68,325 80,325 58,337" fill="#fffbe6" stroke="#333" stroke-width="1.5" stroke-linejoin="round"/>
-<text x="128" y="309.6666666666667" font-family="monospace" font-size="14" text-anchor="middle" fill="#222">「no, send help」</text>
-<rect x="432" y="285" width="220" height="40" rx="8" ry="8" fill="#fffbe6" stroke="#333" stroke-width="1.5"/>
-<polygon points="608,325 596,325 619,337" fill="#fffbe6" stroke="#333" stroke-width="1.5" stroke-linejoin="round"/>
-<text x="542" y="309.6666666666667" font-family="monospace" font-size="14" text-anchor="middle" fill="#222">「coffee first, panic later」</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 411" width="384" height="411">
+<rect x="0" y="0" width="384" height="411" fill="white"/>
+<style>text { font-family: 'Courier New', 'Consolas', 'Fira Code', 'DejaVu Sans Mono', monospace; font-variant-numeric: tabular-nums; }</style>
+<text x="192" y="23" font-family="sans-serif" font-size="16.2" font-weight="bold" text-anchor="middle" fill="#222">Monday Morning</text>
+<rect x="20" y="117" width="90" height="90" fill="#fafafa" stroke="#333" stroke-width="1.5"/>
+<text x="20" y="133" font-family="'Courier New', 'Consolas', 'Fira Code', 'DejaVu Sans Mono', monospace" font-size="18" font-variant-numeric="tabular-nums" fill="#222">  Alice</text>
+<text x="20" y="151" font-family="'Courier New', 'Consolas', 'Fira Code', 'DejaVu Sans Mono', monospace" font-size="18" font-variant-numeric="tabular-nums" fill="#222"></text>
+<text x="20" y="169" font-family="'Courier New', 'Consolas', 'Fira Code', 'DejaVu Sans Mono', monospace" font-size="18" font-variant-numeric="tabular-nums" fill="#222">  ╭─────╮</text>
+<text x="20" y="187" font-family="'Courier New', 'Consolas', 'Fira Code', 'DejaVu Sans Mono', monospace" font-size="18" font-variant-numeric="tabular-nums" fill="#222">  │◕‿◕ │</text>
+<text x="20" y="205" font-family="'Courier New', 'Consolas', 'Fira Code', 'DejaVu Sans Mono', monospace" font-size="18" font-variant-numeric="tabular-nums" fill="#222">  ╰─────╯</text>
+<rect x="134" y="117" width="230" height="90" fill="#fafafa" stroke="#333" stroke-width="1.5"/>
+<text x="134" y="133" font-family="'Courier New', 'Consolas', 'Fira Code', 'DejaVu Sans Mono', monospace" font-size="18" font-variant-numeric="tabular-nums" fill="#222">                Bob</text>
+<text x="134" y="151" font-family="'Courier New', 'Consolas', 'Fira Code', 'DejaVu Sans Mono', monospace" font-size="18" font-variant-numeric="tabular-nums" fill="#222"></text>
+<text x="134" y="169" font-family="'Courier New', 'Consolas', 'Fira Code', 'DejaVu Sans Mono', monospace" font-size="18" font-variant-numeric="tabular-nums" fill="#222">                ╭─────╮</text>
+<text x="134" y="187" font-family="'Courier New', 'Consolas', 'Fira Code', 'DejaVu Sans Mono', monospace" font-size="18" font-variant-numeric="tabular-nums" fill="#222">                │ ◑‿◑│</text>
+<text x="134" y="205" font-family="'Courier New', 'Consolas', 'Fira Code', 'DejaVu Sans Mono', monospace" font-size="18" font-variant-numeric="tabular-nums" fill="#222">                ╰─────╯</text>
+<rect x="20" y="301" width="90" height="90" fill="#fafafa" stroke="#333" stroke-width="1.5"/>
+<text x="20" y="317" font-family="'Courier New', 'Consolas', 'Fira Code', 'DejaVu Sans Mono', monospace" font-size="18" font-variant-numeric="tabular-nums" fill="#222">  Alice</text>
+<text x="20" y="335" font-family="'Courier New', 'Consolas', 'Fira Code', 'DejaVu Sans Mono', monospace" font-size="18" font-variant-numeric="tabular-nums" fill="#222"></text>
+<text x="20" y="353" font-family="'Courier New', 'Consolas', 'Fira Code', 'DejaVu Sans Mono', monospace" font-size="18" font-variant-numeric="tabular-nums" fill="#222">  ╭─────╮</text>
+<text x="20" y="371" font-family="'Courier New', 'Consolas', 'Fira Code', 'DejaVu Sans Mono', monospace" font-size="18" font-variant-numeric="tabular-nums" fill="#222">  │╥﹏╥ │</text>
+<text x="20" y="389" font-family="'Courier New', 'Consolas', 'Fira Code', 'DejaVu Sans Mono', monospace" font-size="18" font-variant-numeric="tabular-nums" fill="#222">  ╰─────╯</text>
+<rect x="134" y="301" width="230" height="90" fill="#fafafa" stroke="#333" stroke-width="1.5"/>
+<text x="134" y="317" font-family="'Courier New', 'Consolas', 'Fira Code', 'DejaVu Sans Mono', monospace" font-size="18" font-variant-numeric="tabular-nums" fill="#222">                Bob</text>
+<text x="134" y="335" font-family="'Courier New', 'Consolas', 'Fira Code', 'DejaVu Sans Mono', monospace" font-size="18" font-variant-numeric="tabular-nums" fill="#222"></text>
+<text x="134" y="353" font-family="'Courier New', 'Consolas', 'Fira Code', 'DejaVu Sans Mono', monospace" font-size="18" font-variant-numeric="tabular-nums" fill="#222">                ╭─────╮</text>
+<text x="134" y="371" font-family="'Courier New', 'Consolas', 'Fira Code', 'DejaVu Sans Mono', monospace" font-size="18" font-variant-numeric="tabular-nums" fill="#222">                │ ◕‿◕│</text>
+<text x="134" y="389" font-family="'Courier New', 'Consolas', 'Fira Code', 'DejaVu Sans Mono', monospace" font-size="18" font-variant-numeric="tabular-nums" fill="#222">                ╰─────╯</text>
+<rect x="26" y="53" width="90" height="56" rx="8" ry="8" fill="#fffbe6" stroke="#333" stroke-width="1.5"/>
+<polygon points="58,109 72,109 65,123" fill="#fffbe6" stroke="#333" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="71" y="85.66666666666667" font-family="'Courier New', 'Consolas', 'Fira Code', 'DejaVu Sans Mono', monospace" font-size="14" font-variant-numeric="tabular-nums" text-anchor="middle" fill="#222">Monday ag
+ain?</text>
+<rect x="130" y="53" width="228" height="38" rx="8" ry="8" fill="#fffbe6" stroke="#333" stroke-width="1.5"/>
+<polygon points="272,91 286,91 279,105" fill="#fffbe6" stroke="#333" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="244" y="76.66666666666667" font-family="'Courier New', 'Consolas', 'Fira Code', 'DejaVu Sans Mono', monospace" font-size="14" font-variant-numeric="tabular-nums" text-anchor="middle" fill="#222">死線 = today, ready?</text>
+<rect x="26" y="237" width="90" height="56" rx="8" ry="8" fill="#fffbe6" stroke="#333" stroke-width="1.5"/>
+<polygon points="58,293 72,293 65,307" fill="#fffbe6" stroke="#333" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="71" y="269.6666666666667" font-family="'Courier New', 'Consolas', 'Fira Code', 'DejaVu Sans Mono', monospace" font-size="14" font-variant-numeric="tabular-nums" text-anchor="middle" fill="#222">no, send 
+help</text>
+<rect x="128" y="237" width="230" height="56" rx="8" ry="8" fill="#fffbe6" stroke="#333" stroke-width="1.5"/>
+<polygon points="272,293 286,293 279,307" fill="#fffbe6" stroke="#333" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="243" y="269.6666666666667" font-family="'Courier New', 'Consolas', 'Fira Code', 'DejaVu Sans Mono', monospace" font-size="14" font-variant-numeric="tabular-nums" text-anchor="middle" fill="#222">coffee first, panic lat
+er</text>
 </svg>
