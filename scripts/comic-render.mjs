@@ -2,35 +2,56 @@
 /**
  * comic-render.mjs — Compose panels + speech bubbles into one SVG.
  *
- * Renders a multi-panel comic where each panel may have a speech bubble
- * attached. Combines `svg-render.mjs` (panels) and `bubble-render.mjs`
- * (bubbles) output, then merges them into a single <svg>.
+ * v2 — clean rect-only edges, bubble space per panel, one chibi per panel.
  *
- * Input (stdin or request.json):
+ * Panel layout per cell:
+ *
+ *   ┌─ bubble space (height = bubbleHeight) ─┐
+ *   │   [bubble 1]                           │
+ *   │   [bubble 2]                           │
+ *   ├──────────────────────────┬─────────────┤
+ *   │                          │  panel      │
+ *   │   content lines          │  border     │
+ *   │                          │  (rect)     │
+ *   │                          │             │
+ *   └──────────────────────────┴─────────────┘
+ *
+ * Each panel:
+ *   - bordered by a clean SVG <rect> (no box-drawing chars)
+ *   - has optional bubble area above the border
+ *   - content is plain <text> monospace, no leading/trailing ║
+ *
+ * Dialogue bubbles are positioned in the bubble area, with tails pointing
+ * down to the panel below.
+ *
+ * Input:
  *   {
- *     "panels":  [ {panelId, style, width, lines} ],
- *     "layout":  { "cols": 2, "gap": 4 },
- *     "cell":    { "w": 10, "h": 18 },
- *     "padding": 8,
- *     "dialogue":[ {panelId, x, y, w, h, text, tail} ]
+ *     "title": "Monday Morning",
+ *     "cell": { "w": 10, "h": 18 },
+ *     "panels": [
+ *       {
+ *         "panelId": 0,
+ *         "width": 30,                 // inner width in cells
+ *         "lines": ["...", "..."],     // content lines, no borders
+ *         "bubbleHeight": 60           // optional, default 0
+ *       }
+ *     ],
+ *     "layout": { "cols": 2, "gap": 12 },
+ *     "dialogue": [
+ *       {
+ *         "panelId": 0,
+ *         "x": 10, "y": 10,
+ *         "w": 180, "h": 40,
+ *         "text": "「hello」",
+ *         "tail": { "side": "bottom-left", "size": 12 }
+ *       }
+ *     ]
  *   }
  *
- * Output (stdout):
- *   { svg: "<svg>...</svg>", ok: true, width, height }
- *
- * Bubble positioning:
- *   x, y, w, h are in SVG units relative to the panel's top-left corner.
- *   For grid layouts, the script translates bubbles into absolute coords
- *   based on panel position in the grid.
+ * Output: { svg, ok, width, height }
  */
 
 import { readFileSync } from 'node:fs';
-
-const BORDERS = {
-  A: { tl: '╔', t: '═', tr: '╗', l: '║', r: '║', bl: '╚', b: '═', br: '╝' },
-  B: { tl: '┌', t: '─', tr: '┐', l: '│', r: '│', bl: '└', b: '─', br: '┘' },
-  C: { tl: '+', t: '-', tr: '+', l: '|', r: '|', bl: '+', b: '-', br: '+' },
-};
 
 function escapeXml(s) {
   return s
@@ -39,37 +60,6 @@ function escapeXml(s) {
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&apos;');
-}
-
-function renderPanel(panel, cellW, cellH) {
-  const b = BORDERS[panel.style];
-  if (!b) return { xml: '', width: 0, height: 0, error: `unknown style ${panel.style}` };
-  const lines = panel.lines.map((l) => l.replace(/\r/g, ''));
-  const innerW = panel.width;
-  const outerW = innerW + 2;
-  const totalLines = lines.length + 2;
-  const w = outerW * cellW;
-  const h = totalLines * cellH;
-  const parts = [];
-  parts.push(`<rect x="0" y="0" width="${w}" height="${h}" fill="#fafafa"/>`);
-  parts.push(
-    `<text x="0" y="${cellH}" font-family="monospace" font-size="${cellH}" ` +
-    `textLength="${innerW * cellW}" lengthAdjust="spacingAndGlyphs">` +
-    `${escapeXml(b.tl + b.t.repeat(innerW) + b.tr)}</text>`
-  );
-  for (let i = 0; i < lines.length; i++) {
-    parts.push(
-      `<text x="0" y="${(i + 2) * cellH}" font-family="monospace" font-size="${cellH}">` +
-      `${escapeXml(b.l + lines[i] + b.r)}</text>`
-    );
-  }
-  parts.push(
-    `<text x="0" y="${totalLines * cellH}" font-family="monospace" font-size="${cellH}" ` +
-    `textLength="${innerW * cellW}" lengthAdjust="spacingAndGlyphs">` +
-    `${escapeXml(b.bl + b.b.repeat(innerW) + b.br)}</text>`
-  );
-  parts.push(`<rect x="0" y="0" width="${w}" height="${h}" fill="none" stroke="#333" stroke-width="1"/>`);
-  return { xml: parts.join('\n'), width: w, height: h };
 }
 
 function tailPoints(x, y, w, h, tail) {
@@ -100,8 +90,7 @@ function renderBubble(b) {
   const s = b.stroke ?? '#333';
   const r = b.radius ?? 8;
   const parts = [
-    `<rect x="${b.x}" y="${b.y}" width="${b.w}" height="${b.h}" rx="${r}" ry="${r}" ` +
-    `fill="${f}" stroke="${s}" stroke-width="1.5"/>`,
+    `<rect x="${b.x}" y="${b.y}" width="${b.w}" height="${b.h}" rx="${r}" ry="${r}" fill="${f}" stroke="${s}" stroke-width="1.5"/>`,
   ];
   if (b.tail) {
     const pts = tailPoints(b.x, b.y, b.w, b.h, b.tail);
@@ -115,8 +104,7 @@ function renderBubble(b) {
   const cx = b.x + b.w / 2;
   const cy = b.y + b.h / 2 + fs / 3;
   parts.push(
-    `<text x="${cx}" y="${cy}" font-family="monospace" font-size="${fs}" ` +
-    `text-anchor="middle" fill="#222">${escapeXml(b.text)}</text>`
+    `<text x="${cx}" y="${cy}" font-family="monospace" font-size="${fs}" text-anchor="middle" fill="#222">${escapeXml(b.text)}</text>`
   );
   return parts.join('\n');
 }
@@ -147,44 +135,59 @@ function main() {
 
   const cellW = input.cell?.w ?? 10;
   const cellH = input.cell?.h ?? 18;
-  const pad = input.padding ?? 12;
-  const gap = input.layout?.gap ?? 4;
+  const pad = input.padding ?? 16;
+  const gap = input.layout?.gap ?? 12;
   const cols = input.layout?.cols ?? 1;
 
-  const rendered = panels.map((p) => renderPanel(p, cellW, cellH));
-  const ok = rendered.every((r) => !r.error);
+  // Compute panel dimensions (no borders in content; panel rect added separately)
+  const panelDims = panels.map((p) => {
+    const lines = (p.lines ?? []).map((l) => l.replace(/\r/g, ''));
+    const innerW = p.width;
+    const innerH = lines.length;
+    const bubbleH = p.bubbleHeight ?? 0;
+    const contentW = innerW * cellW;
+    const contentH = innerH * cellH;
+    return {
+      panelId: p.panelId,
+      contentW,
+      contentH,
+      bubbleH,
+      totalW: contentW,
+      totalH: contentH + bubbleH,
+    };
+  });
 
-  // Compute panel positions
+  // Layout: rows × cols
   const positions = [];
   let totalW, totalH;
   if (cols > 1) {
     const rows = [];
-    for (let i = 0; i < rendered.length; i += cols) {
-      rows.push(rendered.slice(i, i + cols));
+    for (let i = 0; i < panelDims.length; i += cols) {
+      rows.push(panelDims.slice(i, i + cols));
     }
     let y = pad;
     for (const row of rows) {
       let x = pad;
-      const rowH = Math.max(...row.map((p) => p.height));
+      const rowH = Math.max(...row.map((p) => p.totalH));
       for (let i = 0; i < row.length; i++) {
-        positions.push({ x, y, w: row[i].width, h: row[i].height });
-        x += row[i].width + gap;
+        positions.push({ x, y, w: row[i].totalW, h: row[i].totalH, bubbleH: row[i].bubbleH, contentH: row[i].contentH });
+        x += row[i].totalW + gap;
       }
       y += rowH + gap;
     }
     totalW = Math.max(
       ...rows.map((row) =>
-        row.reduce((s, r, i) => s + r.width + (i < row.length - 1 ? gap : 0), 0)
+        row.reduce((s, r, i) => s + r.totalW + (i < row.length - 1 ? gap : 0), 0)
       )
     ) + 2 * pad;
     totalH = y - gap + pad;
   } else {
     let y = pad;
-    for (const p of rendered) {
-      positions.push({ x: pad, y, w: p.width, h: p.height });
-      y += p.height + gap;
+    for (const p of panelDims) {
+      positions.push({ x: pad, y, w: p.totalW, h: p.totalH, bubbleH: p.bubbleH, contentH: p.contentH });
+      y += p.totalH + gap;
     }
-    totalW = Math.max(...rendered.map((r) => r.width)) + 2 * pad;
+    totalW = Math.max(...panelDims.map((p) => p.totalW)) + 2 * pad;
     totalH = y - gap + pad;
   }
 
@@ -199,29 +202,46 @@ function main() {
 
   if (input.title) {
     out.push(
-      `<text x="${totalW / 2}" y="${titleH}" font-family="sans-serif" font-size="${cellH * 0.9}" ` +
-      `font-weight="bold" text-anchor="middle" fill="#222">${escapeXml(input.title)}</text>`
+      `<text x="${totalW / 2}" y="${titleH - 4}" font-family="sans-serif" font-size="${cellH * 0.9}" font-weight="bold" text-anchor="middle" fill="#222">${escapeXml(input.title)}</text>`
     );
   }
 
-  // Render panels at positions
-  for (let i = 0; i < rendered.length; i++) {
+  // Render each panel: bubble area (above) + content area (with rect border)
+  for (let i = 0; i < panels.length; i++) {
+    const panel = panels[i];
     const pos = positions[i];
-    const group = rendered[i].xml;
-    // Move all x="0" y="..." in panel to pos.x + 0, pos.y + ...
-    out.push(`<g transform="translate(${pos.x},${pos.y + titleH})">`);
-    out.push(group);
-    out.push('</g>');
+    const yTop = pos.y + titleH;
+    const bubbleY = yTop;
+    const contentY = yTop + pos.bubbleH;
+    const lines = (panel.lines ?? []).map((l) => l.replace(/\r/g, ''));
+
+    // Content: plain text lines, no leading/trailing ║
+    for (let li = 0; li < lines.length; li++) {
+      out.push(
+        `<text x="${pos.x}" y="${contentY + (li + 1) * cellH - 2}" font-family="monospace" font-size="${cellH}" fill="#222">${escapeXml(lines[li])}</text>`
+      );
+    }
+
+    // Panel rect border (only around the content area, not the bubble space)
+    out.push(
+      `<rect x="${pos.x}" y="${contentY}" width="${pos.w}" height="${pos.contentH}" fill="#fafafa" stroke="#333" stroke-width="1.5"/>`
+    );
+
+    // Optional separator line between bubble area and content
+    if (pos.bubbleH > 0) {
+      // No separator — bubble area is just empty space
+    }
   }
 
-  // Render bubbles, translating to absolute coords
+  // Render bubbles (positioned in bubble area of each panel)
   const dialogue = input.dialogue ?? [];
   for (const d of dialogue) {
     const pos = positions[d.panelId];
     if (!pos) continue;
+    const yTop = pos.y + titleH;
     const abs = {
       x: pos.x + d.x,
-      y: pos.y + titleH + d.y,
+      y: yTop + d.y,
       w: d.w,
       h: d.h,
       text: d.text,
@@ -234,8 +254,7 @@ function main() {
   out.push('</svg>');
   const svg = out.join('\n');
 
-  process.stdout.write(JSON.stringify({ svg, ok, width: totalW, height: totalH }, null, 2) + '\n');
-  if (!ok) process.exitCode = 1;
+  process.stdout.write(JSON.stringify({ svg, ok: true, width: totalW, height: totalH }, null, 2) + '\n');
 }
 
 main();
