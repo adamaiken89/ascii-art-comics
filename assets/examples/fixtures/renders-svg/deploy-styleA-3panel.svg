@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 740 128" width="740" height="128">
+<rect x="0" y="0" width="740" height="128" fill="white"/>
+<g transform="translate(8,8)">
+<rect x="0" y="0" width="240" height="112" fill="#fafafa" stroke="none"/>
+<text x="0" y="16" font-family="monospace" font-size="16" textLength="224" lengthAdjust="spacingAndGlyphs">╔════════════════════════════╗</text>
+<text x="0" y="32" font-family="monospace" font-size="16">║      (•_•)        ║</text>
+<text x="0" y="48" font-family="monospace" font-size="16">║       /|          ║</text>
+<text x="0" y="64" font-family="monospace" font-size="16">║  ╭────────────────╮║</text>
+<text x="0" y="80" font-family="monospace" font-size="16">║  │ pushing to prod │║</text>
+<text x="0" y="96" font-family="monospace" font-size="16">║  ╰────────────────╯║</text>
+<text x="0" y="112" font-family="monospace" font-size="16" textLength="224" lengthAdjust="spacingAndGlyphs">╚════════════════════════════╝</text>
+<rect x="0" y="0" width="240" height="112" fill="none" stroke="#333" stroke-width="1"/>
+</g>
+<g transform="translate(250,8)">
+<rect x="0" y="0" width="240" height="112" fill="#fafafa" stroke="none"/>
+<text x="0" y="16" font-family="monospace" font-size="16" textLength="224" lengthAdjust="spacingAndGlyphs">╔════════════════════════════╗</text>
+<text x="0" y="32" font-family="monospace" font-size="16">║      (╥﹏╥)        ║</text>
+<text x="0" y="48" font-family="monospace" font-size="16">║       /|          ║</text>
+<text x="0" y="64" font-family="monospace" font-size="16">║  ╭────────────────╮║</text>
+<text x="0" y="80" font-family="monospace" font-size="16">║  │ prod is on fire │║</text>
+<text x="0" y="96" font-family="monospace" font-size="16">║  ╰────────────────╯║</text>
+<text x="0" y="112" font-family="monospace" font-size="16" textLength="224" lengthAdjust="spacingAndGlyphs">╚════════════════════════════╝</text>
+<rect x="0" y="0" width="240" height="112" fill="none" stroke="#333" stroke-width="1"/>
+</g>
+<g transform="translate(492,8)">
+<rect x="0" y="0" width="240" height="112" fill="#fafafa" stroke="none"/>
+<text x="0" y="16" font-family="monospace" font-size="16" textLength="224" lengthAdjust="spacingAndGlyphs">╔════════════════════════════╗</text>
+<text x="0" y="32" font-family="monospace" font-size="16">║      (•_•)        ║</text>
+<text x="0" y="48" font-family="monospace" font-size="16">║       /|          ║</text>
+<text x="0" y="64" font-family="monospace" font-size="16">║  ╭────────────────╮║</text>
+<text x="0" y="80" font-family="monospace" font-size="16">║  │ rollback?       │║</text>
+<text x="0" y="96" font-family="monospace" font-size="16">║  ╰────────────────╯║</text>
+<text x="0" y="112" font-family="monospace" font-size="16" textLength="224" lengthAdjust="spacingAndGlyphs">╚════════════════════════════╝</text>
+<rect x="0" y="0" width="240" height="112" fill="none" stroke="#333" stroke-width="1"/>
+</g>
+</svg>

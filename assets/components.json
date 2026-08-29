@@ -1,7 +1,7 @@
 {
   "version": 1,
-  "generated": "2026-08-29T03:32:51.611Z",
-  "count": 71,
+  "generated": "2026-08-29T03:40:08.665Z",
+  "count": 96,
   "categories": {
     "body": [
       {
@@ -289,99 +289,488 @@
         ]
       },
       {
-        "id": "face/chibi-angry",
-        "name": "chibi-angry",
+        "id": "face/chibi-angry-center",
+        "name": "chibi-angry-center",
         "category": "face",
         "lines": [
           "╭─────╮",
-          "│╬_╬ │ ",
+          "│╬ ‿ ╬│",
           "╰─────╯"
         ],
         "width": 7,
         "height": 3,
         "tags": [
           "face",
-          "chibi angry",
+          "chibi angry center",
           "angry",
           "chibi",
+          "centered",
           "width-7"
         ]
       },
       {
-        "id": "face/chibi-happy",
-        "name": "chibi-happy",
+        "id": "face/chibi-angry-left",
+        "name": "chibi-angry-left",
         "category": "face",
         "lines": [
           "╭─────╮",
-          "│◕‿◕ │ ",
+          "│╬ ‿ ─│",
           "╰─────╯"
         ],
         "width": 7,
         "height": 3,
         "tags": [
           "face",
-          "chibi happy",
+          "chibi angry left",
+          "angry",
+          "chibi",
+          "left-facing",
+          "width-7"
+        ]
+      },
+      {
+        "id": "face/chibi-angry-right",
+        "name": "chibi-angry-right",
+        "category": "face",
+        "lines": [
+          "╭─────╮",
+          "│─ ‿ ╬│",
+          "╰─────╯"
+        ],
+        "width": 7,
+        "height": 3,
+        "tags": [
+          "face",
+          "chibi angry right",
+          "angry",
+          "chibi",
+          "right-facing",
+          "width-7"
+        ]
+      },
+      {
+        "id": "face/chibi-dead-center",
+        "name": "chibi-dead-center",
+        "category": "face",
+        "lines": [
+          "╭─────╮",
+          "│× ‿ ×│",
+          "╰─────╯"
+        ],
+        "width": 7,
+        "height": 3,
+        "tags": [
+          "face",
+          "chibi dead center",
+          "dead",
+          "chibi",
+          "centered",
+          "width-7"
+        ]
+      },
+      {
+        "id": "face/chibi-dead-left",
+        "name": "chibi-dead-left",
+        "category": "face",
+        "lines": [
+          "╭─────╮",
+          "│× ‿ ─│",
+          "╰─────╯"
+        ],
+        "width": 7,
+        "height": 3,
+        "tags": [
+          "face",
+          "chibi dead left",
+          "dead",
+          "chibi",
+          "left-facing",
+          "width-7"
+        ]
+      },
+      {
+        "id": "face/chibi-dead-right",
+        "name": "chibi-dead-right",
+        "category": "face",
+        "lines": [
+          "╭─────╮",
+          "│─ ‿ ×│",
+          "╰─────╯"
+        ],
+        "width": 7,
+        "height": 3,
+        "tags": [
+          "face",
+          "chibi dead right",
+          "dead",
+          "chibi",
+          "right-facing",
+          "width-7"
+        ]
+      },
+      {
+        "id": "face/chibi-happy-center",
+        "name": "chibi-happy-center",
+        "category": "face",
+        "lines": [
+          "╭─────╮",
+          "│◕ ‿ ◕│",
+          "╰─────╯"
+        ],
+        "width": 7,
+        "height": 3,
+        "tags": [
+          "face",
+          "chibi happy center",
           "happy",
           "positive",
           "chibi",
+          "centered",
           "width-7"
         ]
       },
       {
-        "id": "face/chibi-panic",
-        "name": "chibi-panic",
+        "id": "face/chibi-happy-left",
+        "name": "chibi-happy-left",
         "category": "face",
         "lines": [
           "╭─────╮",
-          "│⊙_⊙ │ ",
+          "│◕ ‿ ◡│",
           "╰─────╯"
         ],
         "width": 7,
         "height": 3,
         "tags": [
           "face",
-          "chibi panic",
+          "chibi happy left",
+          "happy",
+          "positive",
+          "chibi",
+          "left-facing",
+          "width-7"
+        ]
+      },
+      {
+        "id": "face/chibi-happy-right",
+        "name": "chibi-happy-right",
+        "category": "face",
+        "lines": [
+          "╭─────╮",
+          "│◡ ‿ ◕│",
+          "╰─────╯"
+        ],
+        "width": 7,
+        "height": 3,
+        "tags": [
+          "face",
+          "chibi happy right",
+          "happy",
+          "positive",
+          "chibi",
+          "right-facing",
+          "width-7"
+        ]
+      },
+      {
+        "id": "face/chibi-panic-center",
+        "name": "chibi-panic-center",
+        "category": "face",
+        "lines": [
+          "╭─────╮",
+          "│⊙ ‿ ⊙│",
+          "╰─────╯"
+        ],
+        "width": 7,
+        "height": 3,
+        "tags": [
+          "face",
+          "chibi panic center",
           "panic",
           "chibi",
+          "centered",
           "width-7"
         ]
       },
       {
-        "id": "face/chibi-sad",
-        "name": "chibi-sad",
+        "id": "face/chibi-panic-left",
+        "name": "chibi-panic-left",
         "category": "face",
         "lines": [
           "╭─────╮",
-          "│╥﹏╥│ ",
+          "│⊙ ‿ ─│",
           "╰─────╯"
         ],
         "width": 7,
         "height": 3,
         "tags": [
           "face",
-          "chibi sad",
+          "chibi panic left",
+          "panic",
+          "chibi",
+          "left-facing",
+          "width-7"
+        ]
+      },
+      {
+        "id": "face/chibi-panic-right",
+        "name": "chibi-panic-right",
+        "category": "face",
+        "lines": [
+          "╭─────╮",
+          "│─ ‿ ⊙│",
+          "╰─────╯"
+        ],
+        "width": 7,
+        "height": 3,
+        "tags": [
+          "face",
+          "chibi panic right",
+          "panic",
+          "chibi",
+          "right-facing",
+          "width-7"
+        ]
+      },
+      {
+        "id": "face/chibi-sad-center",
+        "name": "chibi-sad-center",
+        "category": "face",
+        "lines": [
+          "╭─────╮",
+          "│ ╥﹏╥│",
+          "╰─────╯"
+        ],
+        "width": 7,
+        "height": 3,
+        "tags": [
+          "face",
+          "chibi sad center",
           "sad",
           "crying",
           "chibi",
+          "centered",
           "width-7"
         ]
       },
       {
-        "id": "face/chibi-smug",
-        "name": "chibi-smug",
+        "id": "face/chibi-sad-left",
+        "name": "chibi-sad-left",
         "category": "face",
         "lines": [
           "╭─────╮",
-          "│◑‿◑ │ ",
+          "│ ╥﹏─│",
           "╰─────╯"
         ],
         "width": 7,
         "height": 3,
         "tags": [
           "face",
-          "chibi smug",
+          "chibi sad left",
+          "sad",
+          "crying",
+          "chibi",
+          "left-facing",
+          "width-7"
+        ]
+      },
+      {
+        "id": "face/chibi-sad-right",
+        "name": "chibi-sad-right",
+        "category": "face",
+        "lines": [
+          "╭─────╮",
+          "│─ ﹏╥│",
+          "╰─────╯"
+        ],
+        "width": 7,
+        "height": 3,
+        "tags": [
+          "face",
+          "chibi sad right",
+          "sad",
+          "crying",
+          "chibi",
+          "right-facing",
+          "width-7"
+        ]
+      },
+      {
+        "id": "face/chibi-shocked-center",
+        "name": "chibi-shocked-center",
+        "category": "face",
+        "lines": [
+          "╭─────╮",
+          "│◎ ‿ ◎│",
+          "╰─────╯"
+        ],
+        "width": 7,
+        "height": 3,
+        "tags": [
+          "face",
+          "chibi shocked center",
+          "shocked",
+          "chibi",
+          "centered",
+          "width-7"
+        ]
+      },
+      {
+        "id": "face/chibi-shocked-left",
+        "name": "chibi-shocked-left",
+        "category": "face",
+        "lines": [
+          "╭─────╮",
+          "│◎ ‿ ─│",
+          "╰─────╯"
+        ],
+        "width": 7,
+        "height": 3,
+        "tags": [
+          "face",
+          "chibi shocked left",
+          "shocked",
+          "chibi",
+          "left-facing",
+          "width-7"
+        ]
+      },
+      {
+        "id": "face/chibi-shocked-right",
+        "name": "chibi-shocked-right",
+        "category": "face",
+        "lines": [
+          "╭─────╮",
+          "│─ ‿ ◎│",
+          "╰─────╯"
+        ],
+        "width": 7,
+        "height": 3,
+        "tags": [
+          "face",
+          "chibi shocked right",
+          "shocked",
+          "chibi",
+          "right-facing",
+          "width-7"
+        ]
+      },
+      {
+        "id": "face/chibi-smug-center",
+        "name": "chibi-smug-center",
+        "category": "face",
+        "lines": [
+          "╭─────╮",
+          "│◑ ‿ ◑│",
+          "╰─────╯"
+        ],
+        "width": 7,
+        "height": 3,
+        "tags": [
+          "face",
+          "chibi smug center",
           "smug",
           "chibi",
+          "centered",
+          "width-7"
+        ]
+      },
+      {
+        "id": "face/chibi-smug-left",
+        "name": "chibi-smug-left",
+        "category": "face",
+        "lines": [
+          "╭─────╮",
+          "│◑ ‿ ◡│",
+          "╰─────╯"
+        ],
+        "width": 7,
+        "height": 3,
+        "tags": [
+          "face",
+          "chibi smug left",
+          "smug",
+          "chibi",
+          "left-facing",
+          "width-7"
+        ]
+      },
+      {
+        "id": "face/chibi-smug-right",
+        "name": "chibi-smug-right",
+        "category": "face",
+        "lines": [
+          "╭─────╮",
+          "│◡ ‿ ◑│",
+          "╰─────╯"
+        ],
+        "width": 7,
+        "height": 3,
+        "tags": [
+          "face",
+          "chibi smug right",
+          "smug",
+          "chibi",
+          "right-facing",
+          "width-7"
+        ]
+      },
+      {
+        "id": "face/chibi-thinking-center",
+        "name": "chibi-thinking-center",
+        "category": "face",
+        "lines": [
+          "╭─────╮",
+          "│◐ ‿ ◐│",
+          "╰─────╯"
+        ],
+        "width": 7,
+        "height": 3,
+        "tags": [
+          "face",
+          "chibi thinking center",
+          "thinking",
+          "chibi",
+          "centered",
+          "width-7"
+        ]
+      },
+      {
+        "id": "face/chibi-thinking-left",
+        "name": "chibi-thinking-left",
+        "category": "face",
+        "lines": [
+          "╭─────╮",
+          "│◐ ‿ ◡│",
+          "╰─────╯"
+        ],
+        "width": 7,
+        "height": 3,
+        "tags": [
+          "face",
+          "chibi thinking left",
+          "thinking",
+          "chibi",
+          "left-facing",
+          "width-7"
+        ]
+      },
+      {
+        "id": "face/chibi-thinking-right",
+        "name": "chibi-thinking-right",
+        "category": "face",
+        "lines": [
+          "╭─────╮",
+          "│◡ ‿ ◐│",
+          "╰─────╯"
+        ],
+        "width": 7,
+        "height": 3,
+        "tags": [
+          "face",
+          "chibi thinking right",
+          "thinking",
+          "chibi",
+          "right-facing",
           "width-7"
         ]
       },
@@ -436,6 +825,42 @@
         ]
       },
       {
+        "id": "face/happy-left",
+        "name": "happy-left",
+        "category": "face",
+        "lines": [
+          "(◕ ‿   )"
+        ],
+        "width": 8,
+        "height": 1,
+        "tags": [
+          "face",
+          "happy left",
+          "happy",
+          "left-facing",
+          "kaomoji",
+          "width-8"
+        ]
+      },
+      {
+        "id": "face/happy-right",
+        "name": "happy-right",
+        "category": "face",
+        "lines": [
+          "(   ‿ ◕)"
+        ],
+        "width": 8,
+        "height": 1,
+        "tags": [
+          "face",
+          "happy right",
+          "happy",
+          "right-facing",
+          "kaomoji",
+          "width-8"
+        ]
+      },
+      {
         "id": "face/happy",
         "name": "happy",
         "category": "face",
@@ -453,6 +878,42 @@
         ]
       },
       {
+        "id": "face/panic-left",
+        "name": "panic-left",
+        "category": "face",
+        "lines": [
+          "(⊙ ‿   )"
+        ],
+        "width": 8,
+        "height": 1,
+        "tags": [
+          "face",
+          "panic left",
+          "panic",
+          "left-facing",
+          "kaomoji",
+          "width-8"
+        ]
+      },
+      {
+        "id": "face/panic-right",
+        "name": "panic-right",
+        "category": "face",
+        "lines": [
+          "(   ‿ ⊙)"
+        ],
+        "width": 8,
+        "height": 1,
+        "tags": [
+          "face",
+          "panic right",
+          "panic",
+          "right-facing",
+          "kaomoji",
+          "width-8"
+        ]
+      },
+      {
         "id": "face/panic",
         "name": "panic",
         "category": "face",
@@ -467,6 +928,42 @@
           "panic",
           "shocked",
           "kaomoji"
+        ]
+      },
+      {
+        "id": "face/sad-left",
+        "name": "sad-left",
+        "category": "face",
+        "lines": [
+          "(╥ ﹏  )"
+        ],
+        "width": 8,
+        "height": 1,
+        "tags": [
+          "face",
+          "sad left",
+          "sad",
+          "left-facing",
+          "kaomoji",
+          "width-8"
+        ]
+      },
+      {
+        "id": "face/sad-right",
+        "name": "sad-right",
+        "category": "face",
+        "lines": [
+          "(  ﹏ ╥)"
+        ],
+        "width": 8,
+        "height": 1,
+        "tags": [
+          "face",
+          "sad right",
+          "sad",
+          "right-facing",
+          "kaomoji",
+          "width-8"
         ]
       },
       {

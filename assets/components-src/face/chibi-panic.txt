@@ -1,4 +1,0 @@
-@tags: panic, chibi, width-7
-╭─────╮
-│⊙_⊙ │
-╰─────╯

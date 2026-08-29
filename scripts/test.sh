@@ -7,6 +7,10 @@ cd "$(dirname "$0")/.."
 
 WRAP=scripts/box-wrap.mjs
 CG=scripts/content-generator.mjs
+FX_DIR=assets/examples/fixtures
+RENDER_OUT=$FX_DIR/renders
+SVG_OUT=$FX_DIR/renders-svg
+mkdir -p "$RENDER_OUT" "$SVG_OUT"
 FAIL=0
 
 assert_ok() {
@@ -198,12 +202,40 @@ else
   exit 1
 fi
 
+# --- SVG render path ---
+echo ""
+echo "--- svg render ---"
+python3 scripts/render-fixtures-svg.py 2>&1 | tail -8
+
+# Verify each non-C fixture produced a valid SVG
+for fx in "$FX_DIR"/*.json; do
+  name=$(basename "$fx" .json)
+  # Skip if fixture is pure style C (borderless)
+  has_border=$(python3 -c "
+import json, sys
+d = json.load(open('$fx'))
+styles = {p.get('style','A') for p in d.get('panels', [])}
+print('yes' if styles - {'C'} else 'no')
+")
+  if [ "$has_border" = "no" ]; then
+    continue
+  fi
+  if [ ! -s "$SVG_OUT/${name}.svg" ]; then
+    echo "  FAIL  svg $name: no output"
+    FAIL=1
+  else
+    bytes=$(wc -c < "$SVG_OUT/${name}.svg")
+    echo "  PASS  svg $name: $bytes bytes"
+  fi
+done
+
+if [ $FAIL -eq 0 ]; then
+  echo "  SVG ALL PASS"
+fi
+
 # --- Fixture rendering (end-to-end) ---
 echo ""
 echo "--- fixtures ---"
-FX_DIR=assets/examples/fixtures
-RENDER_OUT=$FX_DIR/renders
-mkdir -p "$RENDER_OUT"
 
 # Run render-fixtures.py and verify all pass.
 python3 scripts/render-fixtures.py 2>&1 | tail -8
