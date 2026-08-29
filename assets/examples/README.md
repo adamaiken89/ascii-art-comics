@@ -1,6 +1,17 @@
 # Test fixtures — example comics
 
-These are reference outputs the subagents can pattern-match against. Each example is a complete, validated comic.
+Reference outputs the subagents can pattern-match against. Each example is complete, width-checked, and validated.
+
+## Files
+
+- `showcase.md` — same scene in all 3 styles, side-by-side comparison
+- `style-A-kaomoji.md` — Style A examples (4 comics)
+- `style-B-manga.md` — Style B examples (4 comics)
+- `style-C-noir.md` — Style C examples (5 beats)
+
+## Width check note
+
+All examples use NBSP (U+00A0) for right-padding inside borders. Plain-text preview shows regular spaces — actual files preserve NBSP. Stage 3 auditor must verify NBSP survives in render pipeline.
 
 ## Example 1 — Style A, English, 2 panels
 
