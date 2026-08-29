@@ -6,7 +6,7 @@ Generate comics as **SVG**. Pixel-accurate bubbles, parametric chibis, 2-speaker
 
 Rendered from `assets/examples/fixtures/monday-morning-comic.json` — 4 panels, 2 chibi speakers alternating left/right, mixed CJK+EN dialogue bubbles, pure SVG primitives.
 
-![Monday Morning comic](assets/examples/comics/monday-morning-comic.svg)
+![Monday Morning comic](assets/examples/comics/monday-morning-comic.jpg)
 
 Two chibis. Monday. A deadline. Coffee. One JSON → one SVG.
 
