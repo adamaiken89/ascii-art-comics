@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "faces": {
+    "happy": {
+      "glyph": "(◕‿◕)",
+      "fallback": "(^_^)",
+      "ascii": "o_o"
+    },
+    "sad": {
+      "glyph": "(╥﹏╥)",
+      "fallback": "(T_T)",
+      "ascii": "T_T"
+    },
+    "panic": {
+      "glyph": "(⊙_⊙)",
+      "fallback": "(>_<)",
+      "ascii": ">_<"
+    },
+    "angry": {
+      "glyph": "(╬ Ò﹏Ó)",
+      "fallback": "(>_<)",
+      "ascii": ">_<"
+    },
+    "smug": {
+      "glyph": "(¬‿¬)",
+      "fallback": "(^_^)",
+      "ascii": "^_^"
+    },
+    "dead": {
+      "glyph": "(×_×)",
+      "fallback": "(x_x)",
+      "ascii": "x_x"
+    },
+    "thinking": {
+      "glyph": "(¬_¬)",
+      "fallback": "(-_-)",
+      "ascii": "-_-"
+    },
+    "shocked": {
+      "glyph": "(°□°)",
+      "fallback": "(O_O)",
+      "ascii": "O_O"
+    },
+    "excited": {
+      "glyph": "\\(★▽★)/",
+      "fallback": "(^_^)",
+      "ascii": "*_*"
+    },
+    "confused": {
+      "glyph": "(゜-゜)",
+      "fallback": "(?_?)",
+      "ascii": "?_?"
+    }
+  },
+  "chibi_boxes": {
+    "happy": ["╭──╮", "│◕‿◕│", "╰──╯"],
+    "sad": ["╭──╮", "│╥﹏╥│", "╰──╯"],
+    "panic": ["╭──╮", "│⊙_⊙│", "╰──╯"],
+    "angry": ["╭──╮", "│╬_╬│", "╰──╯"],
+    "smug": ["╭──╮", "│◑‿◑│", "╰──╯"],
+    "dead": ["╭──╮", "│×_×│", "╰──╯"],
+    "thinking": ["╭──╮", "│◐_◐│", "╰──╯"],
+    "shocked": ["╭──╮", "│◎_◎│", "╰──╯"]
+  },
+  "tofu_chars": ["?", "□", "▯", "◇", "�"]
+}
