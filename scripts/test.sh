@@ -240,9 +240,12 @@ echo "--- fixtures ---"
 # Run render-fixtures.py and verify all pass.
 python3 scripts/render-fixtures.py 2>&1 | tail -8
 
-# Verify each fixture has a render and outerW > 0.
+# Verify each panel fixture has a render and outerW > 0.
 for fx in "$FX_DIR"/*.json; do
   name=$(basename "$fx" .json)
+  case "$name" in
+    bubbles-*) continue ;;
+  esac
   if [ ! -s "$RENDER_OUT/${name}.txt" ]; then
     echo "  FAIL  fixture $name: no render produced"
     FAIL=1
@@ -251,9 +254,44 @@ for fx in "$FX_DIR"/*.json; do
   fi
 done
 
+# --- Bubble SVG rendering ---
+echo ""
+echo "--- bubble SVG ---"
+RENDER_OUT_SVG=$FX_DIR/renders-svg
+mkdir -p "$RENDER_OUT_SVG"
+python3 scripts/render-bubbles-svg.py 2>&1 | tail -3
+for fx in "$FX_DIR"/bubbles-*.json; do
+  [ -f "$fx" ] || continue
+  name=$(basename "$fx" .json)
+  if [ ! -s "$RENDER_OUT_SVG/${name}.svg" ]; then
+    echo "  FAIL  bubble $name: no svg produced"
+    FAIL=1
+  else
+    echo "  PASS  bubble $name: $(wc -c < "$RENDER_OUT_SVG/${name}.svg") bytes"
+  fi
+done
+
+# --- Panel SVG rendering (existing) ---
+echo ""
+echo "--- panel SVG ---"
+python3 scripts/render-fixtures-svg.py 2>&1 | tail -3
+for fx in "$FX_DIR"/*.json; do
+  name=$(basename "$fx" .json)
+  case "$name" in
+    bubbles-*) continue ;;
+    dns-styleC) continue ;;  # style C = borderless, no SVG
+  esac
+  if [ ! -s "$RENDER_OUT_SVG/${name}.svg" ]; then
+    echo "  FAIL  svg $name: no svg produced"
+    FAIL=1
+  else
+    echo "  PASS  svg $name: $(wc -c < "$RENDER_OUT_SVG/${name}.svg") bytes"
+  fi
+done
+
 if [ $FAIL -eq 0 ]; then
-  echo "  FIXTURES ALL PASS"
+  echo "  ALL FIXTURES + SVG + BUBBLES PASS"
 else
-  echo "  FIXTURES FAILED"
+  echo "  SOMETHING FAILED"
   exit 1
 fi

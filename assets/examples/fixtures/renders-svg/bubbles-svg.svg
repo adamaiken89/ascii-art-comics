@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 220" width="540" height="220"><rect x="0" y="0" width="540" height="220" fill="white"/><g><rect x="40" y="30" width="220" height="50" rx="8" ry="8" fill="#fffbe6" stroke="#333" stroke-width="1.5"/>
+<polygon points="84,80 96,80 73,92" fill="#fffbe6" stroke="#333" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="150" y="59.666666666666664" font-family="monospace" font-size="14" text-anchor="middle" fill="#222">「today 係 星期二」</text>
+<rect x="280" y="30" width="200" height="50" rx="8" ry="8" fill="#fffbe6" stroke="#333" stroke-width="1.5"/>
+<polygon points="440,80 428,80 450,92" fill="#fffbe6" stroke="#333" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="380" y="59.666666666666664" font-family="monospace" font-size="14" text-anchor="middle" fill="#222">「what about lunch?」</text>
+<rect x="40" y="130" width="200" height="50" rx="8" ry="8" fill="#fffbe6" stroke="#333" stroke-width="1.5"/>
+<polygon points="80,180 92,180 70,192" fill="#fffbe6" stroke="#333" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="140" y="159.66666666666666" font-family="monospace" font-size="14" text-anchor="middle" fill="#222">「燒臘飯」</text>
+<rect x="280" y="130" width="220" height="50" rx="8" ry="8" fill="#fffbe6" stroke="#333" stroke-width="1.5"/>
+<polygon points="456,180 444,180 467,192" fill="#fffbe6" stroke="#333" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="390" y="159.66666666666666" font-family="monospace" font-size="14" text-anchor="middle" fill="#222">「好, +1」</text></g></svg>

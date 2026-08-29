@@ -1,0 +1,28 @@
+{
+  "bubbles": [
+    {
+      "x": 40, "y": 30, "w": 220, "h": 50,
+      "text": "「today 係 星期二」",
+      "fontSize": 14,
+      "tail": { "side": "bottom-left", "size": 12 }
+    },
+    {
+      "x": 280, "y": 30, "w": 200, "h": 50,
+      "text": "「what about lunch?」",
+      "fontSize": 14,
+      "tail": { "side": "bottom-right", "size": 12 }
+    },
+    {
+      "x": 40, "y": 130, "w": 200, "h": 50,
+      "text": "「燒臘飯」",
+      "fontSize": 14,
+      "tail": { "side": "bottom-left", "size": 12 }
+    },
+    {
+      "x": 280, "y": 130, "w": 220, "h": 50,
+      "text": "「好, +1」",
+      "fontSize": 14,
+      "tail": { "side": "bottom-right", "size": 12 }
+    }
+  ]
+}

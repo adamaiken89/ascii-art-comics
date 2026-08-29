@@ -8,8 +8,11 @@
     "wrap": "node scripts/box-wrap.mjs",
     "generate": "node scripts/content-generator.mjs",
     "render:svg": "node scripts/svg-render.mjs",
+    "render:bubbles": "node scripts/bubble-render.mjs",
     "render:fixtures": "python3 scripts/render-fixtures.py",
     "render:fixtures:svg": "python3 scripts/render-fixtures-svg.py",
+    "render:bubbles:fixtures": "python3 scripts/render-bubbles-svg.py",
+    "build:library": "node scripts/build-library.mjs",
     "test": "bash scripts/test.sh"
   },
   "dependencies": {

@@ -34,8 +34,13 @@ def main() -> int:
     fails = 0
     for fx in sorted(FIX.glob("*.json")):
         name = fx.stem
+        if name.startswith("bubbles-"):
+            continue
         print(f"=== {name} ===")
         data = json.loads(fx.read_text(encoding="utf-8"))
+        if "panels" not in data:
+            print(f"  no 'panels' key, skipping")
+            continue
 
         # Style C is borderless — skip SVG render
         styles = {p.get("style", "A") for p in data.get("panels", [])}
