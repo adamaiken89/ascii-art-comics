@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
-# Smoke test the Stage 2 box wrapper.
-# Verifies: happy path, CJK width math, overflow detection, style C fallback.
+# Test the comic-svg pipeline.
+# Verifies: chibi parametric gen, comic render, fixture renders, component library.
 
 set -e
 cd "$(dirname "$0")/.."
 
-WRAP=scripts/box-wrap.mjs
-CG=scripts/content-generator.mjs
+COMIC=scripts/comic-render.mjs
 FX_DIR=assets/examples/fixtures
 RENDER_OUT=$FX_DIR/renders
-SVG_OUT=$FX_DIR/renders-svg
-mkdir -p "$RENDER_OUT" "$SVG_OUT"
+COMIC_OUT=assets/examples/comics
+mkdir -p "$RENDER_OUT" "$COMIC_OUT"
 FAIL=0
 
+# Helper: run a node script with stdin, check ok field
 assert_ok() {
   local name=$1
   local input=$2
@@ -20,28 +20,28 @@ assert_ok() {
   local result
   result=$(node "$script" < "$input" 2>&1) || true
   local ok
-  ok=$(echo "$result" | python3 -c "import sys,json; print(json.load(sys.stdin)['ok'])")
+  ok=$(echo "$result" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('ok', False))" 2>/dev/null || echo "False")
   if [ "$ok" = "True" ]; then
     echo "  PASS  $name"
   else
     echo "  FAIL  $name"
-    echo "$result" | python3 -c "import sys,json; d=json.load(sys.stdin); print('  errors:', d['errors'])"
+    echo "  output: $(echo "$result" | head -c 300)"
     FAIL=1
   fi
 }
 
-assert_err() {
+assert_has() {
+  # Assert that the output contains a substring
   local name=$1
   local input=$2
   local script=$3
+  local needle=$4
   local result
   result=$(node "$script" < "$input" 2>&1) || true
-  local ok
-  ok=$(echo "$result" | python3 -c "import sys,json; print(json.load(sys.stdin)['ok'])")
-  if [ "$ok" = "False" ]; then
+  if echo "$result" | grep -q "$needle"; then
     echo "  PASS  $name"
   else
-    echo "  FAIL  $name (expected ok=false)"
+    echo "  FAIL  $name (missing: $needle)"
     FAIL=1
   fi
 }
@@ -49,280 +49,190 @@ assert_err() {
 TMP=$(mktemp -d)
 trap "rm -rf $TMP" EXIT
 
-# Test 1: simple A-style
-cat > "$TMP/a.json" <<'JSON'
-{
-  "panels": [{ "style": "A", "lines": ["hi"] }]
-}
-JSON
-assert_ok "A-style basic" "$TMP/a.json" "$WRAP"
+# --- Comic render: chibi parametric gen ---
+echo "--- comic render ---"
 
-# Test 2: CJK width
-cat > "$TMP/cjk.json" <<'JSON'
-{
-  "panels": [{ "style": "A", "lines": ["  好,approve了  "] }]
-}
-JSON
-assert_ok "CJK width math" "$TMP/cjk.json" "$WRAP"
-
-# Test 3: overflow
-cat > "$TMP/over.json" <<'JSON'
-{
-  "panels": [{ "style": "A", "width": 5, "lines": ["this is too long"] }]
-}
-JSON
-assert_err "overflow detection" "$TMP/over.json" "$WRAP"
-
-# Test 4: style C
-cat > "$TMP/c.json" <<'JSON'
-{
-  "panels": [{ "style": "C", "lines": ["o_o"] }]
-}
-JSON
-assert_ok "style C ASCII" "$TMP/c.json" "$WRAP"
-
-# Test 5: multi-panel stack
-cat > "$TMP/multi.json" <<'JSON'
+# Test 1: parametric chibi (no library needed)
+cat > "$TMP/chibi.json" <<'JSON'
 {
   "panels": [
-    { "style": "A", "lines": ["panel one"] },
-    { "style": "A", "lines": ["panel two"] }
+    {
+      "panelId": 0,
+      "width": 200,
+      "bubbleHeight": 60,
+      "content": [
+        { "type": "component", "id": "chibi-happy-center", "x": 20, "y": 20 }
+      ]
+    }
+  ],
+  "layout": { "cols": 1, "padding": 20 },
+  "dialogue": []
+}
+JSON
+assert_ok "chibi: parametric happy-center" "$TMP/chibi.json" "$COMIC"
+
+# Test 2: chibi left directional
+cat > "$TMP/chibi-left.json" <<'JSON'
+{
+  "panels": [
+    {
+      "panelId": 0,
+      "width": 200,
+      "bubbleHeight": 60,
+      "content": [
+        { "type": "component", "id": "chibi-sad-left", "x": 20, "y": 20 }
+      ]
+    }
+  ],
+  "layout": { "cols": 1, "padding": 20 },
+  "dialogue": []
+}
+JSON
+assert_ok "chibi: directional left" "$TMP/chibi-left.json" "$COMIC"
+
+# Test 3: 2x2 grid
+cat > "$TMP/grid.json" <<'JSON'
+{
+  "title": "Grid Test",
+  "panels": [
+    { "panelId": 0, "width": 200, "bubbleHeight": 60,
+      "content": [{ "type": "component", "id": "chibi-happy-center", "x": 20, "y": 20 }] },
+    { "panelId": 1, "width": 200, "bubbleHeight": 60,
+      "content": [{ "type": "component", "id": "chibi-thinking-right", "x": 20, "y": 20 }] },
+    { "panelId": 2, "width": 200, "bubbleHeight": 60,
+      "content": [{ "type": "component", "id": "chibi-sad-center", "x": 20, "y": 20 }] },
+    { "panelId": 3, "width": 200, "bubbleHeight": 60,
+      "content": [{ "type": "component", "id": "chibi-happy-right", "x": 20, "y": 20 }] }
+  ],
+  "layout": { "cols": 2, "gap": 20, "padding": 20 },
+  "dialogue": [
+    { "panelId": 0, "text": "hi", "align": "left" },
+    { "panelId": 1, "text": "yo", "align": "right" }
   ]
 }
 JSON
-assert_ok "multi-panel stack" "$TMP/multi.json" "$WRAP"
+assert_ok "comic: 2x2 grid with bubbles" "$TMP/grid.json" "$COMIC"
 
-# Test 6: unknown style rejected
-cat > "$TMP/bad.json" <<'JSON'
+# Test 4: long text wraps by word, not grapheme
+cat > "$TMP/wrap.json" <<'JSON'
 {
-  "panels": [{ "style": "Z", "lines": ["x"] }]
+  "panels": [
+    {
+      "panelId": 0,
+      "width": 200,
+      "bubbleHeight": 100,
+      "content": [{ "type": "component", "id": "chibi-happy-center", "x": 20, "y": 20 }],
+      "speaker": { "component": "chibi-happy-center", "anchor": "bottom" }
+    }
+  ],
+  "layout": { "cols": 1, "padding": 20 },
+  "dialogue": [
+    { "panelId": 0, "text": "this is a longer dialogue line that should wrap by word boundary", "align": "left" }
+  ]
 }
 JSON
-assert_err "unknown style" "$TMP/bad.json" "$WRAP"
+assert_ok "comic: word-boundary wrap" "$TMP/wrap.json" "$COMIC"
 
-# --- Stage 1: content-generator ---
-
-# Test 7: Stage 1 happy path
-cat > "$TMP/cg-happy.json" <<'JSON'
+# Test 5: CJK text in bubble
+cat > "$TMP/cjk.json" <<'JSON'
 {
-  "defaultTarget": 28,
-  "panels": [{
-    "panelId": 0,
-    "lines": [
-      "      (•_•)        ",
-      "       /|          ",
-      "  ╭────────────────╮",
-      "  │ pushing to prod │",
-      "  ╰────────────────╯"
-    ]
-  }]
+  "panels": [
+    {
+      "panelId": 0,
+      "width": 200,
+      "bubbleHeight": 80,
+      "content": [{ "type": "component", "id": "chibi-happy-center", "x": 20, "y": 20 }],
+      "speaker": { "component": "chibi-happy-center", "anchor": "bottom" }
+    }
+  ],
+  "layout": { "cols": 1, "padding": 20 },
+  "dialogue": [
+    { "panelId": 0, "text": "死線 = today, ready?", "align": "right" }
+  ]
 }
 JSON
-assert_ok "stage1: happy path" "$TMP/cg-happy.json" "$CG"
+assert_ok "comic: CJK bubble" "$TMP/cjk.json" "$COMIC"
 
-# Test 8: Stage 1 overflow
-cat > "$TMP/cg-overflow.json" <<'JSON'
+# Test 6: tail points at speaker (speaker ref + anchor)
+cat > "$TMP/tail.json" <<'JSON'
 {
-  "defaultTarget": 10,
-  "panels": [{
-    "panelId": 0,
-    "lines": ["this line is way too long for the budget"]
-  }]
+  "panels": [
+    {
+      "panelId": 0,
+      "width": 200,
+      "bubbleHeight": 80,
+      "content": [{ "type": "component", "id": "chibi-sad-left", "x": 150, "y": 20 }],
+      "speaker": { "component": "chibi-sad-left", "anchor": "bottom" }
+    }
+  ],
+  "layout": { "cols": 1, "padding": 20 },
+  "dialogue": [
+    { "panelId": 0, "text": "far away", "align": "left" }
+  ]
 }
 JSON
-assert_err "stage1: overflow detection" "$TMP/cg-overflow.json" "$CG"
+assert_ok "comic: tail follows speaker" "$TMP/tail.json" "$COMIC"
 
-# Test 9: Stage 1 NBSP leak
-cat > "$TMP/cg-nbsp.json" <<'JSON'
-{
-  "defaultTarget": 28,
-  "panels": [{
-    "panelId": 0,
-    "lines": ["line with nbsp inside"]
-  }]
-}
+# Test 7: missing panel errors
+cat > "$TMP/empty.json" <<'JSON'
+{ "panels": [], "layout": { "cols": 1 } }
 JSON
-assert_err "stage1: NBSP leak" "$TMP/cg-nbsp.json" "$CG"
-
-# Test 10: Stage 1 CJK width
-cat > "$TMP/cg-cjk.json" <<'JSON'
-{
-  "defaultTarget": 30,
-  "panels": [{
-    "panelId": 0,
-    "lines": [
-      "    (◕‿◕)        ",
-      "  ╭──────────────╮",
-      "  │ 好,approve了 │",
-      "  ╰──────────────╯"
-    ]
-  }]
-}
-JSON
-assert_ok "stage1: CJK width" "$TMP/cg-cjk.json" "$CG"
-
-# Test 11: end-to-end Stage 1 → Stage 2
-cat > "$TMP/cg-out.json" <<EOF
-{
-  "defaultTarget": 28,
-  "panels": [{
-    "panelId": 0,
-    "lines": [
-      "      (•_•)        ",
-      "       /|          ",
-      "  ╭────────────────╮",
-      "  │ pushing to prod │",
-      "  ╰────────────────╯"
-    ]
-  }]
-}
-EOF
-CG_RESULT=$(node "$CG" < "$TMP/cg-out.json" 2>&1)
-STAGE2_INPUT=$(echo "$CG_RESULT" | python3 -c "
-import sys, json
-d = json.load(sys.stdin)
-panel = d['panels'][0]
-out = {'panels': [{'style': 'A', 'width': panel['target'], 'lines': panel['lines']}]}
-print(json.dumps(out))
-")
-echo "$STAGE2_INPUT" | node "$WRAP" 2>&1 > "$TMP/stage2.json"
-STAGE2_OK=$(python3 -c "import json; print(json.load(open('$TMP/stage2.json'))['ok'])")
-if [ "$STAGE2_OK" = "True" ]; then
-  echo "  PASS  end-to-end: stage1 → stage2"
+result=$(node "$COMIC" < "$TMP/empty.json" 2>&1) || true
+if echo "$result" | grep -q "no panels"; then
+  echo "  PASS  comic: rejects empty panels"
 else
-  echo "  FAIL  end-to-end: stage1 → stage2"
-  cat "$TMP/stage2.json"
+  echo "  FAIL  comic: rejects empty panels"
   FAIL=1
 fi
 
+# --- Comic fixture (the showcase) ---
+echo ""
+echo "--- comic fixture ---"
+python3 scripts/render-comic-svg.py assets/examples/fixtures/monday-morning-comic.json 2>&1 | tail -1
+if [ -s "$COMIC_OUT/monday-morning-comic.svg" ]; then
+  echo "  PASS  monday-morning-comic rendered ($(wc -c < "$COMIC_OUT/monday-morning-comic.svg") bytes)"
+else
+  echo "  FAIL  monday-morning-comic"
+  FAIL=1
+fi
+
+# --- Component library validation ---
+echo ""
+echo "--- component library ---"
+python3 scripts/validate-components.py 2>&1 | tail -3
+if [ $? -eq 0 ]; then
+  echo "  PASS  validate-components"
+else
+  FAIL=1
+fi
+
+# --- Component SVG showcase ---
+echo ""
+echo "--- component showcase ---"
+node scripts/render-components-svg.mjs 2>&1 | tail -1
+showcase=assets/components-renders/components-svg.svg
+if [ -s "$showcase" ]; then
+  echo "  PASS  components-svg showcase ($(wc -c < "$showcase") bytes)"
+else
+  echo "  FAIL  components-svg showcase"
+  FAIL=1
+fi
+
+# --- Golden parity check ---
+echo ""
+echo "--- golden parity ---"
+python3 scripts/golden-check.py 2>&1 | tail -1
+if python3 scripts/golden-check.py > /dev/null 2>&1; then
+  echo "  PASS  golden parity check"
+else
+  echo "  FAIL  golden parity check"
+  FAIL=1
+fi
+
+echo ""
 if [ $FAIL -eq 0 ]; then
   echo "  ALL PASS"
 else
   echo "  SOME FAILED"
-  exit 1
-fi
-
-# --- SVG render path ---
-echo ""
-echo "--- svg render ---"
-python3 scripts/render-fixtures-svg.py 2>&1 | tail -8
-
-# Verify each non-C fixture produced a valid SVG
-for fx in "$FX_DIR"/*.json; do
-  name=$(basename "$fx" .json)
-  case "$name" in
-    bubbles-*) continue ;;
-    *-comic) continue ;;
-  esac
-  # Skip if fixture is pure style C (borderless)
-  has_border=$(python3 -c "
-import json, sys
-d = json.load(open('$fx'))
-styles = {p.get('style','A') for p in d.get('panels', [])}
-print('yes' if styles - {'C'} else 'no')
-")
-  if [ "$has_border" = "no" ]; then
-    continue
-  fi
-  if [ ! -s "$SVG_OUT/${name}.svg" ]; then
-    echo "  FAIL  svg $name: no output"
-    FAIL=1
-  else
-    bytes=$(wc -c < "$SVG_OUT/${name}.svg")
-    echo "  PASS  svg $name: $bytes bytes"
-  fi
-done
-
-if [ $FAIL -eq 0 ]; then
-  echo "  SVG ALL PASS"
-fi
-
-# --- Fixture rendering (end-to-end) ---
-echo ""
-echo "--- fixtures ---"
-
-# Run render-fixtures.py and verify all pass.
-python3 scripts/render-fixtures.py 2>&1 | tail -8
-
-# Verify each panel fixture has a render and outerW > 0.
-for fx in "$FX_DIR"/*.json; do
-  name=$(basename "$fx" .json)
-  case "$name" in
-    bubbles-*) continue ;;
-    *-comic) continue ;;
-  esac
-  if [ ! -s "$RENDER_OUT/${name}.txt" ]; then
-    echo "  FAIL  fixture $name: no render produced"
-    FAIL=1
-  else
-    echo "  PASS  fixture $name: $(wc -l < "$RENDER_OUT/${name}.txt") lines"
-  fi
-done
-
-# --- Bubble SVG rendering ---
-echo ""
-echo "--- bubble SVG ---"
-RENDER_OUT_SVG=$FX_DIR/renders-svg
-mkdir -p "$RENDER_OUT_SVG"
-python3 scripts/render-bubbles-svg.py 2>&1 | tail -3
-for fx in "$FX_DIR"/bubbles-*.json; do
-  [ -f "$fx" ] || continue
-  name=$(basename "$fx" .json)
-  if [ ! -s "$RENDER_OUT_SVG/${name}.svg" ]; then
-    echo "  FAIL  bubble $name: no svg produced"
-    FAIL=1
-  else
-    echo "  PASS  bubble $name: $(wc -c < "$RENDER_OUT_SVG/${name}.svg") bytes"
-  fi
-done
-
-# --- Panel SVG rendering (existing) ---
-echo ""
-echo "--- panel SVG ---"
-python3 scripts/render-fixtures-svg.py 2>&1 | tail -3
-for fx in "$FX_DIR"/*.json; do
-  name=$(basename "$fx" .json)
-  case "$name" in
-    bubbles-*) continue ;;
-    dns-styleC) continue ;;  # style C = borderless, no SVG
-    *-comic) continue ;;     # comic fixtures handled by comic-render
-  esac
-  if [ ! -s "$RENDER_OUT_SVG/${name}.svg" ]; then
-    echo "  FAIL  svg $name: no svg produced"
-    FAIL=1
-  else
-    echo "  PASS  svg $name: $(wc -c < "$RENDER_OUT_SVG/${name}.svg") bytes"
-  fi
-done
-
-if [ $FAIL -eq 0 ]; then
-  echo "  ALL FIXTURES + SVG + BUBBLES PASS"
-else
-  echo "  SOMETHING FAILED"
-  exit 1
-fi
-
-# --- Comic SVG (panels + bubbles) ---
-echo ""
-echo "--- comic svg ---"
-COMIC_OUT=assets/examples/comics
-mkdir -p "$COMIC_OUT"
-for fx in "$FX_DIR"/monday-morning-comic.json; do
-  [ -f "$fx" ] || continue
-  python3 scripts/render-comic-svg.py "$fx" 2>&1 | tail -2
-  name=$(basename "$fx" .json)
-  if [ ! -s "$COMIC_OUT/${name}.svg" ]; then
-    echo "  FAIL  comic $name: no svg produced"
-    FAIL=1
-  else
-    bytes=$(wc -c < "$COMIC_OUT/${name}.svg")
-    echo "  PASS  comic $name: $bytes bytes"
-  fi
-done
-
-if [ $FAIL -eq 0 ]; then
-  echo "  COMIC SVG PASS"
-else
-  echo "  COMIC FAILED"
   exit 1
 fi

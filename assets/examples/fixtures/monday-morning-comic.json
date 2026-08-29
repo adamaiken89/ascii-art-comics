@@ -1,45 +1,44 @@
 {
   "title": "Monday Morning",
-  "cell": { "w": 10, "h": 18 },
   "panels": [
     {
       "panelId": 0,
-      "width": 22,
-      "speaker": { "x": 4, "y": 1 },
-      "bubbleHeight": 70,
+      "width": 220,
+      "bubbleHeight": 80,
+      "speaker": { "component": "chibi-happy-center", "anchor": "bottom" },
       "content": [
-        { "type": "component", "id": "chibi-happy-center", "x": 2, "y": 1, "scale": 18 }
+        { "type": "component", "id": "chibi-happy-center", "x": 20, "y": 20 }
       ]
     },
     {
       "panelId": 1,
-      "width": 22,
-      "speaker": { "x": 16, "y": 1 },
-      "bubbleHeight": 70,
+      "width": 220,
+      "bubbleHeight": 80,
+      "speaker": { "component": "chibi-thinking-right", "anchor": "bottom" },
       "content": [
-        { "type": "component", "id": "chibi-thinking-right", "x": 14, "y": 1, "scale": 18 }
+        { "type": "component", "id": "chibi-thinking-right", "x": 20, "y": 20 }
       ]
     },
     {
       "panelId": 2,
-      "width": 22,
-      "speaker": { "x": 4, "y": 1 },
-      "bubbleHeight": 70,
+      "width": 220,
+      "bubbleHeight": 80,
+      "speaker": { "component": "chibi-sad-center", "anchor": "bottom" },
       "content": [
-        { "type": "component", "id": "chibi-sad-center", "x": 2, "y": 1, "scale": 18 }
+        { "type": "component", "id": "chibi-sad-center", "x": 20, "y": 20 }
       ]
     },
     {
       "panelId": 3,
-      "width": 22,
-      "speaker": { "x": 16, "y": 1 },
-      "bubbleHeight": 70,
+      "width": 220,
+      "bubbleHeight": 80,
+      "speaker": { "component": "chibi-happy-right", "anchor": "bottom" },
       "content": [
-        { "type": "component", "id": "chibi-happy-right", "x": 14, "y": 1, "scale": 18 }
+        { "type": "component", "id": "chibi-happy-right", "x": 20, "y": 20 }
       ]
     }
   ],
-  "layout": { "cols": 2, "gap": 24 },
+  "layout": { "cols": 2, "gap": 30, "padding": 24 },
   "dialogue": [
     { "panelId": 0, "text": "Monday again?", "align": "left" },
     { "panelId": 1, "text": "死線 = today, ready?", "align": "right" },

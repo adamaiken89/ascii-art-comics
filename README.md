@@ -1,45 +1,68 @@
-# ascii-art-comics
+# comic-svg
 
-Generate comics as **SVG** (default) or **ASCII** (legacy). CJK + English safe, alignment guaranteed by the rasterizer, not the LLM.
+Generate comics as **SVG**. Pixel-accurate bubbles, parametric chibis, 2-speaker dialogue, CJK + English safe.
 
 ## Sample comic
 
-Rendered from `assets/examples/fixtures/monday-morning-comic.json` (4 panels, 2 chibi speakers alternating left/right, mixed CJK+EN dialogue bubbles, pure SVG primitives — no box-drawing chars).
+Rendered from `assets/examples/fixtures/monday-morning-comic.json` — 4 panels, 2 chibi speakers alternating left/right, mixed CJK+EN dialogue bubbles, pure SVG primitives.
 
 ![Monday Morning comic](assets/examples/comics/monday-morning-comic.svg)
 
-Two chibis. Monday. A deadline. Coffee. The full pipeline — content → render — produces this in one pass, no LLM in the output path, no `║` borders, no monospace text alignment guesswork.
+Two chibis. Monday. A deadline. Coffee. One JSON → one SVG.
 
-## Why SVG, not ASCII
-
-LLMs have structural spatial blindness (tokenization, self-attention, VITC benchmark — see `references/llm-spatial-blindness.md`). Asking an LLM to "fix" ASCII art alignment produces the same artifacts it would create. SVG solves this deterministically: `<text>` with `font-family="monospace"` + `textLength` + `lengthAdjust="spacingAndGlyphs"` makes the rasterizer handle width and alignment. No `string-width` math at render time. No LLM.
-
-ASCII output is kept as a legacy option for terminal users (paste-into-markdown, plain-text logs).
-
-## Pipeline
+## Architecture (v0.2)
 
 ```
-content (json) → render (svg or ascii) → emit
+content (json) → comic-render.mjs → SVG
 ```
 
-| Stage | Implementation | Deterministic? |
-|---|---|---|
-| Content | `assets/components.json` + `assets/faces.json` | Manual / LLM-authored |
-| Render SVG | `scripts/comic-render.mjs` (panels) + `scripts/bubble-render.mjs` (bubbles) | Yes |
-| Render ASCII | `scripts/box-wrap.mjs` | Yes |
+**One renderer.** No ASCII legacy. No parallel content models. No `textLength` guessing. The renderer uses constant monospace metrics (CHAR_W_RATIO = 0.6) and lets the rasterizer do what it does well.
 
-No LLM in the render path. No "visual audit" stage. The math is done by the rasterizer.
+**Parametric chibis.** No 27 separate SVG files. `chibi(mood, dir)` is a function that returns SVG inline. Adding a new mood is one map entry, not one file.
 
-## Render modes
+**Speaker by ref.** `speaker: {component: "chibi-happy-center", anchor: "bottom"}` — the renderer snaps the tail to the speaker's bbox. No magic cell coordinates.
+
+## Input schema
+
+```json
+{
+  "title": "Monday Morning",
+  "panels": [
+    {
+      "panelId": 0,
+      "width": 220,                    // panel pixel width
+      "bubbleHeight": 80,              // reserved bubble area
+      "speaker": { "component": "chibi-happy-center", "anchor": "bottom" },
+      "content": [
+        { "type": "component", "id": "chibi-happy-center", "x": 20, "y": 20 }
+      ]
+    }
+  ],
+  "layout": { "cols": 2, "gap": 30, "padding": 24 },
+  "dialogue": [
+    { "panelId": 0, "text": "Monday again?", "align": "left" }
+  ]
+}
+```
+
+- `panels[].content[]` — items: `{type: "component", id, x, y}` or `{type: "text", text, x, y}`
+- `panels[].speaker.component` — id of a component in the panel; renderer uses its bbox for tail anchor
+- `panels[].speaker.anchor` — `top | bottom | left | right | top-left | top-right | bottom-left | bottom-right`
+- `dialogue[].align` — `left | right | center` (bubble position within panel)
+- `dialogue[].text` — auto-sized, word-wrap with grapheme fallback
+
+## Usage
 
 ```bash
-# SVG (default)
-node scripts/svg-render.mjs < request.json > comic.svg
-node scripts/bubble-render.mjs < bubbles.json > bubbles.svg
-node scripts/comic-render.mjs < comic.json > full.svg   # panels + bubbles + title
+# Render a comic fixture
+python3 scripts/render-comic-svg.py assets/examples/fixtures/monday-morning-comic.json
 
-# ASCII (legacy)
-node scripts/box-wrap.mjs < request.json
+# Or pipe JSON directly
+node scripts/comic-render.mjs < request.json > out.svg
+
+# Build component library (chibi variants etc.)
+npm run build:library
+node scripts/render-components-svg.mjs     # showcase
 ```
 
 ## Tests
@@ -48,71 +71,47 @@ node scripts/box-wrap.mjs < request.json
 npm test
 ```
 
-31/31 pass:
-- 11 unit tests (Stage 1 content validation, Stage 2 wrap, seam contracts)
-- 5 panel fixtures (ASCII)
-- 4 panel fixtures (SVG)
-- 1 bubble fixture (SVG)
-- 1 comic fixture (panels + bubbles + title, SVG)
-- 4 SVG fixture renders
-- 5 component library validators
+11/11 pass:
+- 7 comic render tests (chibi parametric, directional, 2×2 grid, word-wrap, CJK, tail-follows-speaker, empty rejection)
+- 1 comic fixture (monday-morning)
+- 1 component library validator (99 components)
+- 1 component SVG showcase
+- 1 golden parity check
+
+## Why no `textLength`?
+
+`textLength` + `lengthAdjust="spacingAndGlyphs"` is fragile when the rasterizer's actual monospace advance width doesn't match your measured cell width. The bubble auto-sizer used `string-width × CHAR_W_RATIO` to compute box width, but the `<text>` inside used `<tspan>` with `text-anchor="middle"` and the rasterizer's own advance. If they disagreed, text would overflow or have padding.
+
+**Fix:** pick one source of truth. v0.2 uses constant font metrics (`fs * 0.6`) for both bubble sizing AND text positioning. The rasterizer always matches itself.
 
 ## Structure
 
 ```
-SKILL.md                          # entry point
-references/
-  persona.md                      # 12 hard rules (no Stage 3)
-  panels.md                       # box math, border sets
-  dialogue.md                     # wrap per language
-  validation.md                   # seam contracts
-  debugging.md                    # width + alignment debugging
-  llm-spatial-blindness.md        # why SVG, not ASCII
-  styles/                         # A.kaomoji, B.manga, C.noir
-agents/                           # content-generator, box-wrapper, box-auditor (legacy spec)
+scripts/
+  comic-render.mjs                # THE renderer (panels + components + bubbles)
+  generate-component-svgs.mjs     # generates 99 SVG primitives
+  build-library.mjs               # builds assets/components.json
+  render-comic-svg.py             # CLI: fixture → SVG file
+  render-components-svg.mjs       # generates showcase SVG
+  validate-components.py          # checks all 99 components valid
+  test.sh                         # full test suite
 assets/
-  faces.json                      # kaomoji + chibi center/left/right
-  components.json                 # 96 components, 8 categories
-  components-src/                 # source for build-library.mjs
-  components-renders/             # visual reports
+  components-svg/                 # 99 SVG primitives (8 categories)
+  components.json                 # registry (id → svg, viewBox, w, h)
   examples/
     fixtures/                     # request JSON files
-    fixtures/renders/             # ASCII outputs
-    fixtures/renders-svg/         # SVG outputs
     comics/                       # end-to-end comic SVGs
-scripts/
-  comic-render.mjs                # panels + bubbles + title
-  bubble-render.mjs               # speech bubbles
-  svg-render.mjs                  # panel boxes (SVG)
-  box-wrap.mjs                    # panel boxes (ASCII, legacy)
-  build-library.mjs               # build components.json
-  content-generator.mjs           # Stage 1 validator
-  render-*.py                     # fixture runners
-  test.sh                         # full test suite
+  components-renders/             # visual showcase
 ```
 
-## Component library
+## Adding a new chibi mood
 
-96 components across 8 categories: face, body, gesture, prop, scene, frame, separator, bubble. Kaomoji, chibi (center/left/right), stick figures, props, scene elements. Build:
-
-```bash
-npm run build:library              # rebuild components.json
-python3 scripts/render-components.py    # visual report
-python3 scripts/render-components-svg.mjs  # SVG showcase
-```
-
-## Authoring a comic
-
-1. Define panels in JSON: `style`, `width`, `lines`, panelId
-2. Add `dialogue` array: bubble position, text, tail direction (relative to each panel)
-3. Set `layout.cols` for grid (0 = stack, n = n columns)
-4. `node scripts/comic-render.mjs < comic.json > comic.svg`
-
-See `assets/examples/fixtures/monday-morning-comic.json` for the full example.
+Edit the `EYE`/`MOUTH`/`CLOSED` maps in `chibiSvg()` inside `comic-render.mjs`. One entry per mood. Done.
 
 ## Key constraints
 
-- Width math at render time: rasterizer, not script
-- Border sets A (heavy) / B (light) / C (ASCII) — one per panel
-- Chibi faces: 3 orientations (center / left / right) for directionality
-- Mixed CJK + EN: handled by monospace + textLength
+- Monospace font stack: `'Courier New', Consolas, monospace`
+- `font-variant-numeric: tabular-nums` for digit alignment
+- Bubble width = `chars × fs × 0.6 + 2× padding`
+- Tail x clamped to bubble width, anchor y drives top/bottom auto-detection
+- Components in `assets/components-svg/` are validated via `validate-components.py` (viewBox + non-empty body)
