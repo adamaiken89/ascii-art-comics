@@ -1,4 +1,0 @@
-@tags: stick, basic
- o
-/|\
-

@@ -1,4 +1,0 @@
-@tags: panic, chibi, left-facing, width-7
-╭─────╮
-│⊙ ‿ ─│
-╰─────╯

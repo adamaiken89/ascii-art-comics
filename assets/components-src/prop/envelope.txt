@@ -1,5 +1,0 @@
-@tags: envelope, mail
-  ___
- /   \
-|  *  |
- \___/

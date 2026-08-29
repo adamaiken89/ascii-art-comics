@@ -1,7 +1,0 @@
-@tags: bug, error, insect
-  /\
- /  \
-/    \
-\    /
- \  /
-  \/

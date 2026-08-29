@@ -2,7 +2,7 @@
 /**
  * comic-render.mjs — Compose panels + speech bubbles into one SVG.
  *
- * v3 — auto-sized bubbles, centered content, dynamic tails, strict monospace.
+ * v4 — supports both text lines and SVG component primitives per panel.
  *
  * Per-panel structure (vertical stack, top → bottom):
  *
@@ -19,9 +19,8 @@
  *   - Tail x = speaker's chibi x position (or panel edge if speaker unspecified)
  *   - Strict monospace stack: Courier New / Consolas / Fira Code / monospace
  *   - Tabular numerals, line-height = font-size (no descender clipping)
- *   - Chibi lines auto-centered: measure each line with string-width, offset
- *   - Bubble text wrapped on width; multi-line bubble if needed
- *   - Dynamic frame: content rect size = max(lineWidth) × cellW
+ *   - Content is an array of items: { type: "text" } or { type: "component" }
+ *   - Components are embedded as inline SVG (no font, no text rendering)
  *
  * Input:
  *   {
@@ -31,7 +30,10 @@
  *       {
  *         "panelId": 0,
  *         "width": 30,                 // inner width in cells (cap on content)
- *         "lines": ["...", "..."],     // content lines, no box-drawing borders
+ *         "content": [                  // array of items (text or component)
+ *           { "type": "text", "text": "Alice" },
+ *           { "type": "component", "id": "chibi-happy-center", "x": 2, "y": 1, "scale": 18 }
+ *         ],
  *         "speaker": { "x": 6, "y": 3 },  // chibi x/y in cell coords
  *         "bubbleHeight": 80
  *       }
@@ -46,8 +48,13 @@
  */
 
 import { readFileSync } from 'node:fs';
+import { join, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import GraphemeSplitter from 'grapheme-splitter';
 import stringWidth from 'string-width';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const ROOT = join(__dirname, '..');
 
 const splitter = new GraphemeSplitter();
 const vw = (s) => stringWidth(s);
@@ -163,39 +170,79 @@ function renderBubble(bubble, tailAnchor) {
 }
 
 /**
- * Measure panel content: returns { widthCells, heightCells, lines }.
- * Trims trailing empty lines, computes max line width in cells.
+ * Load component library from assets/components.json.
+ * Returns Map<id, component> for fast lookup.
  */
-function measureContent(lines) {
-  let end = lines.length;
-  while (end > 0 && lines[end - 1].trim() === '') end--;
-  const trimmed = lines.slice(0, end);
-  let maxW = 0;
-  for (const l of trimmed) {
-    const w = vw(l);
-    if (w > maxW) maxW = w;
+function loadLibrary() {
+  const path = join(ROOT, 'assets', 'components.json');
+  try {
+    const data = JSON.parse(readFileSync(path, 'utf8'));
+    const map = new Map();
+    for (const arr of Object.values(data.categories)) {
+      for (const c of arr) map.set(c.id, c);
+    }
+    return map;
+  } catch (e) {
+    return new Map();
   }
-  return { widthCells: maxW, heightCells: trimmed.length, lines: trimmed };
 }
 
 /**
- * Render panel content lines, centered horizontally.
- *   panel: { x, y, contentW, contentH, cellW, cellH }
- *   lines: array of strings (already measured)
- *   maxW: max line width in cells (from measureContent)
+ * Measure panel content: returns { widthCells, heightCells, lines }.
+ * Accepts either legacy `lines` (string array) or new `content` (item array).
  */
-function renderContent(panel, lines, maxW) {
+function measureContent(panel) {
+  // Legacy: lines = string[]
+  if (panel.lines) {
+    const lines = panel.lines.map((l) => l.replace(/\r/g, ''));
+    let end = lines.length;
+    while (end > 0 && lines[end - 1].trim() === '') end--;
+    const trimmed = lines.slice(0, end);
+    let maxW = 0;
+    for (const l of trimmed) maxW = Math.max(maxW, vw(l));
+    return { widthCells: maxW, heightCells: trimmed.length, lines: trimmed, content: null };
+  }
+  // New: content = item[]
+  if (panel.content) {
+    let maxW = 0;
+    let maxH = 0;
+    for (const item of panel.content) {
+      if (item.type === 'text') {
+        maxW = Math.max(maxW, vw(item.text));
+        maxH = Math.max(maxH, (item.y ?? maxH) + 1);
+      }
+      // components contribute to size via their viewBox + position
+    }
+    return { widthCells: maxW, heightCells: maxH, lines: [], content: panel.content };
+  }
+  return { widthCells: 0, heightCells: 0, lines: [], content: null };
+}
+
+/**
+ * Render panel content (text + components) at panel position.
+ * Components are placed via <g transform> with scale.
+ */
+function renderContent(panel, contentArr, maxW, cellW, cellH) {
   const parts = [];
-  const { x, y, cellW, cellH } = panel;
-  const innerWpx = maxW * cellW;
-  const offsetX = (panel.contentW - innerWpx) / 2; // center
-  for (let i = 0; i < lines.length; i++) {
-    const lineY = y + (i + 1) * cellH - 2;
-    parts.push(
-      `<text x="${x + offsetX}" y="${lineY}" font-family="${MONO_STACK}" ` +
-      `font-size="${cellH}" font-variant-numeric="tabular-nums" ` +
-      `fill="#222">${escapeXml(lines[i])}</text>`
-    );
+  for (const item of contentArr ?? []) {
+    if (item.type === 'text') {
+      const y = panel.y + (item.y ?? 0) * cellH + cellH - 2;
+      const x = panel.x + (item.x ?? 0) * cellW;
+      parts.push(
+        `<text x="${x}" y="${y}" font-family="${MONO_STACK}" ` +
+        `font-size="${cellH}" font-variant-numeric="tabular-nums" ` +
+        `fill="#222">${escapeXml(item.text)}</text>`
+      );
+    } else if (item.type === 'component') {
+      const c = panel._lib?.get(item.id);
+      if (!c) continue;
+      const scale = item.scale ?? cellH;
+      const x = panel.x + (item.x ?? 0) * cellW;
+      const y = panel.y + (item.y ?? 0) * cellH;
+      parts.push(
+        `<g transform="translate(${x},${y}) scale(${scale})">${c.svg}</g>`
+      );
+    }
   }
   return parts.join('\n');
 }
@@ -234,13 +281,26 @@ function main() {
   const bubbleFontSize = 14;
   const bubbleLineH = bubbleFontSize + 4;
 
+  const lib = loadLibrary();
+
   // Pre-measure each panel's content
   const panelInfo = panels.map((p) => {
-    const lines = (p.lines ?? []).map((l) => l.replace(/\r/g, ''));
-    const measured = measureContent(lines);
+    const measured = measureContent(p);
     const innerCap = p.width ?? measured.widthCells;
-    // Use min(measured, cap) for dynamic frame: don't exceed cap
-    const widthCells = Math.max(1, Math.min(measured.widthCells, innerCap));
+    // For content arrays, expand width to include component extents
+    let contentCells = measured.widthCells;
+    if (p.content) {
+      for (const item of p.content) {
+        if (item.type === 'component' && item.scale) {
+          const c = lib.get(item.id);
+          if (c) {
+            const compCells = (c.width * item.scale) / cellW + (item.x ?? 0);
+            contentCells = Math.max(contentCells, compCells);
+          }
+        }
+      }
+    }
+    const widthCells = Math.max(1, Math.min(contentCells, innerCap));
     const heightCells = measured.heightCells;
     const bubbleH = p.bubbleHeight ?? 0;
     const contentH = heightCells * cellH;
@@ -255,8 +315,9 @@ function main() {
       totalW: contentW,
       totalH: contentH + bubbleH,
       lines: measured.lines,
+      content: measured.content,
       maxW: widthCells,
-      speaker: p.speaker ?? null, // {x, y} in cell coords
+      speaker: p.speaker ?? null,
     };
   });
 
@@ -329,9 +390,22 @@ function main() {
       `fill="#fafafa" stroke="#333" stroke-width="1.5"/>`
     );
 
-    // Content text (centered horizontally)
-    const renderArea = { x: pos.x, y: contentY, contentW: pos.w, cellW, cellH };
-    out.push(renderContent(renderArea, info.lines, info.maxW));
+    // Content (text + components)
+    if (info.content) {
+      const renderArea = {
+        x: pos.x,
+        y: contentY,
+        contentW: pos.w,
+        cellW,
+        cellH,
+        _lib: lib,
+      };
+      out.push(renderContent(renderArea, info.content, info.maxW, cellW, cellH));
+    } else {
+      // Legacy: centered text lines
+      const renderArea = { x: pos.x, y: contentY, contentW: pos.w, cellW, cellH };
+      out.push(renderContent(renderArea, info.lines, info.maxW, cellW, cellH));
+    }
   }
 
   // ---- Layer 2: speech bubbles (above content) ----

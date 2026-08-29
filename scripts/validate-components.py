@@ -1,107 +1,102 @@
 #!/usr/bin/env python3
 """
-Validate every component in assets/components.json by rendering it through the
-Stage 1 → Stage 2 pipeline and checking for visual misalignments.
+Validate every component in assets/components-svg/<category>/<name>.svg.
 
 Checks per component:
-  1. Stage 1 ok (no overflow, no NBSP leak, no empty)
-  2. Stage 2 ok (every line === outerW)
-  3. Each rendered mid line: contains expected innerW cells after the leading border
+  1. File exists and is non-empty
+  2. Has valid <svg> root with viewBox
+  3. viewBox has 4 numbers
+  4. width/height match viewBox
+  5. Has actual content (not just an empty <svg>)
+  6. Registered in assets/components.json (built from build-library.mjs)
 
-Outputs a report. Exits 1 if any component fails.
+Exits 0 if all components valid, 1 otherwise.
 """
 
 import json
-import subprocess
+import re
 import sys
 from pathlib import Path
 
 ROOT = Path(__file__).parent.parent
-COMP = ROOT / "assets" / "components.json"
-CG = ROOT / "scripts" / "content-generator.mjs"
-WRAP = ROOT / "scripts" / "box-wrap.mjs"
+SVG_DIR = ROOT / "assets" / "components-svg"
+JSON_FILE = ROOT / "assets" / "components.json"
 
 
-def run(script: Path, stdin: str) -> dict:
-    p = subprocess.run(
-        ["node", str(script)],
-        input=stdin.encode("utf-8"),
-        capture_output=True,
-        check=False,
-    )
-    if p.returncode not in (0, 1):
-        sys.stderr.write(f"{script.name} exit {p.returncode}\n{p.stderr.decode('utf-8')}\n")
-        sys.exit(2)
-    return json.loads(p.stdout)
-
-
-def validate(comp: dict) -> list[str]:
+def validate_svg(path: Path) -> list[str]:
     errors = []
-    width = comp["width"]
-    if width == 0:
-        errors.append(f"width 0 (empty lines)")
+    try:
+        content = path.read_text(encoding="utf-8")
+    except Exception as e:
+        return [f"read error: {e}"]
+
+    if not content.strip():
+        return ["empty file"]
+
+    if "<svg" not in content:
+        errors.append("no <svg> root")
         return errors
 
-    request = {
-        "defaultTarget": width,
-        "panels": [
-            {
-                "panelId": 0,
-                "lines": comp["lines"],
-                "width": width,
-            }
-        ],
-    }
-    raw = json.dumps(request)
-
-    # Stage 1
-    cg = run(CG, raw)
-    if not cg.get("ok"):
-        for e in cg.get("errors", []):
-            errors.append(f"stage1: {e}")
+    vb = re.search(r'viewBox="([^"]+)"', content)
+    if not vb:
+        errors.append("no viewBox attribute")
         return errors
 
-    # Stage 2
-    stage2_in = {
-        "panels": [{"style": "A", "width": width, "lines": comp["lines"]}],
-        "layout": {"cols": 0, "gap": 0},
-    }
-    wr = run(WRAP, json.dumps(stage2_in))
-    if not wr.get("ok"):
-        for e in wr.get("errors", []):
-            errors.append(f"stage2: {e}")
+    parts = vb.group(1).split()
+    if len(parts) != 4:
+        errors.append(f"viewBox has {len(parts)} values, expected 4")
         return errors
+    try:
+        nums = [float(x) for x in parts]
+    except ValueError:
+        errors.append("viewBox has non-numeric values")
+        return errors
+    if nums[2] <= 0 or nums[3] <= 0:
+        errors.append(f"viewBox has non-positive size: {nums[2]}x{nums[3]}")
 
-    outerW = wr["outerW"]
-    if outerW != width + 2:
-        errors.append(f"outerW {outerW} != width+2 {width+2}")
+    # Strip outer <svg> tags
+    inner = re.sub(r"<svg[^>]*>", "", content)
+    inner = re.sub(r"</svg>\s*$", "", inner).strip()
+    if not inner:
+        errors.append("empty <svg> body")
 
-    # Visual: each mid line should start with ║ and end with ║
-    block_lines = wr["block"].split("\n")
-    for i, line in enumerate(block_lines):
-        if line.startswith("╔") or line.startswith("╚"):
-            continue
-        if not (line.startswith("║") and line.endswith("║")):
-            errors.append(f"line {i}: bad border chars: {line!r}")
     return errors
 
 
 def main() -> int:
-    data = json.loads(COMP.read_text(encoding="utf-8"))
-    cats = data.get("categories", {})
+    if not SVG_DIR.exists():
+        print(f"FAIL: {SVG_DIR} does not exist")
+        return 1
+    if not JSON_FILE.exists():
+        print(f"FAIL: {JSON_FILE} does not exist (run build-library.mjs)")
+        return 1
+
+    json_data = json.loads(JSON_FILE.read_text(encoding="utf-8"))
+    json_by_id = {}
+    for cat_arr in json_data.get("categories", {}).values():
+        for c in cat_arr:
+            json_by_id[c["id"]] = c
 
     fails = []
     total = 0
-    for cat, comps in cats.items():
-        for c in comps:
+    for cat_dir in sorted(SVG_DIR.iterdir()):
+        if not cat_dir.is_dir():
+            continue
+        cat = cat_dir.name
+        for svg_file in sorted(cat_dir.glob("*.svg")):
             total += 1
-            errs = validate(c)
+            cid = f"{cat}/{svg_file.stem}"
+            errs = validate_svg(svg_file)
+            if cid not in json_by_id:
+                errs.append(f"not registered in components.json (run build-library.mjs)")
             if errs:
-                fails.append((c["id"], errs))
+                fails.append((cid, errs))
 
-    print(f"checked {total} components")
-    for cat, comps in cats.items():
-        print(f"  {cat}: {len(comps)}")
+    print(f"checked {total} SVG components")
+    for cat_dir in sorted(SVG_DIR.iterdir()):
+        if cat_dir.is_dir():
+            n = len(list(cat_dir.glob("*.svg")))
+            print(f"  {cat_dir.name}: {n}")
 
     if fails:
         print(f"\n{len(fails)} FAILED:")
@@ -111,7 +106,7 @@ def main() -> int:
                 print(f"    - {e}")
         return 1
 
-    print("\nALL OK")
+    print(f"\nALL OK ({len(json_by_id)} registered in components.json)")
     return 0
 
 

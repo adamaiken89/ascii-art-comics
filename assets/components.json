@@ -1,156 +1,111 @@
 {
-  "version": 1,
-  "generated": "2026-08-29T03:40:08.665Z",
-  "count": 96,
+  "version": 2,
+  "generated": "2026-08-29T04:47:50.868Z",
+  "count": 99,
   "categories": {
     "body": [
       {
         "id": "body/shrug",
         "name": "shrug",
         "category": "body",
-        "lines": [
-          " ¯\\_(ツ)_/¯"
-        ],
+        "svg": "<text x=\"0\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"black\"> ¯\\\\_(ツ)_/¯</text>",
+        "viewBox": "0 0 11 1",
         "width": 11,
         "height": 1,
         "tags": [
           "body",
-          "shrug",
-          "shrug",
-          "gesture"
+          "shrug"
         ]
       },
       {
         "id": "body/stick-arms-up",
         "name": "stick-arms-up",
         "category": "body",
-        "lines": [
-          " o ",
-          "\\|/",
-          " | ",
-          "/ \\"
-        ],
+        "svg": "<text x=\"0\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"black\"> o </text><text x=\"0\" y=\"2\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">\\|/</text><text x=\"0\" y=\"3\" font-family=\"monospace\" font-size=\"1\" fill=\"black\"> | </text><text x=\"0\" y=\"4\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">/ \\</text>",
+        "viewBox": "0 0 3 4",
         "width": 3,
         "height": 4,
         "tags": [
           "body",
-          "stick arms up",
-          "stick",
-          "arms-up",
-          "celebrating"
+          "stick arms up"
         ]
       },
       {
         "id": "body/stick-basic",
         "name": "stick-basic",
         "category": "body",
-        "lines": [
-          " o ",
-          "/|\\"
-        ],
+        "svg": "<text x=\"0\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"black\"> o </text><text x=\"0\" y=\"2\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">/|\\</text><text x=\"0\" y=\"3\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">   </text>",
+        "viewBox": "0 0 3 3",
         "width": 3,
-        "height": 2,
+        "height": 3,
         "tags": [
           "body",
-          "stick basic",
-          "stick",
-          "basic"
+          "stick basic"
         ]
       },
       {
         "id": "body/stick-pointing",
         "name": "stick-pointing",
         "category": "body",
-        "lines": [
-          " o      ",
-          "/|\\     ",
-          "  \\     ",
-          "   >--->"
-        ],
+        "svg": "<text x=\"0\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"black\"> o </text><text x=\"0\" y=\"2\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">/|\\</text><text x=\"0\" y=\"3\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">  \\</text><text x=\"0\" y=\"4\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">   &gt;---&gt;</text>",
+        "viewBox": "0 0 8 4",
         "width": 8,
         "height": 4,
         "tags": [
           "body",
-          "stick pointing",
-          "pointing",
-          "gesture"
+          "stick pointing"
         ]
       },
       {
         "id": "body/stick-running",
         "name": "stick-running",
         "category": "body",
-        "lines": [
-          " o ",
-          "/|\\",
-          " | ",
-          " | ",
-          "  >"
-        ],
+        "svg": "<text x=\"0\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"black\"> o </text><text x=\"0\" y=\"2\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">/|\\</text><text x=\"0\" y=\"3\" font-family=\"monospace\" font-size=\"1\" fill=\"black\"> | </text><text x=\"0\" y=\"4\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">   </text><text x=\"0\" y=\"5\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">  &gt;</text>",
+        "viewBox": "0 0 3 5",
         "width": 3,
         "height": 5,
         "tags": [
           "body",
-          "stick running",
-          "stick",
-          "running"
+          "stick running"
         ]
       },
       {
         "id": "body/stick-sitting",
         "name": "stick-sitting",
         "category": "body",
-        "lines": [
-          " o ",
-          "\\|\\",
-          " | ",
-          "/ \\"
-        ],
+        "svg": "<text x=\"0\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"black\"> o </text><text x=\"0\" y=\"2\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">\\|\\</text><text x=\"0\" y=\"3\" font-family=\"monospace\" font-size=\"1\" fill=\"black\"> | </text><text x=\"0\" y=\"4\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">/ \\</text>",
+        "viewBox": "0 0 3 4",
         "width": 3,
         "height": 4,
         "tags": [
           "body",
-          "stick sitting",
-          "stick",
-          "sitting"
+          "stick sitting"
         ]
       },
       {
         "id": "body/stick-walking",
         "name": "stick-walking",
         "category": "body",
-        "lines": [
-          " o ",
-          "/|\\",
-          " | ",
-          " | "
-        ],
+        "svg": "<text x=\"0\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"black\"> o </text><text x=\"0\" y=\"2\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">/|\\</text><text x=\"0\" y=\"3\" font-family=\"monospace\" font-size=\"1\" fill=\"black\"> | </text><text x=\"0\" y=\"4\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">   </text>",
+        "viewBox": "0 0 3 4",
         "width": 3,
         "height": 4,
         "tags": [
           "body",
-          "stick walking",
-          "stick",
-          "walking"
+          "stick walking"
         ]
       },
       {
         "id": "body/stick-with-legs",
         "name": "stick-with-legs",
         "category": "body",
-        "lines": [
-          " o ",
-          "/|\\",
-          "   ",
-          "/ \\"
-        ],
+        "svg": "<text x=\"0\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"black\"> o </text><text x=\"0\" y=\"2\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">/|\\</text><text x=\"0\" y=\"3\" font-family=\"monospace\" font-size=\"1\" fill=\"black\"></text><text x=\"0\" y=\"4\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">/ \\</text>",
+        "viewBox": "0 0 3 4",
         "width": 3,
         "height": 4,
         "tags": [
           "body",
-          "stick with legs",
-          "stick",
-          "with body"
+          "stick with legs"
         ]
       }
     ],
@@ -159,113 +114,78 @@
         "id": "bubble/cjk-bracket",
         "name": "cjk-bracket",
         "category": "bubble",
-        "lines": [
-          "「   」"
-        ],
-        "width": 7,
+        "svg": "<text x=\"0\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">「 」</text>",
+        "viewBox": "0 0 4 1",
+        "width": 4,
         "height": 1,
         "tags": [
           "bubble",
-          "cjk bracket",
-          "bubble",
-          "bracket",
-          "cjk"
+          "cjk bracket"
         ]
       },
       {
         "id": "bubble/en-quote",
         "name": "en-quote",
         "category": "bubble",
-        "lines": [
-          "\"   \""
-        ],
-        "width": 5,
+        "svg": "<text x=\"0\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">\" \"</text>",
+        "viewBox": "0 0 3 1",
+        "width": 3,
         "height": 1,
         "tags": [
           "bubble",
-          "en quote",
-          "bubble",
-          "quote",
-          "en"
+          "en quote"
         ]
       },
       {
         "id": "bubble/rounded",
         "name": "rounded",
         "category": "bubble",
-        "lines": [
-          "╭──────────╮",
-          "│         │ ",
-          "╰────╮    ╯ ",
-          "     ╰────╯ "
-        ],
+        "svg": "<g fill=\"white\" stroke=\"black\" stroke-width=\"0.1\">\n      <path d=\"M 0.5 0.5 Q 0 0.5 0 1 L 0 3.5 Q 0 4 0.5 4 L 8 4 L 7.5 5 L 9 4 L 11.5 4 Q 12 4 12 3.5 L 12 1 Q 12 0.5 11.5 0.5 Z\"/>\n    </g>",
+        "viewBox": "0 0 12 5",
         "width": 12,
-        "height": 4,
+        "height": 5,
         "tags": [
           "bubble",
-          "rounded",
-          "bubble",
-          "rounded",
-          "cjk"
+          "rounded"
         ]
       },
       {
         "id": "bubble/shout",
         "name": "shout",
         "category": "bubble",
-        "lines": [
-          "\\!!!!!!!/",
-          " \\!!!!!/ ",
-          "  \\!!!/  ",
-          "   \\!/   "
-        ],
+        "svg": "<g fill=\"white\" stroke=\"black\" stroke-width=\"0.1\">\n      <polygon points=\"0.5,0.5 2,0 1.5,1.5 3,1 2.5,2.5 4,2 3.5,3.5 5,3 4.5,4 6,3.5 5.5,4.5 7,4 6.5,5 8,4.5 7.5,2 6,2.5 6.5,1 5,1.5 5.5,0 4,0.5 4.5,-0.5 3,0 3.5,-1 2,0 2.5,-1.5 1,0 1.5,-1 0,0.5\"/>\n    </g>",
+        "viewBox": "0 0 9 4",
         "width": 9,
         "height": 4,
         "tags": [
           "bubble",
-          "shout",
-          "bubble",
-          "shout",
-          "jagged"
+          "shout"
         ]
       },
       {
         "id": "bubble/thought",
         "name": "thought",
         "category": "bubble",
-        "lines": [
-          "   _   ",
-          "  ( )  ",
-          " (   ) ",
-          "(     )",
-          " \\___/ ",
-          "    o  "
-        ],
-        "width": 7,
+        "svg": "<g fill=\"white\" stroke=\"black\" stroke-width=\"0.1\">\n      <ellipse cx=\"3\" cy=\"3\" rx=\"2.7\" ry=\"1.5\"/>\n      <ellipse cx=\"1.5\" cy=\"5\" rx=\"0.3\" ry=\"0.3\"/>\n      <ellipse cx=\"0.7\" cy=\"5.7\" rx=\"0.15\" ry=\"0.15\"/>\n    </g>",
+        "viewBox": "0 0 6 6",
+        "width": 6,
         "height": 6,
         "tags": [
           "bubble",
-          "thought",
-          "bubble",
-          "thought",
-          "cloud"
+          "thought"
         ]
       },
       {
         "id": "bubble/whisper",
         "name": "whisper",
         "category": "bubble",
-        "lines": [
-          "(   )"
-        ],
+        "svg": "<g fill=\"none\" stroke=\"black\" stroke-width=\"0.1\">\n      <path d=\"M 0.5 0.5 Q 0 0.5 0 0.5 Q 0.5 0 0.5 0.5\"/>\n      <path d=\"M 4.5 0.5 Q 5 0.5 5 0.5 Q 4.5 0 4.5 0.5\"/>\n    </g>",
+        "viewBox": "0 0 5 1",
         "width": 5,
         "height": 1,
         "tags": [
           "bubble",
-          "whisper",
-          "bubble",
-          "whisper",
-          "small"
+          "whisper"
         ]
       }
     ],
@@ -274,765 +194,559 @@
         "id": "face/angry",
         "name": "angry",
         "category": "face",
-        "lines": [
-          "(╬ Ò﹏Ó)"
-        ],
+        "svg": "<text x=\"0\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">(╬ Ò﹏Ó)</text>",
+        "viewBox": "0 0 8 1",
         "width": 8,
         "height": 1,
         "tags": [
           "face",
-          "angry",
-          "angry",
-          "mad",
-          "kaomoji",
-          "width-8"
+          "angry"
         ]
       },
       {
         "id": "face/chibi-angry-center",
         "name": "chibi-angry-center",
         "category": "face",
-        "lines": [
-          "╭─────╮",
-          "│╬ ‿ ╬│",
-          "╰─────╯"
-        ],
+        "svg": "<g font-family=\"monospace\" font-size=\"1\" text-anchor=\"middle\">\n    <rect x=\"0.1\" y=\"0.1\" width=\"6.8\" height=\"2.8\" rx=\"0.4\" fill=\"none\" stroke=\"black\" stroke-width=\"0.1\"/>\n    <text x=\"2\" y=\"2.1\" fill=\"black\">╬</text>\n    <text x=\"5\" y=\"2.1\" fill=\"black\">╬</text>\n    <text x=\"3.5\" y=\"2.1\" fill=\"black\">_</text>\n  </g>",
+        "viewBox": "0 0 7 3",
         "width": 7,
         "height": 3,
         "tags": [
           "face",
-          "chibi angry center",
-          "angry",
-          "chibi",
-          "centered",
-          "width-7"
+          "chibi angry center"
         ]
       },
       {
         "id": "face/chibi-angry-left",
         "name": "chibi-angry-left",
         "category": "face",
-        "lines": [
-          "╭─────╮",
-          "│╬ ‿ ─│",
-          "╰─────╯"
-        ],
+        "svg": "<g font-family=\"monospace\" font-size=\"1\" text-anchor=\"middle\">\n    <rect x=\"0.1\" y=\"0.1\" width=\"6.8\" height=\"2.8\" rx=\"0.4\" fill=\"none\" stroke=\"black\" stroke-width=\"0.1\"/>\n    <text x=\"2\" y=\"2.1\" fill=\"black\">╬</text>\n    <text x=\"5\" y=\"2.1\" fill=\"black\">─</text>\n    <text x=\"3.5\" y=\"2.1\" fill=\"black\">_</text>\n  </g>",
+        "viewBox": "0 0 7 3",
         "width": 7,
         "height": 3,
         "tags": [
           "face",
-          "chibi angry left",
-          "angry",
-          "chibi",
-          "left-facing",
-          "width-7"
+          "chibi angry left"
         ]
       },
       {
         "id": "face/chibi-angry-right",
         "name": "chibi-angry-right",
         "category": "face",
-        "lines": [
-          "╭─────╮",
-          "│─ ‿ ╬│",
-          "╰─────╯"
-        ],
+        "svg": "<g font-family=\"monospace\" font-size=\"1\" text-anchor=\"middle\">\n    <rect x=\"0.1\" y=\"0.1\" width=\"6.8\" height=\"2.8\" rx=\"0.4\" fill=\"none\" stroke=\"black\" stroke-width=\"0.1\"/>\n    <text x=\"2\" y=\"2.1\" fill=\"black\">─</text>\n    <text x=\"5\" y=\"2.1\" fill=\"black\">╬</text>\n    <text x=\"3.5\" y=\"2.1\" fill=\"black\">_</text>\n  </g>",
+        "viewBox": "0 0 7 3",
         "width": 7,
         "height": 3,
         "tags": [
           "face",
-          "chibi angry right",
-          "angry",
-          "chibi",
-          "right-facing",
-          "width-7"
+          "chibi angry right"
+        ]
+      },
+      {
+        "id": "face/chibi-confused-center",
+        "name": "chibi-confused-center",
+        "category": "face",
+        "svg": "<g font-family=\"monospace\" font-size=\"1\" text-anchor=\"middle\">\n    <rect x=\"0.1\" y=\"0.1\" width=\"6.8\" height=\"2.8\" rx=\"0.4\" fill=\"none\" stroke=\"black\" stroke-width=\"0.1\"/>\n    <text x=\"2\" y=\"2.1\" fill=\"black\">◑</text>\n    <text x=\"5\" y=\"2.1\" fill=\"black\">◐</text>\n    <text x=\"3.5\" y=\"2.1\" fill=\"black\">‿</text>\n  </g>",
+        "viewBox": "0 0 7 3",
+        "width": 7,
+        "height": 3,
+        "tags": [
+          "face",
+          "chibi confused center"
+        ]
+      },
+      {
+        "id": "face/chibi-confused-left",
+        "name": "chibi-confused-left",
+        "category": "face",
+        "svg": "<g font-family=\"monospace\" font-size=\"1\" text-anchor=\"middle\">\n    <rect x=\"0.1\" y=\"0.1\" width=\"6.8\" height=\"2.8\" rx=\"0.4\" fill=\"none\" stroke=\"black\" stroke-width=\"0.1\"/>\n    <text x=\"2\" y=\"2.1\" fill=\"black\">◑</text>\n    <text x=\"5\" y=\"2.1\" fill=\"black\">─</text>\n    <text x=\"3.5\" y=\"2.1\" fill=\"black\">‿</text>\n  </g>",
+        "viewBox": "0 0 7 3",
+        "width": 7,
+        "height": 3,
+        "tags": [
+          "face",
+          "chibi confused left"
+        ]
+      },
+      {
+        "id": "face/chibi-confused-right",
+        "name": "chibi-confused-right",
+        "category": "face",
+        "svg": "<g font-family=\"monospace\" font-size=\"1\" text-anchor=\"middle\">\n    <rect x=\"0.1\" y=\"0.1\" width=\"6.8\" height=\"2.8\" rx=\"0.4\" fill=\"none\" stroke=\"black\" stroke-width=\"0.1\"/>\n    <text x=\"2\" y=\"2.1\" fill=\"black\">─</text>\n    <text x=\"5\" y=\"2.1\" fill=\"black\">◐</text>\n    <text x=\"3.5\" y=\"2.1\" fill=\"black\">‿</text>\n  </g>",
+        "viewBox": "0 0 7 3",
+        "width": 7,
+        "height": 3,
+        "tags": [
+          "face",
+          "chibi confused right"
         ]
       },
       {
         "id": "face/chibi-dead-center",
         "name": "chibi-dead-center",
         "category": "face",
-        "lines": [
-          "╭─────╮",
-          "│× ‿ ×│",
-          "╰─────╯"
-        ],
+        "svg": "<g font-family=\"monospace\" font-size=\"1\" text-anchor=\"middle\">\n    <rect x=\"0.1\" y=\"0.1\" width=\"6.8\" height=\"2.8\" rx=\"0.4\" fill=\"none\" stroke=\"black\" stroke-width=\"0.1\"/>\n    <text x=\"2\" y=\"2.1\" fill=\"black\">×</text>\n    <text x=\"5\" y=\"2.1\" fill=\"black\">×</text>\n    <text x=\"3.5\" y=\"2.1\" fill=\"black\">_</text>\n  </g>",
+        "viewBox": "0 0 7 3",
         "width": 7,
         "height": 3,
         "tags": [
           "face",
-          "chibi dead center",
-          "dead",
-          "chibi",
-          "centered",
-          "width-7"
+          "chibi dead center"
         ]
       },
       {
         "id": "face/chibi-dead-left",
         "name": "chibi-dead-left",
         "category": "face",
-        "lines": [
-          "╭─────╮",
-          "│× ‿ ─│",
-          "╰─────╯"
-        ],
+        "svg": "<g font-family=\"monospace\" font-size=\"1\" text-anchor=\"middle\">\n    <rect x=\"0.1\" y=\"0.1\" width=\"6.8\" height=\"2.8\" rx=\"0.4\" fill=\"none\" stroke=\"black\" stroke-width=\"0.1\"/>\n    <text x=\"2\" y=\"2.1\" fill=\"black\">×</text>\n    <text x=\"5\" y=\"2.1\" fill=\"black\">×</text>\n    <text x=\"3.5\" y=\"2.1\" fill=\"black\">_</text>\n  </g>",
+        "viewBox": "0 0 7 3",
         "width": 7,
         "height": 3,
         "tags": [
           "face",
-          "chibi dead left",
-          "dead",
-          "chibi",
-          "left-facing",
-          "width-7"
+          "chibi dead left"
         ]
       },
       {
         "id": "face/chibi-dead-right",
         "name": "chibi-dead-right",
         "category": "face",
-        "lines": [
-          "╭─────╮",
-          "│─ ‿ ×│",
-          "╰─────╯"
-        ],
+        "svg": "<g font-family=\"monospace\" font-size=\"1\" text-anchor=\"middle\">\n    <rect x=\"0.1\" y=\"0.1\" width=\"6.8\" height=\"2.8\" rx=\"0.4\" fill=\"none\" stroke=\"black\" stroke-width=\"0.1\"/>\n    <text x=\"2\" y=\"2.1\" fill=\"black\">×</text>\n    <text x=\"5\" y=\"2.1\" fill=\"black\">×</text>\n    <text x=\"3.5\" y=\"2.1\" fill=\"black\">_</text>\n  </g>",
+        "viewBox": "0 0 7 3",
         "width": 7,
         "height": 3,
         "tags": [
           "face",
-          "chibi dead right",
-          "dead",
-          "chibi",
-          "right-facing",
-          "width-7"
+          "chibi dead right"
         ]
       },
       {
         "id": "face/chibi-happy-center",
         "name": "chibi-happy-center",
         "category": "face",
-        "lines": [
-          "╭─────╮",
-          "│◕ ‿ ◕│",
-          "╰─────╯"
-        ],
+        "svg": "<g font-family=\"monospace\" font-size=\"1\" text-anchor=\"middle\">\n    <rect x=\"0.1\" y=\"0.1\" width=\"6.8\" height=\"2.8\" rx=\"0.4\" fill=\"none\" stroke=\"black\" stroke-width=\"0.1\"/>\n    <text x=\"2\" y=\"2.1\" fill=\"black\">◕</text>\n    <text x=\"5\" y=\"2.1\" fill=\"black\">◕</text>\n    <text x=\"3.5\" y=\"2.1\" fill=\"black\">‿</text>\n  </g>",
+        "viewBox": "0 0 7 3",
         "width": 7,
         "height": 3,
         "tags": [
           "face",
-          "chibi happy center",
-          "happy",
-          "positive",
-          "chibi",
-          "centered",
-          "width-7"
+          "chibi happy center"
         ]
       },
       {
         "id": "face/chibi-happy-left",
         "name": "chibi-happy-left",
         "category": "face",
-        "lines": [
-          "╭─────╮",
-          "│◕ ‿ ◡│",
-          "╰─────╯"
-        ],
+        "svg": "<g font-family=\"monospace\" font-size=\"1\" text-anchor=\"middle\">\n    <rect x=\"0.1\" y=\"0.1\" width=\"6.8\" height=\"2.8\" rx=\"0.4\" fill=\"none\" stroke=\"black\" stroke-width=\"0.1\"/>\n    <text x=\"2\" y=\"2.1\" fill=\"black\">◕</text>\n    <text x=\"5\" y=\"2.1\" fill=\"black\">◡</text>\n    <text x=\"3.5\" y=\"2.1\" fill=\"black\">‿</text>\n  </g>",
+        "viewBox": "0 0 7 3",
         "width": 7,
         "height": 3,
         "tags": [
           "face",
-          "chibi happy left",
-          "happy",
-          "positive",
-          "chibi",
-          "left-facing",
-          "width-7"
+          "chibi happy left"
         ]
       },
       {
         "id": "face/chibi-happy-right",
         "name": "chibi-happy-right",
         "category": "face",
-        "lines": [
-          "╭─────╮",
-          "│◡ ‿ ◕│",
-          "╰─────╯"
-        ],
+        "svg": "<g font-family=\"monospace\" font-size=\"1\" text-anchor=\"middle\">\n    <rect x=\"0.1\" y=\"0.1\" width=\"6.8\" height=\"2.8\" rx=\"0.4\" fill=\"none\" stroke=\"black\" stroke-width=\"0.1\"/>\n    <text x=\"2\" y=\"2.1\" fill=\"black\">◡</text>\n    <text x=\"5\" y=\"2.1\" fill=\"black\">◕</text>\n    <text x=\"3.5\" y=\"2.1\" fill=\"black\">‿</text>\n  </g>",
+        "viewBox": "0 0 7 3",
         "width": 7,
         "height": 3,
         "tags": [
           "face",
-          "chibi happy right",
-          "happy",
-          "positive",
-          "chibi",
-          "right-facing",
-          "width-7"
+          "chibi happy right"
         ]
       },
       {
         "id": "face/chibi-panic-center",
         "name": "chibi-panic-center",
         "category": "face",
-        "lines": [
-          "╭─────╮",
-          "│⊙ ‿ ⊙│",
-          "╰─────╯"
-        ],
+        "svg": "<g font-family=\"monospace\" font-size=\"1\" text-anchor=\"middle\">\n    <rect x=\"0.1\" y=\"0.1\" width=\"6.8\" height=\"2.8\" rx=\"0.4\" fill=\"none\" stroke=\"black\" stroke-width=\"0.1\"/>\n    <text x=\"2\" y=\"2.1\" fill=\"black\">⊙</text>\n    <text x=\"5\" y=\"2.1\" fill=\"black\">⊙</text>\n    <text x=\"3.5\" y=\"2.1\" fill=\"black\">_</text>\n  </g>",
+        "viewBox": "0 0 7 3",
         "width": 7,
         "height": 3,
         "tags": [
           "face",
-          "chibi panic center",
-          "panic",
-          "chibi",
-          "centered",
-          "width-7"
+          "chibi panic center"
         ]
       },
       {
         "id": "face/chibi-panic-left",
         "name": "chibi-panic-left",
         "category": "face",
-        "lines": [
-          "╭─────╮",
-          "│⊙ ‿ ─│",
-          "╰─────╯"
-        ],
+        "svg": "<g font-family=\"monospace\" font-size=\"1\" text-anchor=\"middle\">\n    <rect x=\"0.1\" y=\"0.1\" width=\"6.8\" height=\"2.8\" rx=\"0.4\" fill=\"none\" stroke=\"black\" stroke-width=\"0.1\"/>\n    <text x=\"2\" y=\"2.1\" fill=\"black\">⊙</text>\n    <text x=\"5\" y=\"2.1\" fill=\"black\">─</text>\n    <text x=\"3.5\" y=\"2.1\" fill=\"black\">_</text>\n  </g>",
+        "viewBox": "0 0 7 3",
         "width": 7,
         "height": 3,
         "tags": [
           "face",
-          "chibi panic left",
-          "panic",
-          "chibi",
-          "left-facing",
-          "width-7"
+          "chibi panic left"
         ]
       },
       {
         "id": "face/chibi-panic-right",
         "name": "chibi-panic-right",
         "category": "face",
-        "lines": [
-          "╭─────╮",
-          "│─ ‿ ⊙│",
-          "╰─────╯"
-        ],
+        "svg": "<g font-family=\"monospace\" font-size=\"1\" text-anchor=\"middle\">\n    <rect x=\"0.1\" y=\"0.1\" width=\"6.8\" height=\"2.8\" rx=\"0.4\" fill=\"none\" stroke=\"black\" stroke-width=\"0.1\"/>\n    <text x=\"2\" y=\"2.1\" fill=\"black\">─</text>\n    <text x=\"5\" y=\"2.1\" fill=\"black\">⊙</text>\n    <text x=\"3.5\" y=\"2.1\" fill=\"black\">_</text>\n  </g>",
+        "viewBox": "0 0 7 3",
         "width": 7,
         "height": 3,
         "tags": [
           "face",
-          "chibi panic right",
-          "panic",
-          "chibi",
-          "right-facing",
-          "width-7"
+          "chibi panic right"
         ]
       },
       {
         "id": "face/chibi-sad-center",
         "name": "chibi-sad-center",
         "category": "face",
-        "lines": [
-          "╭─────╮",
-          "│ ╥﹏╥│",
-          "╰─────╯"
-        ],
+        "svg": "<g font-family=\"monospace\" font-size=\"1\" text-anchor=\"middle\">\n    <rect x=\"0.1\" y=\"0.1\" width=\"6.8\" height=\"2.8\" rx=\"0.4\" fill=\"none\" stroke=\"black\" stroke-width=\"0.1\"/>\n    <text x=\"2\" y=\"2.1\" fill=\"black\">╥</text>\n    <text x=\"5\" y=\"2.1\" fill=\"black\">╥</text>\n    <text x=\"3.5\" y=\"2.1\" fill=\"black\">﹏</text>\n  </g>",
+        "viewBox": "0 0 7 3",
         "width": 7,
         "height": 3,
         "tags": [
           "face",
-          "chibi sad center",
-          "sad",
-          "crying",
-          "chibi",
-          "centered",
-          "width-7"
+          "chibi sad center"
         ]
       },
       {
         "id": "face/chibi-sad-left",
         "name": "chibi-sad-left",
         "category": "face",
-        "lines": [
-          "╭─────╮",
-          "│ ╥﹏─│",
-          "╰─────╯"
-        ],
+        "svg": "<g font-family=\"monospace\" font-size=\"1\" text-anchor=\"middle\">\n    <rect x=\"0.1\" y=\"0.1\" width=\"6.8\" height=\"2.8\" rx=\"0.4\" fill=\"none\" stroke=\"black\" stroke-width=\"0.1\"/>\n    <text x=\"2\" y=\"2.1\" fill=\"black\">╥</text>\n    <text x=\"5\" y=\"2.1\" fill=\"black\">─</text>\n    <text x=\"3.5\" y=\"2.1\" fill=\"black\">﹏</text>\n  </g>",
+        "viewBox": "0 0 7 3",
         "width": 7,
         "height": 3,
         "tags": [
           "face",
-          "chibi sad left",
-          "sad",
-          "crying",
-          "chibi",
-          "left-facing",
-          "width-7"
+          "chibi sad left"
         ]
       },
       {
         "id": "face/chibi-sad-right",
         "name": "chibi-sad-right",
         "category": "face",
-        "lines": [
-          "╭─────╮",
-          "│─ ﹏╥│",
-          "╰─────╯"
-        ],
+        "svg": "<g font-family=\"monospace\" font-size=\"1\" text-anchor=\"middle\">\n    <rect x=\"0.1\" y=\"0.1\" width=\"6.8\" height=\"2.8\" rx=\"0.4\" fill=\"none\" stroke=\"black\" stroke-width=\"0.1\"/>\n    <text x=\"2\" y=\"2.1\" fill=\"black\">─</text>\n    <text x=\"5\" y=\"2.1\" fill=\"black\">╥</text>\n    <text x=\"3.5\" y=\"2.1\" fill=\"black\">﹏</text>\n  </g>",
+        "viewBox": "0 0 7 3",
         "width": 7,
         "height": 3,
         "tags": [
           "face",
-          "chibi sad right",
-          "sad",
-          "crying",
-          "chibi",
-          "right-facing",
-          "width-7"
+          "chibi sad right"
         ]
       },
       {
         "id": "face/chibi-shocked-center",
         "name": "chibi-shocked-center",
         "category": "face",
-        "lines": [
-          "╭─────╮",
-          "│◎ ‿ ◎│",
-          "╰─────╯"
-        ],
+        "svg": "<g font-family=\"monospace\" font-size=\"1\" text-anchor=\"middle\">\n    <rect x=\"0.1\" y=\"0.1\" width=\"6.8\" height=\"2.8\" rx=\"0.4\" fill=\"none\" stroke=\"black\" stroke-width=\"0.1\"/>\n    <text x=\"2\" y=\"2.1\" fill=\"black\">◎</text>\n    <text x=\"5\" y=\"2.1\" fill=\"black\">◎</text>\n    <text x=\"3.5\" y=\"2.1\" fill=\"black\">_</text>\n  </g>",
+        "viewBox": "0 0 7 3",
         "width": 7,
         "height": 3,
         "tags": [
           "face",
-          "chibi shocked center",
-          "shocked",
-          "chibi",
-          "centered",
-          "width-7"
+          "chibi shocked center"
         ]
       },
       {
         "id": "face/chibi-shocked-left",
         "name": "chibi-shocked-left",
         "category": "face",
-        "lines": [
-          "╭─────╮",
-          "│◎ ‿ ─│",
-          "╰─────╯"
-        ],
+        "svg": "<g font-family=\"monospace\" font-size=\"1\" text-anchor=\"middle\">\n    <rect x=\"0.1\" y=\"0.1\" width=\"6.8\" height=\"2.8\" rx=\"0.4\" fill=\"none\" stroke=\"black\" stroke-width=\"0.1\"/>\n    <text x=\"2\" y=\"2.1\" fill=\"black\">◎</text>\n    <text x=\"5\" y=\"2.1\" fill=\"black\">─</text>\n    <text x=\"3.5\" y=\"2.1\" fill=\"black\">_</text>\n  </g>",
+        "viewBox": "0 0 7 3",
         "width": 7,
         "height": 3,
         "tags": [
           "face",
-          "chibi shocked left",
-          "shocked",
-          "chibi",
-          "left-facing",
-          "width-7"
+          "chibi shocked left"
         ]
       },
       {
         "id": "face/chibi-shocked-right",
         "name": "chibi-shocked-right",
         "category": "face",
-        "lines": [
-          "╭─────╮",
-          "│─ ‿ ◎│",
-          "╰─────╯"
-        ],
+        "svg": "<g font-family=\"monospace\" font-size=\"1\" text-anchor=\"middle\">\n    <rect x=\"0.1\" y=\"0.1\" width=\"6.8\" height=\"2.8\" rx=\"0.4\" fill=\"none\" stroke=\"black\" stroke-width=\"0.1\"/>\n    <text x=\"2\" y=\"2.1\" fill=\"black\">─</text>\n    <text x=\"5\" y=\"2.1\" fill=\"black\">◎</text>\n    <text x=\"3.5\" y=\"2.1\" fill=\"black\">_</text>\n  </g>",
+        "viewBox": "0 0 7 3",
         "width": 7,
         "height": 3,
         "tags": [
           "face",
-          "chibi shocked right",
-          "shocked",
-          "chibi",
-          "right-facing",
-          "width-7"
+          "chibi shocked right"
         ]
       },
       {
         "id": "face/chibi-smug-center",
         "name": "chibi-smug-center",
         "category": "face",
-        "lines": [
-          "╭─────╮",
-          "│◑ ‿ ◑│",
-          "╰─────╯"
-        ],
+        "svg": "<g font-family=\"monospace\" font-size=\"1\" text-anchor=\"middle\">\n    <rect x=\"0.1\" y=\"0.1\" width=\"6.8\" height=\"2.8\" rx=\"0.4\" fill=\"none\" stroke=\"black\" stroke-width=\"0.1\"/>\n    <text x=\"2\" y=\"2.1\" fill=\"black\">◑</text>\n    <text x=\"5\" y=\"2.1\" fill=\"black\">◑</text>\n    <text x=\"3.5\" y=\"2.1\" fill=\"black\">‿</text>\n  </g>",
+        "viewBox": "0 0 7 3",
         "width": 7,
         "height": 3,
         "tags": [
           "face",
-          "chibi smug center",
-          "smug",
-          "chibi",
-          "centered",
-          "width-7"
+          "chibi smug center"
         ]
       },
       {
         "id": "face/chibi-smug-left",
         "name": "chibi-smug-left",
         "category": "face",
-        "lines": [
-          "╭─────╮",
-          "│◑ ‿ ◡│",
-          "╰─────╯"
-        ],
+        "svg": "<g font-family=\"monospace\" font-size=\"1\" text-anchor=\"middle\">\n    <rect x=\"0.1\" y=\"0.1\" width=\"6.8\" height=\"2.8\" rx=\"0.4\" fill=\"none\" stroke=\"black\" stroke-width=\"0.1\"/>\n    <text x=\"2\" y=\"2.1\" fill=\"black\">◑</text>\n    <text x=\"5\" y=\"2.1\" fill=\"black\">◡</text>\n    <text x=\"3.5\" y=\"2.1\" fill=\"black\">‿</text>\n  </g>",
+        "viewBox": "0 0 7 3",
         "width": 7,
         "height": 3,
         "tags": [
           "face",
-          "chibi smug left",
-          "smug",
-          "chibi",
-          "left-facing",
-          "width-7"
+          "chibi smug left"
         ]
       },
       {
         "id": "face/chibi-smug-right",
         "name": "chibi-smug-right",
         "category": "face",
-        "lines": [
-          "╭─────╮",
-          "│◡ ‿ ◑│",
-          "╰─────╯"
-        ],
+        "svg": "<g font-family=\"monospace\" font-size=\"1\" text-anchor=\"middle\">\n    <rect x=\"0.1\" y=\"0.1\" width=\"6.8\" height=\"2.8\" rx=\"0.4\" fill=\"none\" stroke=\"black\" stroke-width=\"0.1\"/>\n    <text x=\"2\" y=\"2.1\" fill=\"black\">◡</text>\n    <text x=\"5\" y=\"2.1\" fill=\"black\">◑</text>\n    <text x=\"3.5\" y=\"2.1\" fill=\"black\">‿</text>\n  </g>",
+        "viewBox": "0 0 7 3",
         "width": 7,
         "height": 3,
         "tags": [
           "face",
-          "chibi smug right",
-          "smug",
-          "chibi",
-          "right-facing",
-          "width-7"
+          "chibi smug right"
         ]
       },
       {
         "id": "face/chibi-thinking-center",
         "name": "chibi-thinking-center",
         "category": "face",
-        "lines": [
-          "╭─────╮",
-          "│◐ ‿ ◐│",
-          "╰─────╯"
-        ],
+        "svg": "<g font-family=\"monospace\" font-size=\"1\" text-anchor=\"middle\">\n    <rect x=\"0.1\" y=\"0.1\" width=\"6.8\" height=\"2.8\" rx=\"0.4\" fill=\"none\" stroke=\"black\" stroke-width=\"0.1\"/>\n    <text x=\"2\" y=\"2.1\" fill=\"black\">◐</text>\n    <text x=\"5\" y=\"2.1\" fill=\"black\">◐</text>\n    <text x=\"3.5\" y=\"2.1\" fill=\"black\">_</text>\n  </g>",
+        "viewBox": "0 0 7 3",
         "width": 7,
         "height": 3,
         "tags": [
           "face",
-          "chibi thinking center",
-          "thinking",
-          "chibi",
-          "centered",
-          "width-7"
+          "chibi thinking center"
         ]
       },
       {
         "id": "face/chibi-thinking-left",
         "name": "chibi-thinking-left",
         "category": "face",
-        "lines": [
-          "╭─────╮",
-          "│◐ ‿ ◡│",
-          "╰─────╯"
-        ],
+        "svg": "<g font-family=\"monospace\" font-size=\"1\" text-anchor=\"middle\">\n    <rect x=\"0.1\" y=\"0.1\" width=\"6.8\" height=\"2.8\" rx=\"0.4\" fill=\"none\" stroke=\"black\" stroke-width=\"0.1\"/>\n    <text x=\"2\" y=\"2.1\" fill=\"black\">◐</text>\n    <text x=\"5\" y=\"2.1\" fill=\"black\">─</text>\n    <text x=\"3.5\" y=\"2.1\" fill=\"black\">_</text>\n  </g>",
+        "viewBox": "0 0 7 3",
         "width": 7,
         "height": 3,
         "tags": [
           "face",
-          "chibi thinking left",
-          "thinking",
-          "chibi",
-          "left-facing",
-          "width-7"
+          "chibi thinking left"
         ]
       },
       {
         "id": "face/chibi-thinking-right",
         "name": "chibi-thinking-right",
         "category": "face",
-        "lines": [
-          "╭─────╮",
-          "│◡ ‿ ◐│",
-          "╰─────╯"
-        ],
+        "svg": "<g font-family=\"monospace\" font-size=\"1\" text-anchor=\"middle\">\n    <rect x=\"0.1\" y=\"0.1\" width=\"6.8\" height=\"2.8\" rx=\"0.4\" fill=\"none\" stroke=\"black\" stroke-width=\"0.1\"/>\n    <text x=\"2\" y=\"2.1\" fill=\"black\">─</text>\n    <text x=\"5\" y=\"2.1\" fill=\"black\">◐</text>\n    <text x=\"3.5\" y=\"2.1\" fill=\"black\">_</text>\n  </g>",
+        "viewBox": "0 0 7 3",
         "width": 7,
         "height": 3,
         "tags": [
           "face",
-          "chibi thinking right",
-          "thinking",
-          "chibi",
-          "right-facing",
-          "width-7"
+          "chibi thinking right"
         ]
       },
       {
         "id": "face/confused",
         "name": "confused",
         "category": "face",
-        "lines": [
-          "(゜-゜)"
-        ],
+        "svg": "<text x=\"0\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">(゜-゜)</text>",
+        "viewBox": "0 0 7 1",
         "width": 7,
         "height": 1,
         "tags": [
           "face",
-          "confused",
-          "confused",
-          "kaomoji",
-          "width-7"
+          "confused"
         ]
       },
       {
         "id": "face/dead",
         "name": "dead",
         "category": "face",
-        "lines": [
-          "(×_×)"
-        ],
+        "svg": "<text x=\"0\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">(×_×)</text>",
+        "viewBox": "0 0 5 1",
         "width": 5,
         "height": 1,
         "tags": [
           "face",
-          "dead",
-          "dead",
-          "x-eyes",
-          "kaomoji"
+          "dead"
         ]
       },
       {
         "id": "face/excited",
         "name": "excited",
         "category": "face",
-        "lines": [
-          "\\(★▽★)/"
-        ],
+        "svg": "<text x=\"0\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">\\(★▽★)/</text>",
+        "viewBox": "0 0 7 1",
         "width": 7,
         "height": 1,
         "tags": [
           "face",
-          "excited",
-          "excited",
-          "kaomoji"
+          "excited"
         ]
       },
       {
         "id": "face/happy-left",
         "name": "happy-left",
         "category": "face",
-        "lines": [
-          "(◕ ‿   )"
-        ],
-        "width": 8,
+        "svg": "<text x=\"0\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">(◕ ‿ ◡)</text>",
+        "viewBox": "0 0 6 1",
+        "width": 6,
         "height": 1,
         "tags": [
           "face",
-          "happy left",
-          "happy",
-          "left-facing",
-          "kaomoji",
-          "width-8"
+          "happy left"
         ]
       },
       {
         "id": "face/happy-right",
         "name": "happy-right",
         "category": "face",
-        "lines": [
-          "(   ‿ ◕)"
-        ],
-        "width": 8,
+        "svg": "<text x=\"0\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">(◡ ‿ ◕)</text>",
+        "viewBox": "0 0 6 1",
+        "width": 6,
         "height": 1,
         "tags": [
           "face",
-          "happy right",
-          "happy",
-          "right-facing",
-          "kaomoji",
-          "width-8"
+          "happy right"
         ]
       },
       {
         "id": "face/happy",
         "name": "happy",
         "category": "face",
-        "lines": [
-          "(◕‿◕)"
-        ],
+        "svg": "<text x=\"0\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">(◕‿◕)</text>",
+        "viewBox": "0 0 5 1",
         "width": 5,
         "height": 1,
         "tags": [
           "face",
-          "happy",
-          "happy",
-          "positive",
-          "kaomoji"
+          "happy"
         ]
       },
       {
         "id": "face/panic-left",
         "name": "panic-left",
         "category": "face",
-        "lines": [
-          "(⊙ ‿   )"
-        ],
-        "width": 8,
+        "svg": "<text x=\"0\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">(⊙_O)</text>",
+        "viewBox": "0 0 7 1",
+        "width": 7,
         "height": 1,
         "tags": [
           "face",
-          "panic left",
-          "panic",
-          "left-facing",
-          "kaomoji",
-          "width-8"
+          "panic left"
         ]
       },
       {
         "id": "face/panic-right",
         "name": "panic-right",
         "category": "face",
-        "lines": [
-          "(   ‿ ⊙)"
-        ],
-        "width": 8,
+        "svg": "<text x=\"0\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">(O_⊙)</text>",
+        "viewBox": "0 0 7 1",
+        "width": 7,
         "height": 1,
         "tags": [
           "face",
-          "panic right",
-          "panic",
-          "right-facing",
-          "kaomoji",
-          "width-8"
+          "panic right"
         ]
       },
       {
         "id": "face/panic",
         "name": "panic",
         "category": "face",
-        "lines": [
-          "(⊙_⊙)"
-        ],
+        "svg": "<text x=\"0\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">(⊙_⊙)</text>",
+        "viewBox": "0 0 5 1",
         "width": 5,
         "height": 1,
         "tags": [
           "face",
-          "panic",
-          "panic",
-          "shocked",
-          "kaomoji"
+          "panic"
         ]
       },
       {
         "id": "face/sad-left",
         "name": "sad-left",
         "category": "face",
-        "lines": [
-          "(╥ ﹏  )"
-        ],
-        "width": 8,
+        "svg": "<text x=\"0\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">(╥﹏ ╥)</text>",
+        "viewBox": "0 0 7 1",
+        "width": 7,
         "height": 1,
         "tags": [
           "face",
-          "sad left",
-          "sad",
-          "left-facing",
-          "kaomoji",
-          "width-8"
+          "sad left"
         ]
       },
       {
         "id": "face/sad-right",
         "name": "sad-right",
         "category": "face",
-        "lines": [
-          "(  ﹏ ╥)"
-        ],
-        "width": 8,
+        "svg": "<text x=\"0\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">(╥ ╏╥)</text>",
+        "viewBox": "0 0 7 1",
+        "width": 7,
         "height": 1,
         "tags": [
           "face",
-          "sad right",
-          "sad",
-          "right-facing",
-          "kaomoji",
-          "width-8"
+          "sad right"
         ]
       },
       {
         "id": "face/sad",
         "name": "sad",
         "category": "face",
-        "lines": [
-          "(╥﹏╥)"
-        ],
+        "svg": "<text x=\"0\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">(╥﹏╥)</text>",
+        "viewBox": "0 0 6 1",
         "width": 6,
         "height": 1,
         "tags": [
           "face",
-          "sad",
-          "sad",
-          "crying",
-          "kaomoji",
-          "width-6"
+          "sad"
         ]
       },
       {
         "id": "face/shocked",
         "name": "shocked",
         "category": "face",
-        "lines": [
-          "(°□°)"
-        ],
+        "svg": "<text x=\"0\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">(°□°)</text>",
+        "viewBox": "0 0 5 1",
         "width": 5,
         "height": 1,
         "tags": [
           "face",
-          "shocked",
-          "shocked",
-          "surprised",
-          "kaomoji"
+          "shocked"
         ]
       },
       {
         "id": "face/smug",
         "name": "smug",
         "category": "face",
-        "lines": [
-          "(¬‿¬)"
-        ],
+        "svg": "<text x=\"0\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">(¬‿¬)</text>",
+        "viewBox": "0 0 5 1",
         "width": 5,
         "height": 1,
         "tags": [
           "face",
-          "smug",
-          "smug",
-          "sly",
-          "kaomoji"
+          "smug"
         ]
       },
       {
         "id": "face/thinking",
         "name": "thinking",
         "category": "face",
-        "lines": [
-          "(¬_¬)"
-        ],
+        "svg": "<text x=\"0\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">(¬_¬)</text>",
+        "viewBox": "0 0 5 1",
         "width": 5,
         "height": 1,
         "tags": [
           "face",
-          "thinking",
-          "thinking",
-          "side-eye",
-          "kaomoji"
+          "thinking"
         ]
       }
     ],
@@ -1041,102 +755,78 @@
         "id": "frame/ascii-bottom",
         "name": "ascii-bottom",
         "category": "frame",
-        "lines": [
-          "+--------+"
-        ],
+        "svg": "<text x=\"0\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"none\" stroke=\"black\" stroke-width=\"0.1\">+--------+</text>",
+        "viewBox": "0 0 10 1",
         "width": 10,
         "height": 1,
         "tags": [
           "frame",
-          "ascii bottom",
-          "frame",
-          "ascii",
-          "bottom"
+          "ascii bottom"
         ]
       },
       {
         "id": "frame/ascii-top",
         "name": "ascii-top",
         "category": "frame",
-        "lines": [
-          "+--------+"
-        ],
+        "svg": "<text x=\"0\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"none\" stroke=\"black\" stroke-width=\"0.1\">+--------+</text>",
+        "viewBox": "0 0 10 1",
         "width": 10,
         "height": 1,
         "tags": [
           "frame",
-          "ascii top",
-          "frame",
-          "ascii",
-          "top"
+          "ascii top"
         ]
       },
       {
         "id": "frame/heavy-bottom",
         "name": "heavy-bottom",
         "category": "frame",
-        "lines": [
-          "╚══════════════════╝"
-        ],
+        "svg": "<text x=\"0\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"none\" stroke=\"black\" stroke-width=\"0.1\">╚══════════════════╝</text>",
+        "viewBox": "0 0 20 1",
         "width": 20,
         "height": 1,
         "tags": [
           "frame",
-          "heavy bottom",
-          "frame",
-          "heavy",
-          "bottom"
+          "heavy bottom"
         ]
       },
       {
         "id": "frame/heavy-top",
         "name": "heavy-top",
         "category": "frame",
-        "lines": [
-          "╔══════════════════╗"
-        ],
+        "svg": "<text x=\"0\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"none\" stroke=\"black\" stroke-width=\"0.1\">╔══════════════════╗</text>",
+        "viewBox": "0 0 20 1",
         "width": 20,
         "height": 1,
         "tags": [
           "frame",
-          "heavy top",
-          "frame",
-          "heavy",
-          "top"
+          "heavy top"
         ]
       },
       {
         "id": "frame/light-bottom",
         "name": "light-bottom",
         "category": "frame",
-        "lines": [
-          "└──────────┘"
-        ],
-        "width": 12,
+        "svg": "<text x=\"0\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"none\" stroke=\"black\" stroke-width=\"0.1\">└────────┘</text>",
+        "viewBox": "0 0 10 1",
+        "width": 10,
         "height": 1,
         "tags": [
           "frame",
-          "light bottom",
-          "frame",
-          "light",
-          "bottom"
+          "light bottom"
         ]
       },
       {
         "id": "frame/light-top",
         "name": "light-top",
         "category": "frame",
-        "lines": [
-          "┌──────────┐"
-        ],
-        "width": 12,
+        "svg": "<text x=\"0\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"none\" stroke=\"black\" stroke-width=\"0.1\">┌────────┐</text>",
+        "viewBox": "0 0 10 1",
+        "width": 10,
         "height": 1,
         "tags": [
           "frame",
-          "light top",
-          "frame",
-          "light",
-          "top"
+          "light top"
         ]
       }
     ],
@@ -1145,102 +835,78 @@
         "id": "gesture/fist",
         "name": "fist",
         "category": "gesture",
-        "lines": [
-          " _  ",
-          "(👊)"
-        ],
+        "svg": "<text x=\"0\" y=\"2\" font-family=\"monospace\" font-size=\"1\" fill=\"black\"> _(👊)</text>",
+        "viewBox": "0 0 4 2",
         "width": 4,
         "height": 2,
         "tags": [
           "gesture",
-          "fist",
-          "fist",
-          "hand"
+          "fist"
         ]
       },
       {
         "id": "gesture/ok",
         "name": "ok",
         "category": "gesture",
-        "lines": [
-          " _  ",
-          "(👌)"
-        ],
+        "svg": "<text x=\"0\" y=\"2\" font-family=\"monospace\" font-size=\"1\" fill=\"black\"> _(👌)</text>",
+        "viewBox": "0 0 4 2",
         "width": 4,
         "height": 2,
         "tags": [
           "gesture",
-          "ok",
-          "ok",
-          "hand"
+          "ok"
         ]
       },
       {
         "id": "gesture/peace",
         "name": "peace",
         "category": "gesture",
-        "lines": [
-          " _  ",
-          "(✌)"
-        ],
+        "svg": "<text x=\"0\" y=\"2\" font-family=\"monospace\" font-size=\"1\" fill=\"black\"> _(✌)</text>",
+        "viewBox": "0 0 4 2",
         "width": 4,
         "height": 2,
         "tags": [
           "gesture",
-          "peace",
-          "peace",
-          "hand"
+          "peace"
         ]
       },
       {
         "id": "gesture/thumbs-down",
         "name": "thumbs-down",
         "category": "gesture",
-        "lines": [
-          " _  ",
-          "(👎)"
-        ],
+        "svg": "<text x=\"0\" y=\"2\" font-family=\"monospace\" font-size=\"1\" fill=\"black\"> _(👎)</text>",
+        "viewBox": "0 0 4 2",
         "width": 4,
         "height": 2,
         "tags": [
           "gesture",
-          "thumbs down",
-          "thumbs-down",
-          "hand"
+          "thumbs down"
         ]
       },
       {
         "id": "gesture/thumbs-up",
         "name": "thumbs-up",
         "category": "gesture",
-        "lines": [
-          " _  ",
-          "(👍)"
-        ],
+        "svg": "<text x=\"0\" y=\"2\" font-family=\"monospace\" font-size=\"1\" fill=\"black\"> _(👍)</text>",
+        "viewBox": "0 0 4 2",
         "width": 4,
         "height": 2,
         "tags": [
           "gesture",
-          "thumbs up",
-          "thumbs-up",
-          "hand"
+          "thumbs up"
         ]
       },
       {
         "id": "gesture/wave",
         "name": "wave",
         "category": "gesture",
-        "lines": [
-          " _    ",
-          "( ゝ◡)"
-        ],
+        "svg": "<text x=\"0\" y=\"2\" font-family=\"monospace\" font-size=\"1\" fill=\"black\"> _( ゝ◡)</text>",
+        "viewBox": "0 0 6 2",
         "width": 6,
         "height": 2,
         "tags": [
           "gesture",
-          "wave",
-          "wave",
-          "hand"
+          "wave"
         ]
       }
     ],
@@ -1249,239 +915,156 @@
         "id": "prop/bomb",
         "name": "bomb",
         "category": "prop",
-        "lines": [
-          "  _  ",
-          " ( ) ",
-          " /|\\ ",
-          "/ | \\",
-          "|   |",
-          "|   |",
-          "|   |",
-          "|   |",
-          "|   |"
-        ],
-        "width": 5,
+        "svg": "<g fill=\"black\">\n      <circle cx=\"3\" cy=\"5\" r=\"2.3\"/>\n      <rect x=\"2.3\" y=\"2.2\" width=\"1.4\" height=\"1\"/>\n      <line x1=\"3\" y1=\"2.2\" x2=\"4.5\" y2=\"0.7\" stroke=\"red\" stroke-width=\"0.2\"/>\n      <line x1=\"3\" y1=\"2.2\" x2=\"4\" y2=\"0.3\" stroke=\"red\" stroke-width=\"0.2\"/>\n    </g>",
+        "viewBox": "0 0 6 9",
+        "width": 6,
         "height": 9,
         "tags": [
           "prop",
-          "bomb",
-          "bomb",
-          "danger"
+          "bomb"
         ]
       },
       {
         "id": "prop/book",
         "name": "book",
         "category": "prop",
-        "lines": [
-          " ___ ",
-          "/   \\",
-          "|   |",
-          "\\___/"
-        ],
+        "svg": "<g font-family=\"monospace\" font-size=\"1\" fill=\"none\" stroke=\"black\" stroke-width=\"0.1\">\n      <rect x=\"0.3\" y=\"0.3\" width=\"4.4\" height=\"3.4\"/>\n      <line x1=\"2.5\" y1=\"0.3\" x2=\"2.5\" y2=\"3.7\"/>\n    </g>",
+        "viewBox": "0 0 5 4",
         "width": 5,
         "height": 4,
         "tags": [
           "prop",
-          "book",
-          "book",
-          "reading"
+          "book"
         ]
       },
       {
         "id": "prop/bug",
         "name": "bug",
         "category": "prop",
-        "lines": [
-          "  /\\  ",
-          " /  \\ ",
-          "/    \\",
-          "\\    /",
-          " \\  / ",
-          "  \\/  "
-        ],
-        "width": 6,
-        "height": 6,
+        "svg": "<g fill=\"black\">\n      <circle cx=\"2.5\" cy=\"0.7\" r=\"0.3\"/>\n      <ellipse cx=\"2.5\" cy=\"3.5\" rx=\"1.3\" ry=\"2.3\"/>\n      <line x1=\"1\" y1=\"1.5\" x2=\"0.3\" y2=\"1\" stroke=\"black\" stroke-width=\"0.1\"/>\n      <line x1=\"4\" y1=\"1.5\" x2=\"4.7\" y2=\"1\" stroke=\"black\" stroke-width=\"0.1\"/>\n      <line x1=\"1\" y1=\"3\" x2=\"0.3\" y2=\"3\" stroke=\"black\" stroke-width=\"0.1\"/>\n      <line x1=\"4\" y1=\"3\" x2=\"4.7\" y2=\"3\" stroke=\"black\" stroke-width=\"0.1\"/>\n      <line x1=\"1\" y1=\"4.5\" x2=\"0.3\" y2=\"5\" stroke=\"black\" stroke-width=\"0.1\"/>\n      <line x1=\"4\" y1=\"4.5\" x2=\"4.7\" y2=\"5\" stroke=\"black\" stroke-width=\"0.1\"/>\n    </g>",
+        "viewBox": "0 0 5 7",
+        "width": 5,
+        "height": 7,
         "tags": [
           "prop",
-          "bug",
-          "bug",
-          "error",
-          "insect"
+          "bug"
         ]
       },
       {
         "id": "prop/clock",
         "name": "clock",
         "category": "prop",
-        "lines": [
-          "   __  ",
-          "  /  \\ ",
-          " | 12 |",
-          "  \\__/ "
-        ],
-        "width": 7,
-        "height": 4,
+        "svg": "<g fill=\"none\" stroke=\"black\" stroke-width=\"0.15\">\n      <circle cx=\"2.5\" cy=\"2.5\" r=\"2\"/>\n      <line x1=\"2.5\" y1=\"2.5\" x2=\"2.5\" y2=\"1.3\"/>\n      <line x1=\"2.5\" y1=\"2.5\" x2=\"3.5\" y2=\"2.5\"/>\n      <circle cx=\"2.5\" cy=\"2.5\" r=\"0.15\" fill=\"black\"/>\n    </g>",
+        "viewBox": "0 0 5 5",
+        "width": 5,
+        "height": 5,
         "tags": [
           "prop",
-          "clock",
-          "clock",
-          "time"
+          "clock"
         ]
       },
       {
         "id": "prop/coffee",
         "name": "coffee",
         "category": "prop",
-        "lines": [
-          "~ ~ ~",
-          " ) ) ",
-          "( _ )",
-          "|   |",
-          " ===="
-        ],
+        "svg": "<g>\n      <text x=\"0\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">~ ~ ~</text>\n      <text x=\"0\" y=\"2\" font-family=\"monospace\" font-size=\"1\" fill=\"black\"> ) )</text>\n      <text x=\"0\" y=\"3\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">( _ )</text>\n      <text x=\"0\" y=\"4\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">|   |</text>\n      <text x=\"0\" y=\"5\" font-family=\"monospace\" font-size=\"1\" fill=\"black\"> ====</text>\n    </g>",
+        "viewBox": "0 0 5 5",
         "width": 5,
         "height": 5,
         "tags": [
           "prop",
-          "coffee",
-          "coffee",
-          "drink",
-          "cup"
+          "coffee"
         ]
       },
       {
         "id": "prop/envelope",
         "name": "envelope",
         "category": "prop",
-        "lines": [
-          "  ___  ",
-          " /   \\ ",
-          "|  *  |",
-          " \\___/ "
-        ],
-        "width": 7,
+        "svg": "<g fill=\"none\" stroke=\"black\" stroke-width=\"0.1\">\n      <rect x=\"0.3\" y=\"0.3\" width=\"5.4\" height=\"3.4\"/>\n      <polyline points=\"0.3,0.3 3,2.4 5.7,0.3\"/>\n    </g>",
+        "viewBox": "0 0 6 4",
+        "width": 6,
         "height": 4,
         "tags": [
           "prop",
-          "envelope",
-          "envelope",
-          "mail"
+          "envelope"
         ]
       },
       {
         "id": "prop/fire",
         "name": "fire",
         "category": "prop",
-        "lines": [
-          "  )( ",
-          " (  )",
-          "(   )",
-          "  )  "
-        ],
-        "width": 5,
-        "height": 4,
+        "svg": "<g fill=\"orange\" stroke=\"red\" stroke-width=\"0.1\">\n      <path d=\"M2 0.5 Q 0.5 2 1 3.5 Q 0.5 4 1 4.5 Q 2 4 2 3 Q 2 4 3 4.5 Q 3.5 4 3 3.5 Q 3.5 2 2 0.5 Z\"/>\n      <path d=\"M2 1.5 Q 1 3 1.5 4 Q 2 3.5 2 2.8 Q 2 3.5 2.5 4 Q 3 3 2 1.5 Z\" fill=\"yellow\"/>\n    </g>",
+        "viewBox": "0 0 4 5",
+        "width": 4,
+        "height": 5,
         "tags": [
           "prop",
-          "fire",
-          "fire",
-          "alert",
-          "hot"
+          "fire"
         ]
       },
       {
         "id": "prop/gear",
         "name": "gear",
         "category": "prop",
-        "lines": [
-          "  _",
-          "/ \\",
-          "\\_/"
-        ],
+        "svg": "<g fill=\"none\" stroke=\"black\" stroke-width=\"0.15\">\n      <circle cx=\"1.5\" cy=\"1.5\" r=\"1\"/>\n      <circle cx=\"1.5\" cy=\"1.5\" r=\"0.4\" fill=\"black\"/>\n      <line x1=\"1.5\" y1=\"0.1\" x2=\"1.5\" y2=\"0.5\"/>\n      <line x1=\"1.5\" y1=\"2.5\" x2=\"1.5\" y2=\"2.9\"/>\n      <line x1=\"0.1\" y1=\"1.5\" x2=\"0.5\" y2=\"1.5\"/>\n      <line x1=\"2.5\" y1=\"1.5\" x2=\"2.9\" y2=\"1.5\"/>\n    </g>",
+        "viewBox": "0 0 3 3",
         "width": 3,
         "height": 3,
         "tags": [
           "prop",
-          "gear",
-          "gear",
-          "settings",
-          "cogs"
+          "gear"
         ]
       },
       {
         "id": "prop/key",
         "name": "key",
         "category": "prop",
-        "lines": [
-          " _  ",
-          "( ) ",
-          " |\\ ",
-          " | \\"
-        ],
+        "svg": "<g fill=\"none\" stroke=\"black\" stroke-width=\"0.15\">\n      <circle cx=\"1.5\" cy=\"1.5\" r=\"1\"/>\n      <line x1=\"2.3\" y1=\"1.5\" x2=\"3.8\" y2=\"1.5\"/>\n      <line x1=\"3.2\" y1=\"1.5\" x2=\"3.2\" y2=\"2\"/>\n      <line x1=\"3.6\" y1=\"1.5\" x2=\"3.6\" y2=\"2.2\"/>\n    </g>",
+        "viewBox": "0 0 4 5",
         "width": 4,
-        "height": 4,
+        "height": 5,
         "tags": [
           "prop",
-          "key",
-          "key",
-          "secret"
+          "key"
         ]
       },
       {
         "id": "prop/laptop",
         "name": "laptop",
         "category": "prop",
-        "lines": [
-          " _____ ",
-          "/     \\",
-          "|     |",
-          "\\_____/"
-        ],
+        "svg": "<g font-family=\"monospace\" font-size=\"1\" fill=\"none\" stroke=\"black\" stroke-width=\"0.1\">\n      <rect x=\"0.2\" y=\"0.5\" width=\"6.6\" height=\"2.5\" rx=\"0.1\"/>\n      <rect x=\"0.2\" y=\"3\" width=\"6.6\" height=\"0.8\" rx=\"0.1\" fill=\"black\"/>\n    </g>",
+        "viewBox": "0 0 7 4",
         "width": 7,
         "height": 4,
         "tags": [
           "prop",
-          "laptop",
-          "laptop",
-          "work"
+          "laptop"
         ]
       },
       {
         "id": "prop/money",
         "name": "money",
         "category": "prop",
-        "lines": [
-          "$   ",
-          "$$  ",
-          "$$$ ",
-          "$$$$"
-        ],
+        "svg": "<g font-family=\"monospace\" font-size=\"1\" fill=\"green\">\n      <text x=\"0\" y=\"1\">$</text>\n      <text x=\"0\" y=\"2\">$$</text>\n      <text x=\"0\" y=\"3\">$$$</text>\n      <text x=\"0\" y=\"4\">$$$$</text>\n    </g>",
+        "viewBox": "0 0 4 4",
         "width": 4,
         "height": 4,
         "tags": [
           "prop",
-          "money",
-          "money",
-          "cash",
-          "dollar"
+          "money"
         ]
       },
       {
         "id": "prop/phone",
         "name": "phone",
         "category": "prop",
-        "lines": [
-          " _ ",
-          "|_|",
-          "|_|"
-        ],
+        "svg": "<g font-family=\"monospace\" font-size=\"1\" fill=\"none\" stroke=\"black\" stroke-width=\"0.1\">\n      <rect x=\"0.3\" y=\"0.2\" width=\"2.4\" height=\"2.6\" rx=\"0.3\"/>\n      <line x1=\"1.2\" y1=\"0.4\" x2=\"1.8\" y2=\"0.4\"/>\n    </g>",
+        "viewBox": "0 0 3 3",
         "width": 3,
         "height": 3,
         "tags": [
           "prop",
-          "phone",
-          "phone",
-          "mobile"
+          "phone"
         ]
       }
     ],
@@ -1490,232 +1073,156 @@
         "id": "scene/arrow-down",
         "name": "arrow-down",
         "category": "scene",
-        "lines": [
-          "  |",
-          "  |",
-          "  v"
-        ],
-        "width": 3,
+        "svg": "<g fill=\"black\">\n      <line x1=\"0.5\" y1=\"0\" x2=\"0.5\" y2=\"2\" stroke=\"black\" stroke-width=\"0.15\"/>\n      <polygon points=\"0,2 1,2 0.5,3\"/>\n    </g>",
+        "viewBox": "0 0 1 3",
+        "width": 1,
         "height": 3,
         "tags": [
           "scene",
-          "arrow down",
-          "arrow-down",
-          "transition"
+          "arrow down"
         ]
       },
       {
         "id": "scene/arrow-right",
         "name": "arrow-right",
         "category": "scene",
-        "lines": [
-          "  >"
-        ],
-        "width": 3,
+        "svg": "<g fill=\"black\">\n      <polygon points=\"0,0 1,0.5 0,1\"/>\n    </g>",
+        "viewBox": "0 0 1 1",
+        "width": 1,
         "height": 1,
         "tags": [
           "scene",
-          "arrow right",
-          "arrow-right",
-          "transition"
+          "arrow right"
         ]
       },
       {
         "id": "scene/arrow-up",
         "name": "arrow-up",
         "category": "scene",
-        "lines": [
-          "  ^",
-          "  |",
-          "  |"
-        ],
-        "width": 3,
+        "svg": "<g fill=\"black\">\n      <line x1=\"0.5\" y1=\"1\" x2=\"0.5\" y2=\"3\" stroke=\"black\" stroke-width=\"0.15\"/>\n      <polygon points=\"0,1 1,1 0.5,0\"/>\n    </g>",
+        "viewBox": "0 0 1 3",
+        "width": 1,
         "height": 3,
         "tags": [
           "scene",
-          "arrow up",
-          "arrow-up",
-          "transition"
+          "arrow up"
         ]
       },
       {
         "id": "scene/cloud",
         "name": "cloud",
         "category": "scene",
-        "lines": [
-          "  _    ",
-          " (   ) ",
-          "(     )"
-        ],
-        "width": 7,
+        "svg": "<g fill=\"lightgray\" stroke=\"gray\" stroke-width=\"0.1\">\n      <ellipse cx=\"3\" cy=\"2\" rx=\"2.7\" ry=\"1\"/>\n      <ellipse cx=\"2\" cy=\"1.5\" rx=\"1.3\" ry=\"0.8\"/>\n      <ellipse cx=\"4\" cy=\"1.5\" rx=\"1.5\" ry=\"0.9\"/>\n    </g>",
+        "viewBox": "0 0 6 3",
+        "width": 6,
         "height": 3,
         "tags": [
           "scene",
-          "cloud",
-          "cloud",
-          "weather"
+          "cloud"
         ]
       },
       {
         "id": "scene/house",
         "name": "house",
         "category": "scene",
-        "lines": [
-          "    /\\   ",
-          "   /  \\  ",
-          "  /    \\ ",
-          " /______\\",
-          " |  __  |",
-          " | |  | |",
-          " | |__| |",
-          " |______|"
-        ],
-        "width": 9,
-        "height": 8,
+        "svg": "<g fill=\"none\" stroke=\"black\" stroke-width=\"0.1\">\n      <polygon points=\"0,3 3.5,0 7,3\"/>\n      <rect x=\"0.5\" y=\"3\" width=\"6\" height=\"6\"/>\n      <rect x=\"2.5\" y=\"5\" width=\"2\" height=\"4\"/>\n      <rect x=\"1.2\" y=\"4\" width=\"1.5\" height=\"1.5\"/>\n      <rect x=\"4.3\" y=\"4\" width=\"1.5\" height=\"1.5\"/>\n    </g>",
+        "viewBox": "0 0 7 9",
+        "width": 7,
+        "height": 9,
         "tags": [
           "scene",
-          "house",
-          "house",
-          "home"
+          "house"
         ]
       },
       {
         "id": "scene/lightning",
         "name": "lightning",
         "category": "scene",
-        "lines": [
-          "  /\\  ",
-          " /  \\ ",
-          "/    \\",
-          " \\    "
-        ],
-        "width": 6,
+        "svg": "<g fill=\"yellow\" stroke=\"orange\" stroke-width=\"0.1\">\n      <polygon points=\"2,0 0.5,2 1.5,2 1,4 3,1.5 2,1.5 2.5,0\"/>\n    </g>",
+        "viewBox": "0 0 4 4",
+        "width": 4,
         "height": 4,
         "tags": [
           "scene",
-          "lightning",
-          "lightning",
-          "thunder",
-          "storm"
+          "lightning"
         ]
       },
       {
         "id": "scene/moon",
         "name": "moon",
         "category": "scene",
-        "lines": [
-          "  _ ",
-          " ( )",
-          "  - "
-        ],
+        "svg": "<g fill=\"lightgray\" stroke=\"gray\" stroke-width=\"0.1\">\n      <path d=\"M 1 0.3 A 1.5 1.5 0 1 0 1 2.7 A 1.2 1.2 0 1 1 1 0.3 Z\"/>\n    </g>",
+        "viewBox": "0 0 4 3",
         "width": 4,
         "height": 3,
         "tags": [
           "scene",
-          "moon",
-          "moon",
-          "night"
+          "moon"
         ]
       },
       {
         "id": "scene/rain",
         "name": "rain",
         "category": "scene",
-        "lines": [
-          "  . ",
-          ". . ",
-          " .  ",
-          ".  .",
-          " .  ",
-          ". . "
-        ],
-        "width": 4,
+        "svg": "<g fill=\"blue\">\n      <text x=\"0\" y=\"1\" font-family=\"monospace\" font-size=\"1\">.</text>\n      <text x=\"1\" y=\"2\" font-family=\"monospace\" font-size=\"1\">.</text>\n      <text x=\"0\" y=\"3\" font-family=\"monospace\" font-size=\"1\">.</text>\n      <text x=\"1\" y=\"4\" font-family=\"monospace\" font-size=\"1\">.</text>\n      <text x=\"0\" y=\"5\" font-family=\"monospace\" font-size=\"1\">.</text>\n      <text x=\"1\" y=\"6\" font-family=\"monospace\" font-size=\"1\">.</text>\n    </g>",
+        "viewBox": "0 0 3 6",
+        "width": 3,
         "height": 6,
         "tags": [
           "scene",
-          "rain",
-          "rain",
-          "weather"
+          "rain"
         ]
       },
       {
         "id": "scene/snow",
         "name": "snow",
         "category": "scene",
-        "lines": [
-          "  *",
-          "  *",
-          "*  ",
-          "  *",
-          "  *"
-        ],
-        "width": 3,
+        "svg": "<g fill=\"white\" stroke=\"lightblue\" stroke-width=\"0.05\">\n      <text x=\"0\" y=\"1\" font-family=\"monospace\" font-size=\"1\">*</text>\n      <text x=\"1\" y=\"2\" font-family=\"monospace\" font-size=\"1\">*</text>\n      <text x=\"0\" y=\"3\" font-family=\"monospace\" font-size=\"1\">*</text>\n      <text x=\"1\" y=\"4\" font-family=\"monospace\" font-size=\"1\">*</text>\n      <text x=\"0\" y=\"5\" font-family=\"monospace\" font-size=\"1\">*</text>\n    </g>",
+        "viewBox": "0 0 2 5",
+        "width": 2,
         "height": 5,
         "tags": [
           "scene",
-          "snow",
-          "snow",
-          "weather",
-          "winter"
+          "snow"
         ]
       },
       {
         "id": "scene/star",
         "name": "star",
         "category": "scene",
-        "lines": [
-          "  * ",
-          " * *",
-          "  * "
-        ],
-        "width": 4,
+        "svg": "<g fill=\"gold\">\n      <polygon points=\"1.5,0 1.8,1.2 3,1.2 2.1,1.9 2.4,3 1.5,2.4 0.6,3 0.9,1.9 0,1.2 1.2,1.2\"/>\n    </g>",
+        "viewBox": "0 0 3 3",
+        "width": 3,
         "height": 3,
         "tags": [
           "scene",
-          "star",
-          "star",
-          "sparkle"
+          "star"
         ]
       },
       {
         "id": "scene/sun",
         "name": "sun",
         "category": "scene",
-        "lines": [
-          "\\ | /",
-          " \\|/ ",
-          "──O──",
-          " /|\\ ",
-          "/ | \\"
-        ],
+        "svg": "<g>\n      <line x1=\"0\" y1=\"2.5\" x2=\"5\" y2=\"2.5\" stroke=\"orange\" stroke-width=\"0.1\"/>\n      <line x1=\"2.5\" y1=\"0\" x2=\"2.5\" y2=\"5\" stroke=\"orange\" stroke-width=\"0.1\"/>\n      <line x1=\"0.5\" y1=\"0.5\" x2=\"4.5\" y2=\"4.5\" stroke=\"orange\" stroke-width=\"0.1\"/>\n      <line x1=\"4.5\" y1=\"0.5\" x2=\"0.5\" y2=\"4.5\" stroke=\"orange\" stroke-width=\"0.1\"/>\n      <circle cx=\"2.5\" cy=\"2.5\" r=\"1\" fill=\"yellow\" stroke=\"orange\" stroke-width=\"0.1\"/>\n    </g>",
+        "viewBox": "0 0 5 5",
         "width": 5,
         "height": 5,
         "tags": [
           "scene",
-          "sun",
-          "sun",
-          "weather",
-          "day"
+          "sun"
         ]
       },
       {
         "id": "scene/tree",
         "name": "tree",
         "category": "scene",
-        "lines": [
-          "   ^  ",
-          "  ^^^ ",
-          " ^^^^^",
-          "   |  ",
-          "   |  "
-        ],
-        "width": 6,
-        "height": 5,
+        "svg": "<g>\n      <polygon points=\"2.5,0 0.5,3 4.5,3\" fill=\"green\"/>\n      <polygon points=\"2.5,1.5 0.5,4 4.5,4\" fill=\"green\"/>\n      <polygon points=\"2.5,3 0.5,5.5 4.5,5.5\" fill=\"green\"/>\n      <rect x=\"2\" y=\"5\" width=\"1\" height=\"1\" fill=\"brown\"/>\n    </g>",
+        "viewBox": "0 0 5 6",
+        "width": 5,
+        "height": 6,
         "tags": [
           "scene",
-          "tree",
-          "tree",
-          "nature"
+          "tree"
         ]
       }
     ],
@@ -1724,15 +1231,12 @@
         "id": "separator/ascii",
         "name": "ascii",
         "category": "separator",
-        "lines": [
-          "--------------------"
-        ],
+        "svg": "<line x1=\"0\" y1=\"0.5\" x2=\"20\" y2=\"0.5\" stroke=\"black\" stroke-width=\"0.1\"/>",
+        "viewBox": "0 0 20 1",
         "width": 20,
         "height": 1,
         "tags": [
           "separator",
-          "ascii",
-          "divider",
           "ascii"
         ]
       },
@@ -1740,15 +1244,12 @@
         "id": "separator/dotted",
         "name": "dotted",
         "category": "separator",
-        "lines": [
-          "- - - - - - - - - -"
-        ],
-        "width": 19,
+        "svg": "<circle cx=\"0.5\" cy=\"0.5\" r=\"0.08\" fill=\"black\"/><circle cx=\"2.5\" cy=\"0.5\" r=\"0.08\" fill=\"black\"/><circle cx=\"4.5\" cy=\"0.5\" r=\"0.08\" fill=\"black\"/><circle cx=\"6.5\" cy=\"0.5\" r=\"0.08\" fill=\"black\"/><circle cx=\"8.5\" cy=\"0.5\" r=\"0.08\" fill=\"black\"/><circle cx=\"10.5\" cy=\"0.5\" r=\"0.08\" fill=\"black\"/><circle cx=\"12.5\" cy=\"0.5\" r=\"0.08\" fill=\"black\"/><circle cx=\"14.5\" cy=\"0.5\" r=\"0.08\" fill=\"black\"/><circle cx=\"16.5\" cy=\"0.5\" r=\"0.08\" fill=\"black\"/><circle cx=\"18.5\" cy=\"0.5\" r=\"0.08\" fill=\"black\"/>",
+        "viewBox": "0 0 20 1",
+        "width": 20,
         "height": 1,
         "tags": [
           "separator",
-          "dotted",
-          "divider",
           "dotted"
         ]
       },
@@ -1756,15 +1257,12 @@
         "id": "separator/double",
         "name": "double",
         "category": "separator",
-        "lines": [
-          "════════════════════"
-        ],
+        "svg": "<line x1=\"0\" y1=\"0.3\" x2=\"20\" y2=\"0.3\" stroke=\"black\" stroke-width=\"0.15\"/><line x1=\"0\" y1=\"0.7\" x2=\"20\" y2=\"0.7\" stroke=\"black\" stroke-width=\"0.15\"/>",
+        "viewBox": "0 0 20 1",
         "width": 20,
         "height": 1,
         "tags": [
           "separator",
-          "double",
-          "divider",
           "double"
         ]
       },
@@ -1772,15 +1270,12 @@
         "id": "separator/line",
         "name": "line",
         "category": "separator",
-        "lines": [
-          "────────────────────"
-        ],
+        "svg": "<line x1=\"0\" y1=\"0.5\" x2=\"20\" y2=\"0.5\" stroke=\"black\" stroke-width=\"0.15\"/>",
+        "viewBox": "0 0 20 1",
         "width": 20,
         "height": 1,
         "tags": [
           "separator",
-          "line",
-          "divider",
           "line"
         ]
       },
@@ -1788,15 +1283,12 @@
         "id": "separator/star",
         "name": "star",
         "category": "separator",
-        "lines": [
-          "* * * * * * * * * *"
-        ],
+        "svg": "<text x=\"0\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">*</text><text x=\"2\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">*</text><text x=\"4\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">*</text><text x=\"6\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">*</text><text x=\"8\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">*</text><text x=\"10\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">*</text><text x=\"12\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">*</text><text x=\"14\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">*</text><text x=\"16\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">*</text><text x=\"18\" y=\"1\" font-family=\"monospace\" font-size=\"1\" fill=\"black\">*</text>",
+        "viewBox": "0 0 19 1",
         "width": 19,
         "height": 1,
         "tags": [
           "separator",
-          "star",
-          "divider",
           "star"
         ]
       },
@@ -1804,15 +1296,12 @@
         "id": "separator/wavy",
         "name": "wavy",
         "category": "separator",
-        "lines": [
-          "~^~^~^~^~^~^~^~^~^~^~^~^~"
-        ],
-        "width": 25,
+        "svg": "<path d=\"M 0 0.5 Q 0.5 0 1 0.5 T 2 0.5 T 3 0.5 T 4 0.5 T 5 0.5 T 6 0.5 T 7 0.5 T 8 0.5 T 9 0.5 T 10 0.5 T 11 0.5 T 12 0.5 T 13 0.5 T 14 0.5 T 15 0.5 T 16 0.5 T 17 0.5 T 18 0.5 T 19 0.5 T 20 0.5\" fill=\"none\" stroke=\"black\" stroke-width=\"0.1\"/>",
+        "viewBox": "0 0 20 1",
+        "width": 20,
         "height": 1,
         "tags": [
           "separator",
-          "wavy",
-          "divider",
           "wavy"
         ]
       }

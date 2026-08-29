@@ -1,4 +1,0 @@
-@tags: gear, settings, cogs
-  _
-/ \
-\_/

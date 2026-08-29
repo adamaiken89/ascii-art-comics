@@ -15,6 +15,8 @@
     "render:fixtures:comic": "python3 scripts/render-comic-svg.py assets/examples/fixtures/monday-morning-comic.json",
     "render:bubbles:fixtures": "python3 scripts/render-bubbles-svg.py",
     "build:library": "node scripts/build-library.mjs",
+    "generate:component-svgs": "node scripts/generate-component-svgs.mjs",
+    "render:components:svg": "node scripts/render-components-svg.mjs",
     "test": "bash scripts/test.sh"
   },
   "dependencies": {

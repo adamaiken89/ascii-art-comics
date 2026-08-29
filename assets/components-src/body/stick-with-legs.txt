@@ -1,5 +1,0 @@
-@tags: stick, with body
- o
-/|\
-
-/ \

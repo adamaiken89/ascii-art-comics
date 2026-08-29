@@ -2,95 +2,75 @@
 /**
  * components/build-library.mjs
  *
- * Builds assets/components.json from a directory of source files.
- * Source files: assets/components-src/<category>/<name>.txt
- * Each source file contains a component, lines separated by \n.
+ * Builds assets/components.json from a directory of SVG source files.
+ * Source files: assets/components-svg/<category>/<name>.svg
+ * Each source file contains a self-contained <svg> with viewBox.
  *
  * Output: assets/components.json
  *   {
- *     "version": 1,
+ *     "version": 2,
  *     "categories": {
  *       "face":     [...],
  *       "body":     [...],
- *       "gesture":  [...],
- *       "prop":     [...],
- *       "scene":    [...],
- *       "frame":    [...],
- *       "separator": [...],
- *       "bubble":   [...]
+ *       ...
  *     }
  *   }
  *
  * Each component:
  *   {
- *     "id":     "face/happy-kaomoji",
- *     "name":   "happy-kaomoji",
- *     "category": "face",
- *     "lines":  ["...", "..."],
- *     "width":  number,           // max(vw) across lines
- *     "height": number,           // lines.length
- *     "tags":   ["happy", "kaomoji", "positive"]
+ *     "id":      "face/chibi-happy-center",
+ *     "name":    "chibi-happy-center",
+ *     "category":"face",
+ *     "svg":     "<g>...</g>",           // inner content of <svg>
+ *     "viewBox": "0 0 7 3",
+ *     "width":   7,                       // from viewBox
+ *     "height":  3,                       // from viewBox
+ *     "tags":    ["face", "chibi", ...]
  *   }
  *
- * Width measured via string-width + grapheme-splitter (persona rule 4).
+ * No more string-width math. The SVG itself defines the geometry.
  */
 
 import { readdirSync, readFileSync, writeFileSync, mkdirSync, statSync } from 'node:fs';
-import { join, basename, relative } from 'node:path';
-import GraphemeSplitter from 'grapheme-splitter';
-import stringWidth from 'string-width';
+import { join, basename } from 'node:path';
 
 const ROOT = new URL('..', import.meta.url).pathname;
-const SRC = join(ROOT, 'assets', 'components-src');
+const SRC = join(ROOT, 'assets', 'components-svg');
 const OUT = join(ROOT, 'assets', 'components.json');
 
-const splitter = new GraphemeSplitter();
-
-function vw(s) {
-  return stringWidth(s);
-}
-
 function tagFromFilename(name) {
-  // strip extension, kebab-case
   return name.replace(/\.[^.]+$/, '').toLowerCase();
 }
 
-function parseMetaFile(content) {
-  // Optional first-line metadata: "@tags: tag1, tag2"
-  let lines = content.split('\n');
-  const tags = [];
-  if (lines[0]?.startsWith('@tags:')) {
-    tags.push(...lines[0].slice(6).split(',').map((s) => s.trim()).filter(Boolean));
-    lines = lines.slice(1);
-  }
-  if (lines[0]?.startsWith('@width:')) {
-    return { tags, lines, _explicitWidth: parseInt(lines[0].slice(7).trim(), 10) };
-  }
-  // Strip trailing empty lines (file-ending newlines).
-  while (lines.length > 0 && lines[lines.length - 1] === '') {
-    lines.pop();
-  }
-  return { tags, lines };
+function parseSvg(content) {
+  // Extract viewBox + inner content
+  const vbMatch = content.match(/viewBox="([^"]+)"/);
+  if (!vbMatch) return null;
+  const [, , w, h] = vbMatch[1].split(/\s+/).map(Number);
+
+  // Strip outer <svg> tags, keep inner
+  const inner = content
+    .replace(/<svg[^>]*>/, '')
+    .replace(/<\/svg>\s*$/, '')
+    .trim();
+
+  return { svg: inner, viewBox: vbMatch[1], width: w, height: h };
 }
 
 function buildComponent(category, filePath) {
   const raw = readFileSync(filePath, 'utf8');
-  const { tags: extraTags, lines: rawLines, _explicitWidth } = parseMetaFile(raw);
-  // Normalize: right-pad shorter lines with ASCII space to match the widest.
-  // This prevents visual skew when components have variable-width lines.
-  const measured = rawLines.map((l) => vw(l));
-  const maxW = measured.reduce((m, w) => Math.max(m, w), 0);
-  const lines = rawLines.map((l) => l + ' '.repeat(maxW - vw(l)));
-  const width = maxW;
+  const parsed = parseSvg(raw);
+  if (!parsed) return null;
   const name = tagFromFilename(basename(filePath));
   return {
     id: `${category}/${name}`,
     name,
     category,
-    lines,
-    width,
-    height: lines.length,
-    tags: [category, name.replace(/-/g, ' '), ...extraTags],
+    svg: parsed.svg,
+    viewBox: parsed.viewBox,
+    width: parsed.width,
+    height: parsed.height,
+    tags: [category, name.replace(/-/g, ' ')],
   };
 }
 
@@ -106,15 +86,17 @@ function main() {
 
   for (const cat of cats) {
     const catDir = join(SRC, cat);
-    const files = readdirSync(catDir).filter((f) => f.endsWith('.txt'));
-    const comps = files.map((f) => buildComponent(cat, join(catDir, f)));
+    const files = readdirSync(catDir).filter((f) => f.endsWith('.svg'));
+    const comps = files
+      .map((f) => buildComponent(cat, join(catDir, f)))
+      .filter(Boolean);
     categories[cat] = comps;
     totalCount += comps.length;
     console.log(`  ${cat}: ${comps.length} components`);
   }
 
   const out = {
-    version: 1,
+    version: 2,
     generated: new Date().toISOString(),
     count: totalCount,
     categories,

@@ -3,11 +3,10 @@
  * render-components-svg.mjs
  *
  * Renders a curated showcase of components from assets/components.json as a
- * single SVG. Each component becomes a labeled card with its source drawn
- * in monospace and a caption below.
+ * single SVG. Each component becomes a labeled card with the component's
+ * own SVG content drawn at a scaled size.
  *
- * No panel borders — just a grid of <text> elements with explicit coordinates.
- * SVG handles all width math, including CJK + emoji.
+ * No text rendering, no width math. The component SVG IS the visual.
  *
  * Output: assets/components-renders/components-svg.svg
  */
@@ -28,15 +27,6 @@ for (const arr of Object.values(comps.categories)) {
   for (const c of arr) lookup[c.name] = c;
 }
 
-function escapeXml(s) {
-  return s
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&apos;');
-}
-
 // Curated subset per category
 const SHOWCASE = {
   face: [
@@ -52,89 +42,78 @@ const SHOWCASE = {
   frame: ['heavy-top', 'light-top', 'ascii-top'],
 };
 
-const cellW = 8;   // px per monospace cell
-const cellH = 14;  // px per line (smaller for more density)
-const cellPadX = 16;
+const SCALE = 16;            // px per SVG unit
 const colW = 260;
 const colGap = 20;
-const cardPadX = 10;
-const cardPadY = 8;
-const cardGap = 10;
-const titleH = cellH + 4;
+const cardPadX = 14;
+const cardPadY = 12;
+const cardGap = 12;
+const titleH = 22;
 
 const PAGE_W = 1200;
-const PAGE_H = 1800;
+const PAGE_H = 2200;
 const COLS_PER_ROW = 4;
-const MAX_Y = PAGE_H - 40;
 
 const parts = [];
 parts.push(
   `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${PAGE_W} ${PAGE_H}" width="${PAGE_W}" height="${PAGE_H}">`
 );
 parts.push(`<rect x="0" y="0" width="${PAGE_W}" height="${PAGE_H}" fill="#fafafa"/>`);
-// Page title
 parts.push(
-  `<text x="${cellPadX}" y="${cellH + 8}" font-family="monospace" font-size="20" font-weight="bold" fill="#222">ascii-art-comics — SVG component showcase</text>`
+  `<text x="20" y="28" font-family="sans-serif" font-size="20" font-weight="bold" fill="#222">ascii-art-comics — SVG component showcase</text>`
 );
 parts.push(
-  `<text x="${cellPadX}" y="${cellH + 28}" font-family="monospace" font-size="12" fill="#888">${comps.count} components · all rendered via &lt;text&gt; with monospace font, no width math</text>`
+  `<text x="20" y="50" font-family="sans-serif" font-size="12" fill="#888">${comps.count} components · pure SVG primitives, no font rendering</text>`
 );
 
-let x = cellPadX;
-let y = cellH + 50;
+let x = 20;
+let y = 70;
 let colIdx = 0;
 
 for (const [category, names] of Object.entries(SHOWCASE)) {
-  // Category header
   parts.push(
-    `<text x="${x}" y="${y + cellH}" font-family="monospace" font-size="14" font-weight="bold" fill="#444">${escapeXml(category)}</text>`
+    `<text x="${x}" y="${y + 14}" font-family="sans-serif" font-size="13" font-weight="bold" fill="#444">${category}</text>`
   );
   parts.push(
-    `<line x1="${x}" y1="${y + cellH + 4}" x2="${x + colW - 20}" y2="${y + cellH + 4}" stroke="#bbb" stroke-width="1"/>`
+    `<line x1="${x}" y1="${y + 18}" x2="${x + colW - 20}" y2="${y + 18}" stroke="#bbb" stroke-width="1"/>`
   );
-  y += titleH + 6;
+  y += titleH + 4;
 
   for (const name of names) {
     const c = lookup[name];
     if (!c) continue;
-    const w = c.width;
-    const h = c.height;
-    const drawW = w * cellW;
-    const drawH = h * cellH;
-    const cardW = Math.min(Math.max(drawW + cardPadX * 2 + 8, 140), colW - 20);
-    const cardH = drawH + cardPadY * 2 + 14;
+    const drawW = c.width * SCALE;
+    const drawH = c.height * SCALE;
+    const cardW = Math.max(140, Math.min(drawW + cardPadX * 2 + 16, colW - 20));
+    const cardH = drawH + cardPadY * 2 + 18;
 
-    if (y + cardH > MAX_Y) {
+    if (y + cardH > PAGE_H - 30) {
       colIdx++;
-      if (colIdx >= COLS_PER_ROW) break; // overflow safety
-      x = cellPadX + colIdx * (colW + colGap);
-      y = cellH + 50;
+      if (colIdx >= COLS_PER_ROW) break;
+      x = 20 + colIdx * (colW + colGap);
+      y = 70;
     }
 
     parts.push(
       `<g transform="translate(${x},${y})">` +
       `<rect x="0" y="0" width="${cardW}" height="${cardH}" fill="white" stroke="#ddd" stroke-width="1" rx="4"/>`
     );
-    // Component text lines
-    for (let i = 0; i < c.lines.length; i++) {
-      parts.push(
-        `<text x="${cardPadX}" y="${cardPadY + (i + 1) * cellH}" font-family="monospace" font-size="${cellH}" fill="#000">${escapeXml(c.lines[i])}</text>`
-      );
-    }
-    // Caption
+    // Embed component SVG at its natural size, scaled
     parts.push(
-      `<text x="${cardPadX}" y="${cardH - 6}" font-family="monospace" font-size="10" fill="#888">${escapeXml(name)} · ${w}×${h}</text>`
+      `<g transform="translate(${cardPadX},${cardPadY}) scale(${SCALE})">${c.svg}</g>`
+    );
+    parts.push(
+      `<text x="${cardPadX}" y="${cardH - 6}" font-family="sans-serif" font-size="10" fill="#888">${name} · ${c.width}×${c.height}</text>`
     );
     parts.push(`</g>`);
 
     y += cardH + cardGap;
   }
 
-  // Move to next column
   colIdx++;
   if (colIdx >= COLS_PER_ROW) break;
-  x = cellPadX + colIdx * (colW + colGap);
-  y = cellH + 50;
+  x = 20 + colIdx * (colW + colGap);
+  y = 70;
 }
 
 parts.push(`</svg>`);
