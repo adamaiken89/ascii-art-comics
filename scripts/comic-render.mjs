@@ -71,23 +71,50 @@ function escapeXml(s) {
     .replace(/'/g, '&apos;');
 }
 
-/** Wrap text to fit maxCells, returning array of lines. */
+/** Wrap text to fit maxCells, returning array of lines.
+ *  Breaks on word boundaries; only falls back to grapheme splitting if a
+ *  single grapheme cluster exceeds maxCells.
+ */
 function wrapText(text, maxCells) {
   if (vw(text) <= maxCells) return [text];
   const lines = [];
-  const g = splitter.splitGraphemes(text);
+  const words = text.split(/(\s+)/); // keep separators
   let cur = '';
   let curW = 0;
-  for (const ch of g) {
-    const w = vw(ch);
-    if (curW + w > maxCells && cur) {
-      lines.push(cur);
-      cur = ch;
-      curW = w;
-    } else {
-      cur += ch;
-      curW += w;
+  const pushCur = () => {
+    if (cur) lines.push(cur);
+    cur = '';
+    curW = 0;
+  };
+  for (const word of words) {
+    const wW = vw(word);
+    if (wW > maxCells) {
+      // Word itself too long: push current, then grapheme-split this word
+      pushCur();
+      let gline = '';
+      let gW = 0;
+      for (const g of splitter.splitGraphemes(word)) {
+        const gwc = vw(g);
+        if (gW + gwc > maxCells && gline) {
+          lines.push(gline);
+          gline = g;
+          gW = gwc;
+        } else {
+          gline += g;
+          gW += gwc;
+        }
+      }
+      cur = gline;
+      curW = gW;
+      continue;
     }
+    if (curW + wW > maxCells && cur.trim()) {
+      pushCur();
+      // Don't start a new line with whitespace
+      if (/^\s+$/.test(word)) continue;
+    }
+    cur += word;
+    curW += wW;
   }
   if (cur) lines.push(cur);
   return lines;
@@ -157,13 +184,20 @@ function renderBubble(bubble, tailAnchor) {
     }
   }
 
-  // Center text
+  // Center text (multi-line via <tspan>)
   const cx = bubble.x + bubble.w / 2;
-  const cy = bubble.y + bubble.h / 2 + fs / 3;
+  const lineH = fs;
+  const lines = bubble.text.split('\n');
+  const totalTextH = lines.length * lineH;
+  const startY = bubble.y + (bubble.h - totalTextH) / 2 + lineH - 2;
+  const tspans = lines.map((ln, i) => {
+    const dy = i === 0 ? 0 : lineH;
+    return `<tspan x="${cx}" dy="${dy}">${escapeXml(ln)}</tspan>`;
+  }).join('');
   parts.push(
-    `<text x="${cx}" y="${cy}" font-family="${MONO_STACK}" ` +
+    `<text x="${cx}" y="${startY}" font-family="${MONO_STACK}" ` +
     `font-size="${fs}" font-variant-numeric="tabular-nums" ` +
-    `text-anchor="middle" fill="#222">${escapeXml(bubble.text)}</text>`
+    `text-anchor="middle" fill="#222">${tspans}</text>`
   );
 
   return parts.join('\n');
@@ -179,7 +213,12 @@ function loadLibrary() {
     const data = JSON.parse(readFileSync(path, 'utf8'));
     const map = new Map();
     for (const arr of Object.values(data.categories)) {
-      for (const c of arr) map.set(c.id, c);
+      for (const c of arr) {
+        // Index by full id, category/name, and bare name — fixture refs may use any
+        map.set(c.id, c);
+        map.set(`${c.category}/${c.name}`, c);
+        map.set(c.name, c);
+      }
     }
     return map;
   } catch (e) {

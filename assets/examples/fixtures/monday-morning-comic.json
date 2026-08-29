@@ -4,42 +4,38 @@
   "panels": [
     {
       "panelId": 0,
-      "width": 24,
-      "speaker": { "x": 4, "y": 3 },
+      "width": 22,
+      "speaker": { "x": 4, "y": 1 },
       "bubbleHeight": 70,
       "content": [
-        { "type": "text", "text": "  Alice" },
         { "type": "component", "id": "chibi-happy-center", "x": 2, "y": 1, "scale": 18 }
       ]
     },
     {
       "panelId": 1,
-      "width": 24,
-      "speaker": { "x": 18, "y": 3 },
+      "width": 22,
+      "speaker": { "x": 16, "y": 1 },
       "bubbleHeight": 70,
       "content": [
-        { "type": "text", "text": "                Bob" },
-        { "type": "component", "id": "chibi-thinking-right", "x": 16, "y": 1, "scale": 18 }
+        { "type": "component", "id": "chibi-thinking-right", "x": 14, "y": 1, "scale": 18 }
       ]
     },
     {
       "panelId": 2,
-      "width": 24,
-      "speaker": { "x": 4, "y": 3 },
+      "width": 22,
+      "speaker": { "x": 4, "y": 1 },
       "bubbleHeight": 70,
       "content": [
-        { "type": "text", "text": "  Alice" },
         { "type": "component", "id": "chibi-sad-center", "x": 2, "y": 1, "scale": 18 }
       ]
     },
     {
       "panelId": 3,
-      "width": 24,
-      "speaker": { "x": 18, "y": 3 },
+      "width": 22,
+      "speaker": { "x": 16, "y": 1 },
       "bubbleHeight": 70,
       "content": [
-        { "type": "text", "text": "                Bob" },
-        { "type": "component", "id": "chibi-happy-right", "x": 16, "y": 1, "scale": 18 }
+        { "type": "component", "id": "chibi-happy-right", "x": 14, "y": 1, "scale": 18 }
       ]
     }
   ],
