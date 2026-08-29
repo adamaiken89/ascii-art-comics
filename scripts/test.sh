@@ -229,6 +229,59 @@ else
   FAIL=1
 fi
 
+# --- Template system ---
+echo ""
+echo "--- template system ---"
+COMIC_OUT=assets/examples/comics
+mkdir -p "$COMIC_OUT"
+FAIL_TPL=0
+for content in assets/examples/content/*.json; do
+  name=$(basename "$content" .json)
+  python3 scripts/render-template.py "$content" > /dev/null 2>&1
+  if [ -s "$COMIC_OUT/${name}.svg" ]; then
+    bytes=$(wc -c < "$COMIC_OUT/${name}.svg")
+    echo "  PASS  template: $name ($bytes bytes)"
+  else
+    echo "  FAIL  template: $name"
+    FAIL_TPL=1
+  fi
+done
+
+# Template structural assertions on monday-morning
+SVG="$COMIC_OUT/monday-morning.svg"
+if [ -s "$SVG" ]; then
+  rects=$(python3 -c "
+import xml.etree.ElementTree as ET
+t = ET.parse('$SVG')
+ns = {'s':'http://www.w3.org/2000/svg'}
+print(len(t.findall('.//s:rect', ns)))
+")
+  polygons=$(python3 -c "
+import xml.etree.ElementTree as ET
+t = ET.parse('$SVG')
+ns = {'s':'http://www.w3.org/2000/svg'}
+print(len(t.findall('.//s:polygon', ns)))
+")
+  tspans=$(python3 -c "
+import xml.etree.ElementTree as ET
+t = ET.parse('$SVG')
+ns = {'s':'http://www.w3.org/2000/svg'}
+print(len(t.findall('.//s:tspan', ns)))
+")
+  if [ "$rects" -ge 5 ] && [ "$polygons" -ge 4 ] && [ "$tspans" -ge 4 ]; then
+    echo "  PASS  template structure: $rects rects, $polygons polygons, $tspans tspans"
+  else
+    echo "  FAIL  template structure: $rects rects, $polygons polygons, $tspans tspans (expected >=5/4/4)"
+    FAIL_TPL=1
+  fi
+fi
+
+if [ $FAIL_TPL -eq 0 ]; then
+  echo "  TEMPLATES PASS"
+else
+  FAIL=1
+fi
+
 echo ""
 if [ $FAIL -eq 0 ]; then
   echo "  ALL PASS"

@@ -1,0 +1,34 @@
+{
+  "name": "vertical-scroll",
+  "version": 1,
+  "description": "3 panels stacked vertically, narrative progression.",
+  "panelW": 320,
+  "panelH": 200,
+  "border": "A",
+  "gutter": 16,
+  "padding": 16,
+  "layout": "grid-3x1",
+  "panels": [
+    {
+      "id": "T1",
+      "col": 0,
+      "row": 0,
+      "bubble": { "x": 16, "y": 12, "w": 288, "h": 52, "tail": { "side": "bottom-left", "size": 12 } },
+      "character": { "x": 110, "y": 110, "face": "neutral", "pose": "center", "scale": 16 }
+    },
+    {
+      "id": "T2",
+      "col": 0,
+      "row": 1,
+      "bubble": { "x": 16, "y": 12, "w": 288, "h": 52, "tail": { "side": "bottom-left", "size": 12 } },
+      "character": { "x": 110, "y": 110, "face": "thinking", "pose": "center", "scale": 16 }
+    },
+    {
+      "id": "T3",
+      "col": 0,
+      "row": 2,
+      "bubble": { "x": 16, "y": 12, "w": 288, "h": 52, "tail": { "side": "bottom-left", "size": 12 } },
+      "character": { "x": 110, "y": 110, "face": "happy", "pose": "center", "scale": 16 }
+    }
+  ]
+}

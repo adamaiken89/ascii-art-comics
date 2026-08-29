@@ -6,9 +6,11 @@
   "description": "SVG comic generator — 96 component primitives, 2-speaker dialogue, pixel-accurate bubbles. ASCII output kept as legacy option.",
   "scripts": {
     "render:comic": "node scripts/comic-render.mjs",
+    "render:template": "node scripts/template-render.mjs",
     "render:components:svg": "node scripts/render-components-svg.mjs",
     "render:fixtures": "python3 scripts/render-fixtures.py",
     "render:fixtures:comic": "python3 scripts/render-comic-svg.py assets/examples/fixtures/monday-morning-comic.json",
+    "render:fixtures:template": "for f in assets/examples/content/*.json; do python3 scripts/render-template.py \"$f\"; done",
     "build:library": "node scripts/build-library.mjs",
     "generate:component-svgs": "node scripts/generate-component-svgs.mjs",
     "test": "bash scripts/test.sh"

@@ -1,0 +1,16 @@
+{
+  "template": "splash",
+  "title": "Launch Day",
+  "panels": {
+    "main": {
+      "text": "We did it. Ship it.",
+      "face": "happy",
+      "dir": "center"
+    }
+  },
+  "extras": {
+    "caption-top": {
+      "text": "Friday, 5:47 PM"
+    }
+  }
+}

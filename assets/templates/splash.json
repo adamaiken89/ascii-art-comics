@@ -1,0 +1,23 @@
+{
+  "name": "splash",
+  "version": 1,
+  "description": "Single large panel, multiple bubbles, single character.",
+  "panelW": 500,
+  "panelH": 360,
+  "border": "A",
+  "gutter": 0,
+  "padding": 24,
+  "layout": "single",
+  "panels": [
+    {
+      "id": "main",
+      "col": 0,
+      "row": 0,
+      "bubble": { "x": 16, "y": 12, "w": 240, "h": 60, "tail": { "side": "bottom-right", "size": 14 } },
+      "character": { "x": 290, "y": 200, "face": "happy", "pose": "center", "scale": 22 },
+      "extras": [
+        { "id": "extra-bubble", "bubble": { "x": 250, "y": 12, "w": 234, "h": 60, "tail": { "side": "bottom-left", "size": 14 } } }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "template": "4-koma-dialogue",
+  "title": "Monday Morning",
+  "panels": {
+    "TL": { "text": "Monday again?", "face": "happy", "dir": "left" },
+    "TR": { "text": "死線 = today, ready?", "face": "thinking", "dir": "right" },
+    "BL": { "text": "no, send help", "face": "sad", "dir": "left" },
+    "BR": { "text": "coffee first, panic later", "face": "happy", "dir": "right" }
+  }
+}

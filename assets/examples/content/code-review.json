@@ -1,0 +1,16 @@
+{
+  "template": "2-panel-strip",
+  "title": "Code Review",
+  "panels": {
+    "L": {
+      "text": "LGTM",
+      "face": "happy",
+      "dir": "right"
+    },
+    "R": {
+      "text": "wait, what does this do?",
+      "face": "thinking",
+      "dir": "left"
+    }
+  }
+}

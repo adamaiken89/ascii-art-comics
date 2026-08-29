@@ -1,0 +1,41 @@
+{
+  "name": "4-koma-dialogue",
+  "version": 1,
+  "description": "2x2 grid, 1 chibi per panel, 1 bubble per panel. Alternating speakers left/right.",
+  "panelW": 220,
+  "panelH": 180,
+  "border": "A",
+  "gutter": 16,
+  "padding": 16,
+  "layout": "grid-2x2",
+  "panels": [
+    {
+      "id": "TL",
+      "col": 0,
+      "row": 0,
+      "bubble": { "x": 16, "y": 12, "w": 188, "h": 52, "tail": { "side": "bottom-left", "size": 12 } },
+      "character": { "x": 60, "y": 100, "face": "happy", "pose": "center", "scale": 16 }
+    },
+    {
+      "id": "TR",
+      "col": 1,
+      "row": 0,
+      "bubble": { "x": 16, "y": 12, "w": 188, "h": 52, "tail": { "side": "bottom-right", "size": 12 } },
+      "character": { "x": 60, "y": 100, "face": "thinking", "pose": "center", "scale": 16 }
+    },
+    {
+      "id": "BL",
+      "col": 0,
+      "row": 1,
+      "bubble": { "x": 16, "y": 12, "w": 188, "h": 52, "tail": { "side": "bottom-left", "size": 12 } },
+      "character": { "x": 60, "y": 100, "face": "sad", "pose": "center", "scale": 16 }
+    },
+    {
+      "id": "BR",
+      "col": 1,
+      "row": 1,
+      "bubble": { "x": 16, "y": 12, "w": 188, "h": 52, "tail": { "side": "bottom-right", "size": 12 } },
+      "character": { "x": 60, "y": 100, "face": "happy", "pose": "center", "scale": 16 }
+    }
+  ]
+}

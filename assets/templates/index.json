@@ -1,0 +1,12 @@
+{
+  "name": "templates",
+  "version": 1,
+  "description": "Index of available templates",
+  "templates": [
+    { "name": "4-koma-dialogue", "file": "4-koma-dialogue.json", "panels": 4, "layout": "grid-2x2" },
+    { "name": "2-panel-strip",   "file": "2-panel-strip.json",   "panels": 2, "layout": "grid-1x2" },
+    { "name": "splash",          "file": "splash.json",          "panels": 1, "layout": "single" },
+    { "name": "vertical-scroll", "file": "vertical-scroll.json", "panels": 3, "layout": "grid-3x1" },
+    { "name": "manga-rtl",       "file": "manga-rtl.json",       "panels": 4, "layout": "grid-2x2-rtl" }
+  ]
+}

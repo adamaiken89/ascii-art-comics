@@ -1,0 +1,27 @@
+{
+  "name": "2-panel-strip",
+  "version": 1,
+  "description": "Two horizontal panels, alternating speakers (left then right).",
+  "panelW": 320,
+  "panelH": 180,
+  "border": "A",
+  "gutter": 16,
+  "padding": 16,
+  "layout": "grid-1x2",
+  "panels": [
+    {
+      "id": "L",
+      "col": 0,
+      "row": 0,
+      "bubble": { "x": 16, "y": 12, "w": 288, "h": 52, "tail": { "side": "bottom-left", "size": 12 } },
+      "character": { "x": 110, "y": 100, "face": "neutral", "pose": "center", "scale": 16 }
+    },
+    {
+      "id": "R",
+      "col": 1,
+      "row": 0,
+      "bubble": { "x": 16, "y": 12, "w": 288, "h": 52, "tail": { "side": "bottom-right", "size": 12 } },
+      "character": { "x": 110, "y": 100, "face": "happy", "pose": "center", "scale": 16 }
+    }
+  ]
+}
