@@ -4,11 +4,11 @@ Generate comics as **SVG** (default) or **ASCII** (legacy). CJK + English safe, 
 
 ## Sample comic
 
-Rendered from `assets/examples/fixtures/monday-morning-comic.json` (4 panels, chibi directional variants, mixed CJK+EN dialogue bubbles).
+Rendered from `assets/examples/fixtures/monday-morning-comic.json` (4 panels, 2 chibi speakers alternating left/right, mixed CJK+EN dialogue bubbles, pure SVG primitives — no box-drawing chars).
 
 ![Monday Morning comic](assets/examples/comics/monday-morning-comic.svg)
 
-Two chibis. Monday. A deadline. Coffee. The full pipeline — content → render — produces this in one pass, no LLM in the output path.
+Two chibis. Monday. A deadline. Coffee. The full pipeline — content → render — produces this in one pass, no LLM in the output path, no `║` borders, no monospace text alignment guesswork.
 
 ## Why SVG, not ASCII
 
