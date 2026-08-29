@@ -1,25 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 518 312" width="518" height="312">
-<rect x="0" y="0" width="518" height="312" fill="white"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 504 484" width="504" height="484">
+<rect x="0" y="0" width="504" height="484" fill="white"/>
 <style>text { font-family: 'Courier New', Consolas, monospace; font-variant-numeric: tabular-nums; }</style>
-<text x="259" y="20" font-family="sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#222">Monday Morning</text>
-<rect x="24" y="132" width="220" height="23" fill="#fafafa" stroke="#333" stroke-width="1.5"/>
-<g transform="translate(44,152)"><rect x="0" y="0" width="7" height="3" fill="none" stroke="#333" stroke-width="0.1"/><text x="2" y="1.4" font-family="'Courier New', Consolas, monospace" font-size="1.2" text-anchor="middle" fill="#222">◕</text><text x="5" y="1.4" font-family="'Courier New', Consolas, monospace" font-size="1.2" text-anchor="middle" fill="#222">◕</text><text x="3.5" y="2.5" font-family="'Courier New', Consolas, monospace" font-size="1" text-anchor="middle" fill="#222">‿</text></g>
-<rect x="274" y="132" width="220" height="23" fill="#fafafa" stroke="#333" stroke-width="1.5"/>
-<g transform="translate(294,152)"><rect x="0" y="0" width="7" height="3" fill="none" stroke="#333" stroke-width="0.1"/><text x="2" y="1.4" font-family="'Courier New', Consolas, monospace" font-size="1.2" text-anchor="middle" fill="#222">─</text><text x="5" y="1.4" font-family="'Courier New', Consolas, monospace" font-size="1.2" text-anchor="middle" fill="#222">◐</text><text x="3.5" y="2.5" font-family="'Courier New', Consolas, monospace" font-size="1" text-anchor="middle" fill="#222">~</text></g>
-<rect x="24" y="265" width="220" height="23" fill="#fafafa" stroke="#333" stroke-width="1.5"/>
-<g transform="translate(44,285)"><rect x="0" y="0" width="7" height="3" fill="none" stroke="#333" stroke-width="0.1"/><text x="2" y="1.4" font-family="'Courier New', Consolas, monospace" font-size="1.2" text-anchor="middle" fill="#222">╥</text><text x="5" y="1.4" font-family="'Courier New', Consolas, monospace" font-size="1.2" text-anchor="middle" fill="#222">╥</text><text x="3.5" y="2.5" font-family="'Courier New', Consolas, monospace" font-size="1" text-anchor="middle" fill="#222">﹏</text></g>
-<rect x="274" y="265" width="220" height="23" fill="#fafafa" stroke="#333" stroke-width="1.5"/>
-<g transform="translate(294,285)"><rect x="0" y="0" width="7" height="3" fill="none" stroke="#333" stroke-width="0.1"/><text x="2" y="1.4" font-family="'Courier New', Consolas, monospace" font-size="1.2" text-anchor="middle" fill="#222">◡</text><text x="5" y="1.4" font-family="'Courier New', Consolas, monospace" font-size="1.2" text-anchor="middle" fill="#222">◕</text><text x="3.5" y="2.5" font-family="'Courier New', Consolas, monospace" font-size="1" text-anchor="middle" fill="#222">‿</text></g>
-<rect x="30" y="58" width="133.2" height="34" rx="8" ry="8" fill="#fffbe6" stroke="#333" stroke-width="1.5"/>
-<polygon points="40.5,92 54.5,92 47.5,106" fill="#fffbe6" stroke="#333" stroke-width="1.5" stroke-linejoin="round"/>
-<text x="96.6" y="81" font-family="'Courier New', Consolas, monospace" font-size="14" font-variant-numeric="tabular-nums" text-anchor="middle" fill="#222"><tspan x="96.6" dy="0">Monday again?</tspan></text>
-<rect x="296" y="58" width="192" height="34" rx="8" ry="8" fill="#fffbe6" stroke="#333" stroke-width="1.5"/>
-<polygon points="296,92 310,92 303,106" fill="#fffbe6" stroke="#333" stroke-width="1.5" stroke-linejoin="round"/>
-<text x="392" y="81" font-family="'Courier New', Consolas, monospace" font-size="14" font-variant-numeric="tabular-nums" text-anchor="middle" fill="#222"><tspan x="392" dy="0">死線 = today, ready?</tspan></text>
-<rect x="30" y="191" width="133.2" height="34" rx="8" ry="8" fill="#fffbe6" stroke="#333" stroke-width="1.5"/>
-<polygon points="40.5,225 54.5,225 47.5,239" fill="#fffbe6" stroke="#333" stroke-width="1.5" stroke-linejoin="round"/>
-<text x="96.6" y="214" font-family="'Courier New', Consolas, monospace" font-size="14" font-variant-numeric="tabular-nums" text-anchor="middle" fill="#222"><tspan x="96.6" dy="0">no, send help</tspan></text>
-<rect x="296" y="191" width="192" height="52" rx="8" ry="8" fill="#fffbe6" stroke="#333" stroke-width="1.5"/>
-<polygon points="296,243 310,243 303,257" fill="#fffbe6" stroke="#333" stroke-width="1.5" stroke-linejoin="round"/>
-<text x="392" y="214" font-family="'Courier New', Consolas, monospace" font-size="14" font-variant-numeric="tabular-nums" text-anchor="middle" fill="#222"><tspan x="392" dy="0">coffee first, panic </tspan><tspan x="392" dy="18">later</tspan></text>
+<text x="252" y="20" font-family="sans-serif" font-size="20" font-weight="bold" text-anchor="middle" fill="#222">Monday Morning</text>
+<rect x="20" y="108" width="220" height="136" fill="#fafafa" stroke="#333" stroke-width="1.5"/>
+<text font-family="'Courier New', Consolas, monospace" font-size="18" fill="#222"><tspan x="100" dy="0">╭─────╮</tspan><tspan x="100" dy="22">│◕‿◕ │</tspan><tspan x="100" dy="22">╰─────╯</tspan></text>
+<rect x="264" y="108" width="220" height="136" fill="#fafafa" stroke="#333" stroke-width="1.5"/>
+<text font-family="'Courier New', Consolas, monospace" font-size="18" fill="#222"><tspan x="344" dy="0">╭─────╮</tspan><tspan x="344" dy="22">│ ◑‿◑│</tspan><tspan x="344" dy="22">╰─────╯</tspan></text>
+<rect x="20" y="328" width="220" height="136" fill="#fafafa" stroke="#333" stroke-width="1.5"/>
+<text font-family="'Courier New', Consolas, monospace" font-size="18" fill="#222"><tspan x="100" dy="0">╭─────╮</tspan><tspan x="100" dy="22">│╥﹏╥ │</tspan><tspan x="100" dy="22">╰─────╯</tspan></text>
+<rect x="264" y="328" width="220" height="136" fill="#fafafa" stroke="#333" stroke-width="1.5"/>
+<text font-family="'Courier New', Consolas, monospace" font-size="18" fill="#222"><tspan x="344" dy="0">╭─────╮</tspan><tspan x="344" dy="22">│ ◑‿◑│</tspan><tspan x="344" dy="22">╰─────╯</tspan></text>
+<rect x="26" y="54" width="133.2" height="34" rx="8" ry="8" fill="#fffbe6" stroke="#333" stroke-width="1.5"/>
+<polygon points="85.6,88 99.6,88 92.6,102" fill="#fffbe6" stroke="#333" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="92.6" y="77" font-family="'Courier New', Consolas, monospace" font-size="14" font-variant-numeric="tabular-nums" text-anchor="middle" fill="#222"><tspan x="92.6" dy="0">Monday again?</tspan></text>
+<rect x="286" y="54" width="192" height="34" rx="8" ry="8" fill="#fffbe6" stroke="#333" stroke-width="1.5"/>
+<polygon points="375,88 389,88 382,102" fill="#fffbe6" stroke="#333" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="382" y="77" font-family="'Courier New', Consolas, monospace" font-size="14" font-variant-numeric="tabular-nums" text-anchor="middle" fill="#222"><tspan x="382" dy="0">死線 = today, ready?</tspan></text>
+<rect x="26" y="274" width="133.2" height="34" rx="8" ry="8" fill="#fffbe6" stroke="#333" stroke-width="1.5"/>
+<polygon points="85.6,308 99.6,308 92.6,322" fill="#fffbe6" stroke="#333" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="92.6" y="297" font-family="'Courier New', Consolas, monospace" font-size="14" font-variant-numeric="tabular-nums" text-anchor="middle" fill="#222"><tspan x="92.6" dy="0">no, send help</tspan></text>
+<rect x="286" y="274" width="192" height="52" rx="8" ry="8" fill="#fffbe6" stroke="#333" stroke-width="1.5"/>
+<polygon points="375,326 389,326 382,327" fill="#fffbe6" stroke="#333" stroke-width="1.5" stroke-linejoin="round"/>
+<text x="382" y="297" font-family="'Courier New', Consolas, monospace" font-size="14" font-variant-numeric="tabular-nums" text-anchor="middle" fill="#222"><tspan x="382" dy="0">coffee first, panic </tspan><tspan x="382" dy="18">later</tspan></text>
 </svg>

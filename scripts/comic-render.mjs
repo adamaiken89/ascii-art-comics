@@ -208,8 +208,16 @@ function measureContent(contentArr) {
     if (item.type === 'text') {
       maxW = Math.max(maxW, vw(item.text));
       maxH = Math.max(maxH, (item.y ?? 0) + 1);
+    } else if (item.type === 'ascii') {
+      const fs = item.fontSize ?? 14;
+      const lines = String(item.text ?? '').split('\n');
+      const cw = charW(fs);
+      const w = Math.max(...lines.map((l) => vw(l))) * cw;
+      const h = lines.length * Math.round(fs * 1.2);
+      maxW = Math.max(maxW, (item.x ?? 0) + w);
+      maxH = Math.max(maxH, (item.y ?? 0) + h);
     } else if (item.type === 'component') {
-      const c = resolveComponent(item.id, new Map()); // no lib for measure
+      const c = resolveComponent(item.id, new Map());
       if (c) {
         maxW = Math.max(maxW, (item.x ?? 0) + c.width);
         maxH = Math.max(maxH, (item.y ?? 0) + c.height);
@@ -227,10 +235,23 @@ function renderContent(items, panelX, panelY, lib) {
         `<text x="${panelX + (item.x ?? 0) * charW(14)}" y="${panelY + (item.y ?? 0) * 16 + 14}" ` +
         `font-family="${DEFAULT_FONT}" font-size="14" fill="#222">${escapeXml(item.text)}</text>`
       );
+    } else if (item.type === 'ascii') {
+      // Render multi-line ASCII art as monospace <text> with <tspan> per line.
+      // The rasterizer handles CJK + box-drawing width via monospace font.
+      const fs = item.fontSize ?? 14;
+      const lines = String(item.text ?? '').split('\n');
+      const lh = Math.round(fs * 1.2);
+      const x = panelX + (item.x ?? 0);
+      const y = panelY + (item.y ?? 0) + fs;
+      const tspans = lines.map((ln, i) =>
+        `<tspan x="${x}" dy="${i === 0 ? 0 : lh}">${escapeXml(ln)}</tspan>`
+      ).join('');
+      out.push(
+        `<text font-family="${DEFAULT_FONT}" font-size="${fs}" fill="#222">${tspans}</text>`
+      );
     } else if (item.type === 'component') {
       const c = resolveComponent(item.id, lib);
       if (!c) continue;
-      // Components use their natural pixel size (no magic scale).
       out.push(
         `<g transform="translate(${panelX + (item.x ?? 0)},${panelY + (item.y ?? 0)})">${c.svg}</g>`
       );
