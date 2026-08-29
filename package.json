@@ -1,0 +1,14 @@
+{
+  "name": "ascii-art-comics",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "description": "ASCII art comics generator — 3-stage pipeline (content, box, audit)",
+  "scripts": {
+    "wrap": "node scripts/box-wrap.mjs"
+  },
+  "dependencies": {
+    "grapheme-splitter": "^1.0.4",
+    "string-width": "^7.0.0"
+  }
+}
