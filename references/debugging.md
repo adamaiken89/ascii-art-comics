@@ -73,7 +73,7 @@ If a coffee cup has:
 ```
 …and the lines have widths 4, 5, 5, 5, 5, the lines will render at different x-positions inside a box.
 
-**Fix:** the build script (`scripts/build-library.mjs`) right-pads all lines to the max width with ASCII space. Source files can have variable-width lines; the build normalizes them.
+**Fix:** the build script (`scripts/build-library.ts`) right-pads all lines to the max width with ASCII space. Source files can have variable-width lines; the build normalizes them.
 
 ### Bug 6: Content hugs wrong side of box
 

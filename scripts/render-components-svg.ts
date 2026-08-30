@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env bun
 /**
- * render-components-svg.mjs
+ * render-components-svg.ts
  *
  * Renders a curated showcase of components from assets/components.json as a
  * single SVG. Each component becomes a labeled card with the component's

@@ -1,0 +1,102 @@
+{
+  "title": "Monday Morning",
+  "panels": [
+    {
+      "panelId": 0,
+      "width": 36,
+      "height": 12,
+      "content": [
+        {
+          "type": "component",
+          "id": "chibi-sad-center",
+          "x": 4,
+          "y": 4
+        },
+        {
+          "type": "component",
+          "id": "coffee",
+          "x": 20,
+          "y": 6
+        },
+        {
+          "type": "text",
+          "text": "Zzz",
+          "x": 26,
+          "y": 5
+        }
+      ],
+      "speaker": {
+        "component": "chibi-sad-center"
+      }
+    },
+    {
+      "panelId": 1,
+      "width": 36,
+      "height": 13,
+      "border": "heavy",
+      "content": [
+        {
+          "type": "component",
+          "id": "chibi-happy-right",
+          "x": 22,
+          "y": 4
+        },
+        {
+          "type": "component",
+          "id": "preset-office",
+          "x": 0,
+          "y": 0
+        }
+      ],
+      "speaker": {
+        "component": "chibi-happy-right"
+      }
+    },
+    {
+      "panelId": 2,
+      "width": 36,
+      "height": 11,
+      "content": [
+        {
+          "type": "component",
+          "id": "chibi-panic-left",
+          "x": 3,
+          "y": 3
+        },
+        {
+          "type": "component",
+          "id": "laptop",
+          "x": 12,
+          "y": 5
+        },
+        {
+          "type": "component",
+          "id": "face-love",
+          "x": 22,
+          "y": 4
+        }
+      ],
+      "speaker": {
+        "component": "chibi-panic-left"
+      }
+    }
+  ],
+  "dialogue": [
+    {
+      "panelId": 0,
+      "text": "Monday again? 死線 today…",
+      "align": "left"
+    },
+    {
+      "panelId": 1,
+      "text": "Deadline? What deadline?",
+      "align": "right",
+      "style": "shout"
+    },
+    {
+      "panelId": 2,
+      "text": "The deploy is live in 10 minutes!!",
+      "align": "left"
+    }
+  ]
+}

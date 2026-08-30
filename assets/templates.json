@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "scope": "v1 — single template: equal 2x2",
+  "templates": {
+    "equal_2x2": {
+      "name": "equal_2x2",
+      "rows": 2,
+      "cols": 2,
+      "panelW": 24,
+      "panelH": 12,
+      "gutter_col": 1,
+      "gutter_row": 1,
+      "border_set": "heavy",
+      "gridW": 49,
+      "gridH": 25,
+      "read_order": ["TL", "TR", "BL", "BR"],
+      "zone_split": {
+        "visual_rows": 7,
+        "dialogue_rows": 3,
+        "separator_row": 1
+      },
+      "panel_layout": {
+        "innerW": 22,
+        "innerH": 10,
+        "visual_zone_height": 7,
+        "dialogue_zone_height": 3
+      }
+    }
+  },
+  "default": "equal_2x2"
+}

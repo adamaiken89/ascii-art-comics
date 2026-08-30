@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env bun
 /**
- * comic-render.mjs — Single comic renderer (panels + components + bubbles).
+ * comic-render.ts — Single comic renderer (panels + components + bubbles).
  *
  * v5 — refactor:
  *   - Single content model: content[] = {type: "component"} | {type: "text"}

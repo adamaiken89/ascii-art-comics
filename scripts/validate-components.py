@@ -8,7 +8,7 @@ Checks per component:
   3. viewBox has 4 numbers
   4. width/height match viewBox
   5. Has actual content (not just an empty <svg>)
-  6. Registered in assets/components.json (built from build-library.mjs)
+  6. Registered in assets/components.json (built from build-library.ts)
 
 Exits 0 if all components valid, 1 otherwise.
 """
@@ -68,7 +68,7 @@ def main() -> int:
         print(f"FAIL: {SVG_DIR} does not exist")
         return 1
     if not JSON_FILE.exists():
-        print(f"FAIL: {JSON_FILE} does not exist (run build-library.mjs)")
+        print(f"FAIL: {JSON_FILE} does not exist (run build-library.ts)")
         return 1
 
     json_data = json.loads(JSON_FILE.read_text(encoding="utf-8"))
@@ -88,7 +88,7 @@ def main() -> int:
             cid = f"{cat}/{svg_file.stem}"
             errs = validate_svg(svg_file)
             if cid not in json_by_id:
-                errs.append(f"not registered in components.json (run build-library.mjs)")
+                errs.append(f"not registered in components.json (run build-library.ts)")
             if errs:
                 fails.append((cid, errs))
 

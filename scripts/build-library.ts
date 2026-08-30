@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env bun
 /**
- * components/build-library.mjs
+ * components/build-library.ts
  *
  * Builds assets/components.json from a directory of SVG source files.
  * Source files: assets/components-svg/<category>/<name>.svg

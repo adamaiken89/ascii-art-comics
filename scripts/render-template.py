@@ -13,7 +13,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).parent.parent
-SCRIPT = ROOT / "scripts" / "template-render.mjs"
+SCRIPT = ROOT / "scripts" / "template-render.ts"
 DEFAULT_OUT = ROOT / "assets" / "examples" / "comics"
 
 
@@ -29,7 +29,7 @@ def main():
     out.parent.mkdir(parents=True, exist_ok=True)
 
     p = subprocess.run(
-        ["node", str(SCRIPT), str(inp), str(out)],
+        ["bun", str(SCRIPT), str(inp), str(out)],
         capture_output=True,
         check=False,
     )

@@ -1,0 +1,15 @@
+{
+  "title": "Repair Test",
+  "panels": [
+    {
+      "panelId": 0,
+      "width": 20, "height": 8,
+      "content": [
+        { "type": "component", "id": "chibi-happy-center", "x": 14, "y": 4 },
+        { "type": "component", "id": "chibi-sad-center", "x": 4, "y": 4 }
+      ],
+      "speaker": { "component": "chibi-sad-center" }
+    }
+  ],
+  "dialogue": [ { "panelId": 0, "text": "these two collide and overflow", "align": "left" } ]
+}

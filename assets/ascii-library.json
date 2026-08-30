@@ -1,0 +1,63 @@
+{
+  "version": 1,
+  "note": "ASCII variants for library components, consumed by scripts/compose.ts. Every row is authored at uniform visible cell width; the composer re-verifies and pads. Cell width rule: EAW W/F = 2 cells, else 1 (see scripts/lib/cellwidth.ts).",
+  "components": {
+    "prop/coffee":    [" ) )", ".---.", "|___|"],
+    "prop/book":      [".---.", "|===|", "'---'"],
+    "prop/laptop":    [".---.", "|___|", "'---'"],
+    "prop/clock":     [".--.", "( @ )", "'--'"],
+    "prop/money":     [".---.", "|$ $|", "'---'"],
+    "prop/phone":     [".---.", "|:::|", "'---'"],
+    "prop/envelope":  [".---.", "|\\~/|", "'---'"],
+    "prop/bomb":      [" & ", ".--.", "(##)"],
+    "prop/bug":       ["\\_/", "(@)", "/|\\"],
+    "prop/gear":      ["-o-o-", "[___]", "-o-o-"],
+    "prop/key":       ["o--#", "   |>"],
+    "prop/fire":      [" w ", "( )", "###"],
+    "scene/sun":      ["\\ | /", "- O -", "/ | \\"],
+    "scene/moon":     ["_.--", "(  ( ", "`--'"],
+    "scene/cloud":    [".--.", "(____)"],
+    "scene/rain":     ["\\/'", "\\/'"],
+    "scene/snow":     ["\\|/", "-*-", "/|\\"],
+    "scene/star":     [" * ", "***", " * "],
+    "scene/lightning": [" /", "<_", " /"],
+    "scene/tree":     [" /\\ ", "/##\\", " || "],
+    "scene/house":    [" ___ ", "/\\ \\", "|_|_|"],
+    "scene/arrow-up": [" | ", "/|\\"],
+    "scene/arrow-down": ["\\|/", " | "],
+    "scene/arrow-right": ["-->"],
+    "scene/arrow-left": ["<--"],
+    "gesture/thumbs-up":   [" d  ", "| | ", "|_| "],
+    "gesture/thumbs-down": ["|_| ", "| | ", " ¯¯ "],
+    "gesture/peace":       ["\\ /", " | ", " | "],
+    "gesture/ok":          [".--", "|  ", "'--"],
+    "gesture/fist":        [".--.", "|##|", "'--'"],
+    "gesture/wave":        ["\\o/", " | ", "/ \\"],
+    "body/stick-basic":    [" o ", "/|\\", "/ \\"],
+    "body/stick-arms-up":  ["\\o/", " | ", "/ \\"],
+    "body/stick-pointing": [" o--", "/|  ", "/ \\ "],
+    "body/stick-running":  [" o~", "/|_", ">/ "],
+    "body/stick-sitting":  [" o ", "/|_", "/ /"],
+    "body/stick-walking":  [" o ", "/|_", "/ \\"],
+    "body/shrug":          ["¯\\_(ツ)_/¯"],
+    "body/stick-with-legs": [" o ", "/|\\", "/|\\"]
+  },
+  "scene_presets": {
+    "outdoors": [
+      { "id": "scene/sun", "x": "right-top" },
+      { "id": "scene/tree", "x": "left-bottom" }
+    ],
+    "night": [
+      { "id": "scene/moon", "x": "right-top" },
+      { "id": "scene/star", "x": "center-top" }
+    ],
+    "storm": [
+      { "id": "scene/cloud", "x": "center-top" },
+      { "id": "scene/lightning", "x": "center-bottom" }
+    ],
+    "office": [
+      { "id": "prop/laptop", "x": "center-bottom" },
+      { "id": "prop/coffee", "x": "left-bottom" }
+    ]
+  }
+}

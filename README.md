@@ -1,69 +1,62 @@
 # comic-svg
 
-Generate comics as **SVG**. Pixel-accurate bubbles, parametric chibis, 2-speaker dialogue, CJK + English safe.
+Text-only comic generator on **Bun**: the LLM writes semantic JSON (component ids, cell
+coordinates, dialogue text), a deterministic harness draws the raw ASCII cell grid, validates
+it, and rasterizes it to **PNG/JPEG** with a pinned font.
+
+## Pipeline (v0.3 — ASCII intermediate, raster output)
+
+```
+LLM → semantic JSON (component ids, cell coords, dialogue text)
+    → compose.ts (bun)   draws the raw ASCII cell grid (borders, bubbles, chibis, props)
+    → validate-grid.py   checks it in cell space (visible width is exact ground truth)
+    → repair loop        grows panels / shifts colliders, ≤3 deterministic passes
+    → raster-cells.py    draws each character at its exact cell origin, pinned font
+    → out/name.txt (advisory) + out/name.png + out/name.jpg (source of truth)
+```
+
+One command:
+
+```bash
+python3 scripts/render-ascii-comic.py content.json -o out/name
+```
+
+**The LLM never draws a box.** It picks component ids and coordinates; the composer owns
+every border, so boxes cannot be broken by construction. Collisions and overflow are detected
+at compose time as machine-readable issues `{type, severity, expected, got, fix}` and
+auto-repaired where deterministic; unrepairable issues (e.g. unknown component id) block
+rasterization so a bad comic is never silently shipped.
+
+**Font-independent correctness.** Composition (TypeScript/Bun), validation (Python), and
+rasterization (Python) share one width rule — `2 cells if East Asian Width ∈ {W,F} else 1`,
+per codepoint — with the JS ranges table generated from Python's `unicodedata`, so they
+cannot disagree. The rasterizer positions each glyph at its cell origin, so font advance
+widths never affect alignment; output is byte-stable across platforms (bundled
+JetBrains Mono + cmap-checked platform fallbacks for CJK/kaomoji glyphs, per glyph).
+**Don't judge the `.txt` artifact in a terminal** — terminal fonts render ambiguous-width
+kaomoji differently; the PNG is the source of truth.
+
+## Vocabulary
+
+- `chibi-<mood>-<dir>[-<pose>]` — parametric character: 3-row face box + simple body
+  (arms `╱│╲`, torso, legs), 6 rows total. 16 moods × 3 directions (center/left/right) ×
+  poses (`basic`, `up` = arms raised, `point` = pointing, flips with direction). Box width
+  adapts to 2-cell glyphs (sad's `﹏` widens the box instead of breaking it).
+- `face-<mood>` — kaomoji line from `assets/faces.json`.
+- Library ids (`prop/coffee`, `scene/sun`, `gesture/thumbs-up`, `body/shrug`, …) — ASCII art
+  in `assets/ascii-library.json`.
+- `preset-<name>` — scene backdrop: `outdoors`, `night`, `storm`, `office`.
+
+Full content-JSON schema and issue-type reference: `SKILL.md`.
+Runnable fixtures: `assets/examples/fixtures/ascii/`.
 
 ## Sample comic
 
-Rendered from `assets/examples/fixtures/monday-morning-comic.json` — 4 panels, 2 chibi speakers alternating left/right, mixed CJK+EN dialogue bubbles, pure SVG primitives.
+Rendered from `assets/examples/fixtures/ascii/monday-morning-ascii.json` — 3 panels, chibi
+speakers with bodies, CJK+EN dialogue, proportional bubble tails, prop and scene-preset
+components.
 
-![Monday Morning comic](assets/examples/comics/monday-morning-comic.jpg)
-
-Two chibis. Monday. A deadline. Coffee. One JSON → one SVG.
-
-## Architecture (v0.2)
-
-```
-content (json) → comic-render.mjs → SVG
-```
-
-**One renderer.** No ASCII legacy. No parallel content models. No `textLength` guessing. The renderer uses constant monospace metrics (CHAR_W_RATIO = 0.6) and lets the rasterizer do what it does well.
-
-**Parametric chibis.** No 27 separate SVG files. `chibi(mood, dir)` is a function that returns SVG inline. Adding a new mood is one map entry, not one file.
-
-**Speaker by ref.** `speaker: {component: "chibi-happy-center", anchor: "bottom"}` — the renderer snaps the tail to the speaker's bbox. No magic cell coordinates.
-
-## Input schema
-
-```json
-{
-  "title": "Monday Morning",
-  "panels": [
-    {
-      "panelId": 0,
-      "width": 220,                    // panel pixel width
-      "bubbleHeight": 80,              // reserved bubble area
-      "speaker": { "component": "chibi-happy-center", "anchor": "bottom" },
-      "content": [
-        { "type": "component", "id": "chibi-happy-center", "x": 20, "y": 20 }
-      ]
-    }
-  ],
-  "layout": { "cols": 2, "gap": 30, "padding": 24 },
-  "dialogue": [
-    { "panelId": 0, "text": "Monday again?", "align": "left" }
-  ]
-}
-```
-
-- `panels[].content[]` — items: `{type: "component", id, x, y}` or `{type: "text", text, x, y}`
-- `panels[].speaker.component` — id of a component in the panel; renderer uses its bbox for tail anchor
-- `panels[].speaker.anchor` — `top | bottom | left | right | top-left | top-right | bottom-left | bottom-right`
-- `dialogue[].align` — `left | right | center` (bubble position within panel)
-- `dialogue[].text` — auto-sized, word-wrap with grapheme fallback
-
-## Usage
-
-```bash
-# Render a comic fixture
-python3 scripts/render-comic-svg.py assets/examples/fixtures/monday-morning-comic.json
-
-# Or pipe JSON directly
-node scripts/comic-render.mjs < request.json > out.svg
-
-# Build component library (chibi variants etc.)
-npm run build:library
-node scripts/render-components-svg.mjs     # showcase
-```
+![Monday Morning ascii pipeline](assets/examples/comics/ascii/monday-morning-ascii.png)
 
 ## Tests
 
@@ -71,47 +64,47 @@ node scripts/render-components-svg.mjs     # showcase
 npm test
 ```
 
-11/11 pass:
-- 7 comic render tests (chibi parametric, directional, 2×2 grid, word-wrap, CJK, tail-follows-speaker, empty rejection)
-- 1 comic fixture (monday-morning)
-- 1 component library validator (99 components)
-- 1 component SVG showcase
-- 1 golden parity check
+All checks pass:
+- ASCII pipeline: showcase render, CJK/wrap torture with repair loop, overlap repair loop,
+  unresolvable-component raster block, **PNG+TXT golden parity**, and a **JS↔Python
+  width-table parity** check
+- Legacy SVG path: 7 comic render tests, 1 comic fixture, component validator (99), showcase
 
-## Why no `textLength`?
+## Legacy SVG path (v0.2)
 
-`textLength` + `lengthAdjust="spacingAndGlyphs"` is fragile when the rasterizer's actual monospace advance width doesn't match your measured cell width. The bubble auto-sizer used `string-width × CHAR_W_RATIO` to compute box width, but the `<text>` inside used `<tspan>` with `text-anchor="middle"` and the rasterizer's own advance. If they disagreed, text would overflow or have padding.
+`scripts/comic-render.ts` + `scripts/render-comic-svg.py` remain usable — render to your
+own output path (the committed `assets/examples/comics/` holds only current
+ascii-pipeline outputs):
 
-**Fix:** pick one source of truth. v0.2 uses constant font metrics (`fs * 0.6`) for both bubble sizing AND text positioning. The rasterizer always matches itself.
+```bash
+python3 scripts/render-comic-svg.py assets/examples/fixtures/monday-morning-comic.json out.svg
+```
 
 ## Structure
 
 ```
 scripts/
-  comic-render.mjs                # THE renderer (panels + components + bubbles)
-  generate-component-svgs.mjs     # generates 99 SVG primitives
-  build-library.mjs               # builds assets/components.json
-  render-comic-svg.py             # CLI: fixture → SVG file
-  render-components-svg.mjs       # generates showcase SVG
-  validate-components.py          # checks all 99 components valid
+  compose.ts                      # cell-space composer (borders, bubbles, chibi bodies, collisions)
+  validate-grid.py                # cell-space structural validator
+  raster-cells.py                 # char-by-char rasterizer (PNG/JPEG) + ink check
+  render-ascii-comic.py           # full pipeline + deterministic repair loop
+  width-parity.ts                 # JS↔Python width-table parity guard
+  lib/cellwidth.ts                # THE width rule (TS) — EAW table generated from unicodedata
+  lib/eaw-ranges.ts               # GENERATED — do not hand-edit
+  comic-render.ts                 # legacy: SVG renderer
+  template-render.ts              # legacy: template path
   test.sh                         # full test suite
 assets/
-  components-svg/                 # 99 SVG primitives (8 categories)
-  components.json                 # registry (id → svg, viewBox, w, h)
-  examples/
-    fixtures/                     # request JSON files
-    comics/                       # end-to-end comic SVGs
-  components-renders/             # visual showcase
+  fonts/JetBrainsMono-Regular.ttf # pinned OFL monospace font
+  ascii-library.json              # ASCII props/scenes/gestures/bodies + scene presets
+  faces.json                      # kaomoji registry (16 moods)
+  examples/fixtures/ascii/        # request JSONs for the current pipeline
+  examples/comics/ascii/          # current outputs + golden.sha256
 ```
 
-## Adding a new chibi mood
+## Adding a new chibi mood or pose
 
-Edit the `EYE`/`MOUTH`/`CLOSED` maps in `chibiSvg()` inside `comic-render.mjs`. One entry per mood. Done.
-
-## Key constraints
-
-- Monospace font stack: `'Courier New', Consolas, monospace`
-- `font-variant-numeric: tabular-nums` for digit alignment
-- Bubble width = `chars × fs × 0.6 + 2× padding`
-- Tail x clamped to bubble width, anchor y drives top/bottom auto-detection
-- Components in `assets/components-svg/` are validated via `validate-components.py` (viewBox + non-empty body)
+Moods: one entry in each of `CHIBI.EYE` / `CHIBI.MOUTH` / `CHIBI.CLOSED` in
+`scripts/compose.ts` (plus optionally a kaomoji in `assets/faces.json`).
+Poses: one entry in `CHIBI_POSES`. Glyph presence in the font is verified at raster time
+(`glyph_missing` warning if absent).

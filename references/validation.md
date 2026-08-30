@@ -1,3 +1,8 @@
+> **STATUS: SUPERSEDED (2026-08).** The v1 3-stage LLM-draws-ASCII pipeline described here
+> was replaced by the ASCII-intermediate pipeline: LLM emits semantic JSON, the deterministic
+> composer (`scripts/compose.ts`) draws the cell grid, and output is rasterized PNG/JPEG
+> (`scripts/render-ascii-comic.py`). See README.md and SKILL.md. Kept for history.
+
 # Validation — Seam Contracts
 
 The pipeline is only as solid as its seams. This file pins the contracts.

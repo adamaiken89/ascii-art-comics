@@ -1,6 +1,6 @@
-#!/usr/bin/env node
+#!/usr/bin/env bun
 /**
- * generate-component-svgs.mjs
+ * generate-component-svgs.ts
  *
  * Generate SVG primitives for all 96 components in assets/components-svg/<category>/<name>.svg.
  * Replaces the ASCII-art `.txt` source files as the visual source of truth.

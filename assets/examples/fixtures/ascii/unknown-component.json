@@ -1,0 +1,13 @@
+{
+  "title": "Unrepairable",
+  "panels": [
+    {
+      "panelId": 0,
+      "width": 30, "height": 10,
+      "content": [
+        { "type": "component", "id": "dragon", "x": 2, "y": 2 }
+      ]
+    }
+  ],
+  "dialogue": []
+}

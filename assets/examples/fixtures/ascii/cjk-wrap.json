@@ -1,0 +1,55 @@
+{
+  "title": "Wrap & Width Torture",
+  "panels": [
+    {
+      "panelId": 0,
+      "width": 30,
+      "height": 12,
+      "content": [
+        {
+          "type": "component",
+          "id": "chibi-shocked-center",
+          "x": 12,
+          "y": 6
+        }
+      ],
+      "speaker": {
+        "component": "chibi-shocked-center"
+      }
+    },
+    {
+      "panelId": 1,
+      "width": 30,
+      "height": 12,
+      "content": [
+        {
+          "type": "component",
+          "id": "chibi-embarrassed-left",
+          "x": 2,
+          "y": 4
+        },
+        {
+          "type": "component",
+          "id": "face-sleepy",
+          "x": 16,
+          "y": 6
+        }
+      ],
+      "speaker": {
+        "component": "chibi-embarrassed-left"
+      }
+    }
+  ],
+  "dialogue": [
+    {
+      "panelId": 0,
+      "text": "死線死亡線 is a very long CJK run that must hardwrap by grapheme without drifting the bubble border",
+      "align": "left"
+    },
+    {
+      "panelId": 1,
+      "text": "supercalifragilisticexpialidocious-DontBreakMe",
+      "align": "right"
+    }
+  ]
+}

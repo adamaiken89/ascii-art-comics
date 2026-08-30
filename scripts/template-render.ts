@@ -1,10 +1,10 @@
-#!/usr/bin/env node
+#!/usr/bin/env bun
 /**
- * template-render.mjs — Render a comic from a template + content JSON.
+ * template-render.ts — Render a comic from a template + content JSON.
  *
  * Usage:
- *   node scripts/template-render.mjs <content.json> [<output.svg>]
- *   echo '<content.json>' | node scripts/template-render.mjs
+ *   bun scripts/template-render.ts <content.json> [<output.svg>]
+ *   echo '<content.json>' | bun scripts/template-render.ts
  *
  * Inputs:
  *   - Template: assets/templates/<name>.json  (panel grid, bubble slots, character slots)
@@ -44,7 +44,7 @@ function escapeXml(s) {
     .replace(/'/g, '&apos;');
 }
 
-/* === Parametric chibi (port from comic-render.mjs) === */
+/* === Parametric chibi (port from comic-render.ts) === */
 function chibiSvg(mood, dir) {
   const EYE = {
     happy: ['◕', '◕'], sad: ['╥', '╥'], panic: ['⊙', '⊙'], angry: ['╬', '╬'],

@@ -1,97 +1,97 @@
 ---
 name: ascii-art-comics
-description: Generate comic panels with monospace layout, dialogue bubbles, and CJK-safe alignment. Use when the user wants a comic, a text-based comic strip, kaomoji panel art, or asks to "draw a comic" / "make a comic about X" / "comic in ASCII". Triggers on requests involving comic panels, speech bubbles, character expressions, or sequential art. Default output is SVG (deterministic, perfect alignment); ASCII output available for terminal paste.
+description: Generate comic panels with monospace layout, dialogue bubbles, and CJK-safe alignment. Use when the user wants a comic, a text-based comic strip, kaomoji panel art, or asks to "draw a comic" / "make a comic about X" / "comic in ASCII". Triggers on requests involving comic panels, speech bubbles, character expressions, or sequential art. Default output is PNG/JPEG rasterized from a validated ASCII cell grid (byte-stable, font-independent); raw ASCII artifact kept as intermediate.
 ---
 
-Comic generator with two output modes. **SVG is default** — cell-precise text placement via `textLength` + `lengthAdjust`, no LLM in the render path, no spatial blindness. **ASCII is legacy** — for users who want to paste into markdown/terminal.
+Comic generator. **PNG/JPEG via the ASCII-intermediate pipeline is default** — the LLM emits semantic JSON (which components, where, what dialogue), a deterministic composer draws the raw ASCII cell grid, a validator checks it in cell space, and a rasterizer draws each character at exact cell origins with a pinned font. **SVG renderers are legacy.** Raw `.txt` artifact is kept for readability but is advisory — the PNG is the source of truth.
 
-## When to use
+## Why this design
 
-User asks for a comic, text comic, kaomoji comic, or any "draw X as a comic" request where monospace output is acceptable. SVG output is preferred unless the user explicitly asks for ASCII / plain text.
+- LLMs have spatial blindness (see `references/llm-spatial-blindness.md`) — 30–50% of hand-drawn ASCII lines misalign. Here **the LLM never draws a box**: it picks component ids and coordinates, the composer owns every border.
+- Font variability is eliminated: composition, validation, and rasterization all share one width table (`scripts/lib/cellwidth.ts`, generated from Python's `unicodedata`), and the rasterizer positions each glyph at its cell origin, so font advance widths never affect alignment.
+- **Never judge output in a terminal** — terminal fonts render ambiguous-width kaomoji glyphs at different widths than the pinned font. The `.txt` artifact is a convenience; the PNG/JPEG is what ships.
 
 ## Invocation flow
 
-1. **Intake** — clarify if ambiguous:
-   - style (A kaomoji / B manga / C noir; default A)
-   - language (CJK / EN / mixed; auto-detect if unambiguous, else ask)
-   - panel count and rough scene
-   - output mode: SVG (default) or ASCII
-2. **Layout** — compute per-panel `innerW` (visible cells of content area)
-3. **Stage 1** → call `content-generator` subagent per panel (or run `scripts/content-generator.mjs` to validate)
-4. **Stage 2** → render via `scripts/svg-render.mjs` (SVG) or `scripts/box-wrap.mjs` (ASCII)
-5. **Grid assembly** — place panels with gutters
-6. **Emit** — SVG via `code` fence, ASCII via plain fence (no `text` lang tag)
+1. **Intake** — clarify if ambiguous: story/scene, mood vocabulary, language (CJK/EN/mixed), panel count.
+2. Author semantic content JSON (schema below). Pick component ids from the vocabulary — **by name, never invent**.
+3. Run: `python3 scripts/render-ascii-comic.py content.json -o out/name`
+4. If `ok: false`, read `issues[].fix` hints, patch the JSON, re-run (max 3 passes). The harness also self-repairs mechanically (grows panels, shifts colliders) before giving up.
+5. Deliver `out/name.png` (or `.jpg`) + optionally the `.txt` artifact with a terminal-width caveat.
 
-## Pipeline seam
+## Content JSON schema
 
-```
-Stage 1                            Stage 2 (output)
-content-generator  →  ──────────→  svg-render       (default)
-{lines, measured}                  box-wrap         (legacy ASCII)
-                                   pure content     (style C, no border)
-```
-
-Stage 1 = content lines + widths. Pure data, no rendering.
-Stage 2 = render. Deterministic script, no LLM. SVG handles all alignment at the rasterizer.
-
-**No Stage 3 auditor.** The "visual audit" idea was dropped because LLMs have spatial blindness (see `references/llm-spatial-blindness.md`). SVG output cannot be misaligned by construction.
-
-## Recovery cascade
-
-| Failure | Action |
-|---|---|
-| Stage 1: line wider than target | retry once with shrunken text |
-| Stage 1: NBSP leak | reject (NBSP forbidden in content) |
-| Stage 2: structural error | bug in script — report, do not retry |
-| Output: wrong width after render | adjust Stage 1 target, re-render |
-
-## Output contracts
-
-### SVG (default)
-
-```html
-<svg width="W" height="H" viewBox="0 0 W H" xmlns="http://www.w3.org/2000/svg">
-  <style>text { font-family: ui-monospace, ...; font-size: ... }</style>
-  <rect ... borders ... />
-  <text x="..." y="..." textLength="..." lengthAdjust="spacingAndGlyphs">...</text>
-  ...
-</svg>
+```json
+{
+  "title": "Monday Morning",
+  "panels": [
+    {
+      "panelId": 0,
+      "width": 36, "height": 12,
+      "border": "round" | "heavy" | "ascii",
+      "content": [
+        { "type": "component", "id": "chibi-sad-center", "x": 4, "y": 5 },
+        { "type": "component", "id": "coffee", "x": 20, "y": 6 },
+        { "type": "text", "text": "Zzz", "x": 26, "y": 5 }
+      ],
+      "speaker": { "component": "chibi-sad-center" }
+    }
+  ],
+  "dialogue": [
+    { "panelId": 0, "text": "Monday again?", "align": "left|center|right", "style": "round|shout" }
+  ]
+}
 ```
 
-Emit in a ```` ```svg ```` fence. Inline CSS. No external assets.
+Coordinates are **cells** (0,0 = first interior cell; width/height include the border).
 
-### ASCII (legacy)
+## Component vocabulary
 
-- Plain ```` ``` ```` fence (no `text` lang tag)
-- NBSP (U+00A0) inside `║ ║` for right-padding
-- ASCII space outside borders
-- One border set per panel; no mixing
-- No trailing whitespace outside borders
+- `chibi-<mood>-<dir>[-<pose>]` — parametric character: 3-row face box + simple body (arms `╱│╲`, torso, legs), 6 rows total. 16 moods (happy, sad, panic, angry, smug, dead, thinking, shocked, neutral, excited, confused, sleepy, love, dizzy, proud, embarrassed, suspicious) × 3 directions (center/left/right) × poses (`basic`, `up` = arms raised `╲│╱`, `point` = pointing, flips with direction). Box width adapts to 2-cell glyphs (e.g. sad's `﹏`) instead of breaking. (happy, sad, panic, angry, smug, dead, thinking, shocked, neutral, excited, confused, sleepy, love, dizzy, proud, embarrassed, suspicious) × 3 directions (center/left/right). Box width adapts to 2-cell glyphs (e.g. sad's `﹏`) instead of breaking.
+- `face-<mood>` — kaomoji line from `assets/faces.json`.
+- Library ids (`prop/coffee` or bare `coffee`, `scene/sun`, `gesture/thumbs-up`, `body/shrug`, …) — ASCII art in `assets/ascii-library.json`.
+- `preset-<name>` — scene backdrop: `outdoors`, `night`, `storm`, `office`.
 
-### Style C (noir, borderless)
+## Issue types (shared shape `{type, panel, row, col, severity, expected, got, fix}`)
 
-Either format: emit raw content lines, no border.
+| Type | Meaning | Harness self-repair |
+|---|---|---|
+| `component_out_of_bounds` / `text_overflow` | content exceeds panel interior | grows panel |
+| `bubble_overflow` | bubble + tail exceed interior | grows panel |
+| `component_overlap` / `bubble_overlap` | collision | shifts items / pushes content below bubble |
+| `tail_truncated` | speaker far from bubble | warning only |
+| `unknown_component` | id not resolvable | **unrepairable** — agent must fix the id |
+| `width_drift` / `border_*` | grid invariant violated (composer bug) | report |
+| `glyph_missing` / `cjk_font_missing` | rasterizer font coverage | warning; add `--cjk-font` |
+
+`severity: "error"` blocks rasterization; warnings still render.
+
+## Pipeline internals
+
+```
+content.json ─→ scripts/compose.ts          (cell grid, borders, bubbles, collisions)
+             ─→ scripts/validate-grid.py     (cell-space invariants)
+             ─→ repair loop (≤3, deterministic)
+             ─→ scripts/raster-cells.py      (char-by-char PIL draw, pinned font)
+             ─→ out/name.{txt,png,jpg} + issues JSON
+```
+
+- Width rule everywhere: `2 if East Asian Width ∈ {W,F} else 1`, per codepoint. JS reads `scripts/lib/eaw-ranges.ts` (GENERATED from Python `unicodedata` — regenerate it, never hand-edit).
+- Bundled font: `assets/fonts/JetBrainsMono-Regular.ttf` (OFL). CJK/missing glyphs fall back per-codepoint through platform fonts (cmap-checked; JIT-less, deterministic).
+- Tests: `npm test` — includes render fixtures, repair-loop checks, PNG+TXT golden parity, and a JS↔Python width-table parity check.
+
+## Legacy (kept, not default)
+
+- `scripts/comic-render.ts` + `scripts/render-comic-svg.py` — SVG renderer path.
+- `scripts/template-render.ts` — template path.
+- `SPEC.md`, `agents/*.md`, `scripts/harness.py` — superseded v1 stages; see `references/llm-spatial-blindness.md` for why the LLM-draws-ASCII + LLM-audits design was abandoned.
 
 ## Pointer map
 
-- Persona + hard rules → `references/persona.md`
-- Width math, NBSP, forbidden ops → `references/persona.md` § Width
+- Width rule + EAW table → `scripts/lib/cellwidth.ts`, `scripts/lib/eaw-ranges.ts`
 - Border sets, gutter math → `references/panels.md`
-- Seam contracts → `references/validation.md`
 - Wrap rules per language → `references/dialogue.md`
-- **Debugging misaligned boxes / wrong widths → `references/debugging.md`** (CJK + emoji gotchas, 6 common bugs)
-- **Why SVG over ASCII (LLM spatial blindness) → `references/llm-spatial-blindness.md`**
-- Face registry (center/left/right × mood) → `assets/faces.json`
-- Component library (80 components: faces, bodies, gestures, props, scene, frames, bubbles, separators) → `assets/components.json`, source in `assets/components-src/`
-- Subagent specs → `agents/`
-- Style guides → `references/styles/`
-- Example comics + runnable fixtures → `assets/examples/`
-
-## Component library
-
-`assets/components.json` (built from `assets/components-src/<category>/*.txt`) is a registry of reusable comic pieces — faces, bodies, gestures, props, scene elements, frames, separators, speech bubbles. Each component has pre-computed `width` and `height` for layout planning.
-
-**Chibi faces**: 9 moods × 3 directions (center / left / right) = 27 variants. All 7 cells wide.
-
-Build: `node scripts/build-library.mjs`
-Render report: `python3 scripts/render-components.py` → `assets/components-renders/REPORT.md`
+- Debugging misaligned boxes → `references/debugging.md`
+- Why the LLM is not in the render path → `references/llm-spatial-blindness.md`
+- Faces → `assets/faces.json`; ASCII component library → `assets/ascii-library.json`
+- Fixtures (runnable) → `assets/examples/fixtures/ascii/`; outputs + goldens → `assets/examples/comics/ascii/`

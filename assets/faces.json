@@ -50,6 +50,41 @@
       "glyph": "(゜-゜)",
       "fallback": "(?_?)",
       "ascii": "?_?"
+    },
+    "neutral": {
+      "glyph": "(•_•)",
+      "fallback": "(-_-)",
+      "ascii": "-_-"
+    },
+    "sleepy": {
+      "glyph": "(－_－) zzZ",
+      "fallback": "(-_-) zzZ",
+      "ascii": "-_- zzZ"
+    },
+    "love": {
+      "glyph": "(♥‿♥)",
+      "fallback": "(^_^)<3",
+      "ascii": "^_^ <3"
+    },
+    "dizzy": {
+      "glyph": "(@_@)",
+      "fallback": "(@_@)",
+      "ascii": "@_@"
+    },
+    "proud": {
+      "glyph": "(^‿^)",
+      "fallback": "(^_^)",
+      "ascii": "^_^"
+    },
+    "embarrassed": {
+      "glyph": "(//‿//)",
+      "fallback": "(^_^')",
+      "ascii": "^_^'"
+    },
+    "suspicious": {
+      "glyph": "(●_●)",
+      "fallback": "(?_?)",
+      "ascii": "?_?"
     }
   },
   "chibi_boxes": {

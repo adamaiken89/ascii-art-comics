@@ -1,22 +1,27 @@
 {
   "name": "comic-svg",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "type": "module",
   "private": true,
-  "description": "SVG comic generator — 96 component primitives, 2-speaker dialogue, pixel-accurate bubbles. ASCII output kept as legacy option.",
+  "description": "ASCII-intermediate comic generator on Bun — semantic JSON in, validated ASCII cell grid + rasterized PNG/JPEG out. SVG renderers kept as legacy.",
   "scripts": {
-    "render:comic": "node scripts/comic-render.mjs",
-    "render:template": "node scripts/template-render.mjs",
-    "render:components:svg": "node scripts/render-components-svg.mjs",
+    "render:comic": "bun scripts/comic-render.ts",
+    "render:template": "bun scripts/template-render.ts",
+    "render:components:svg": "bun scripts/render-components-svg.ts",
+    "render:ascii": "python3 scripts/render-ascii-comic.py",
     "render:fixtures": "python3 scripts/render-fixtures.py",
     "render:fixtures:comic": "python3 scripts/render-comic-svg.py assets/examples/fixtures/monday-morning-comic.json",
     "render:fixtures:template": "for f in assets/examples/content/*.json; do python3 scripts/render-template.py \"$f\"; done",
-    "build:library": "node scripts/build-library.mjs",
-    "generate:component-svgs": "node scripts/generate-component-svgs.mjs",
+    "build:library": "bun scripts/build-library.ts",
+    "generate:component-svgs": "bun scripts/generate-component-svgs.ts",
+    "width:parity": "bun scripts/width-parity.ts",
     "test": "bash scripts/test.sh"
   },
   "dependencies": {
     "grapheme-splitter": "^1.0.4",
     "string-width": "^7.0.0"
+  },
+  "devDependencies": {
+    "bun-types": "^1.4.0"
   }
 }
