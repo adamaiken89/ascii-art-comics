@@ -75,10 +75,12 @@ def repair(content, issues):
                 changed = True
         elif typ == "bubble_overlap":
             # Content collides with the bubble area: push everything below
-            # the collision row and grow the panel to make room.
+            # the collision row and grow the panel to make room. Items pinned
+            # to the floor (y == "floor") stay put.
             hit_row = iss.get("row", 1)  # 1-based, border-inclusive
             for c in p.get("content", []):
-                if c.get("y", 0) < hit_row:
+                y = c.get("y", 0)
+                if isinstance(y, (int, float)) and y < hit_row:
                     c["y"] = hit_row
             p["height"] = p.get("height", 10) + hit_row
             changed = True

@@ -1,0 +1,17 @@
+{
+  "name": "daily4",
+  "structure": "kishōtenketsu (起承転結) — conflict-free 4-panel daily-life arc",
+  "use_for": "morning routines, meals, commutes, weather, chores, small misunderstandings",
+  "beats": [
+    { "beat": "ki (intro)", "panel": 1, "goal": "Establish the setting and the character's state. A scene preset (bedroom/kitchen/street) plus one character. Dialogue is optional — a thought bubble with an inner remark works well here." },
+    { "beat": "shō (develop)", "panel": 2, "goal": "Deepen the situation without changing it: a second character enters, a small action, a routine continues. Introduce the everyday object the strip is about (coffee, umbrella, cat, train)." },
+    { "beat": "ten (twist)", "panel": 3, "goal": "Recontextualize panels 1-2 with a surprise that is still everyday-scale: the item is missing, the day is wrong, someone remembered the wrong thing. Reaction FX (fx/em, fx/sweat, fx/q) belong here." },
+    { "beat": "ketsu (harmonize)", "panel": 4, "goal": "Resolve the twist calmly — the punchline lands by tying back to panel 1. A two-shot of both characters facing each other is the classic closer." }
+  ],
+  "example_dialogue": [
+    { "panel": 1, "text": "…five more minutes…", "style": "thought" },
+    { "panel": 2, "text": "Morning! Tea's ready.", "style": "round" },
+    { "panel": 3, "text": "TEA?! Today is the picnic!!", "style": "shout" },
+    { "panel": 4, "text": "Relax. It got rained out anyway.", "style": "round" }
+  ]
+}

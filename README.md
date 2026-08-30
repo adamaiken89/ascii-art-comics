@@ -43,18 +43,26 @@ kaomoji differently; the PNG is the source of truth.
   poses (`basic`, `up` = arms raised, `point` = pointing, flips with direction). Box width
   adapts to 2-cell glyphs (sad's `﹏` widens the box instead of breaking it).
 - `face-<mood>` — kaomoji line from `assets/faces.json`.
-- Library ids (`prop/coffee`, `scene/sun`, `gesture/thumbs-up`, `body/shrug`, …) — ASCII art
-  in `assets/ascii-library.json`.
-- `preset-<name>` — scene backdrop: `outdoors`, `night`, `storm`, `office`.
+- `fx/*` — reaction glyphs (sweat, zzz, anger, `!!`, `??`, heart, note).
+- Library ids (`prop/coffee`, `prop/cat`, `scene/sun`, `gesture/thumbs-up`, `body/shrug`, …)
+  — ASCII art in `assets/ascii-library.json`.
+- `preset-<name>` — scene backdrops: bedroom, kitchen, cafe, living-room, home, street,
+  office, night, storm, outdoors.
+- Panel conveniences: `y: "floor"`, `ground: true` (`▁` floor line), and
+  `layout: "two-shot"` + `cast` for two characters facing each other.
+- Bubble styles: `round`, `shout`, `thought` (drifting `o ˙` tail), `whisper` (dashed).
+- Story beats for daily conversation comics: `assets/stories/daily4.json`
+  (kishōtenketsu) and `assets/stories/manzai.json` (boke/tsukkomi).
 
 Full content-JSON schema and issue-type reference: `SKILL.md`.
 Runnable fixtures: `assets/examples/fixtures/ascii/`.
 
 ## Sample comic
 
-Rendered from `assets/examples/fixtures/ascii/monday-morning-ascii.json` — 3 panels, chibi
-speakers with bodies, CJK+EN dialogue, proportional bubble tails, prop and scene-preset
-components.
+Rendered from `assets/examples/fixtures/ascii/monday-morning-ascii.json` — a 4-panel
+kishōtenketsu daily-conversation strip: a thought-bubble opener with `zzz` over a bed,
+a two-shot morning greeting on a ground line with coffee, a shout-bubble twist with
+reaction FX, and a two-character Sunday punchline.
 
 ![Monday Morning ascii pipeline](assets/examples/comics/ascii/monday-morning-ascii.png)
 

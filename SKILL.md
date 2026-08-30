@@ -38,17 +38,26 @@ Comic generator. **PNG/JPEG via the ASCII-intermediate pipeline is default** —
     }
   ],
   "dialogue": [
-    { "panelId": 0, "text": "Monday again?", "align": "left|center|right", "style": "round|shout" }
+    { "panelId": 0, "text": "…", "align": "left|center|right", "style": "round|shout|thought|whisper" }
   ]
 }
 ```
 
 Coordinates are **cells** (0,0 = first interior cell; width/height include the border).
 
+Panel-level conveniences:
+- `y: "floor"` on any content item — stand on the interior floor.
+- `ground: true` — draw a `▁` floor line across the panel.
+- `layout: "two-shot"` + `cast: [{id, side?}]` — two characters facing each other on the floor (first defaults `left`, second `right`); classic staging for conversations.
+- Bubble styles: `round` (default), `shout` (heavy border), `thought` (round + drifting `o ˙` tail — inner monologue), `whisper` (dashed — asides).
+
 ## Component vocabulary
 
 - `chibi-<mood>-<dir>[-<pose>]` — parametric character: 3-row face box + simple body (arms `╱│╲`, torso, legs), 6 rows total. 16 moods (happy, sad, panic, angry, smug, dead, thinking, shocked, neutral, excited, confused, sleepy, love, dizzy, proud, embarrassed, suspicious) × 3 directions (center/left/right) × poses (`basic`, `up` = arms raised `╲│╱`, `point` = pointing, flips with direction). Box width adapts to 2-cell glyphs (e.g. sad's `﹏`) instead of breaking. (happy, sad, panic, angry, smug, dead, thinking, shocked, neutral, excited, confused, sleepy, love, dizzy, proud, embarrassed, suspicious) × 3 directions (center/left/right). Box width adapts to 2-cell glyphs (e.g. sad's `﹏`) instead of breaking.
 - `face-<mood>` — kaomoji line from `assets/faces.json`.
+- `fx/<name>` — reaction glyphs: `sweat` (`;`), `zzz`, `anger` (`≡≡≡`), `em` (`!!`), `q` (`??`), `heart`, `note`. Place near the head; use sparingly (one per panel).
+- `prop/<name>` — daily-life props: bed, table, chair, tv, cat, bread, noodles, umbrella, bag, window, plant, laptop, coffee, book, phone, … (full list in `assets/ascii-library.json`).
+- `preset-<name>` — scene backdrops: `bedroom`, `kitchen`, `cafe`, `living-room`, `home`, `street`, `office`, `night`, `storm`, `outdoors`.
 - Library ids (`prop/coffee` or bare `coffee`, `scene/sun`, `gesture/thumbs-up`, `body/shrug`, …) — ASCII art in `assets/ascii-library.json`.
 - `preset-<name>` — scene backdrop: `outdoors`, `night`, `storm`, `office`.
 
@@ -65,6 +74,15 @@ Coordinates are **cells** (0,0 = first interior cell; width/height include the b
 | `glyph_missing` / `cjk_font_missing` | rasterizer font coverage | warning; add `--cjk-font` |
 
 `severity: "error"` blocks rasterization; warnings still render.
+
+## Story structure (daily conversation comics)
+
+Two proven 4-panel structures — beat guides in `assets/stories/`:
+
+- **`daily4` (kishōtenketsu)** — intro → develop → twist → harmonize. Conflict-free, ideal for routines/meals/commutes/weather. Twist recontextualizes; the ketsu ties back to panel 1.
+- **`manzai` (boke/tsukkomi)** — two roles: the *boke* says the silly thing, the *tsukkomi* retorts (shout bubble, reaction FX). Two-shot staging in every panel.
+
+Write one dialogue line per beat; keep the twist everyday-scale.
 
 ## Pipeline internals
 

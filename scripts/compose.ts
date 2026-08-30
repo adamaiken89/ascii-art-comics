@@ -57,7 +57,7 @@ export interface Issue {
 }
 
 export type GridSlot =
-  | { ch: string; w: number }
+  | { ch: string; w: number; bg?: true }
   | { cont: true }
   | null;
 
@@ -65,14 +65,16 @@ export interface ComponentItem {
   type: 'component';
   id: string;
   x?: number;
-  y?: number;
+  y?: number | 'floor';
+  /** two-shot sugar: place at panel edge, standing on the floor */
+  side?: 'left' | 'right' | 'center';
 }
 
 export interface TextItem {
   type: 'text';
   text: string;
   x?: number;
-  y?: number;
+  y?: number | 'floor';
 }
 
 export type ContentItem = ComponentItem | TextItem;
@@ -84,6 +86,12 @@ export interface Panel {
   border?: string;
   content?: ContentItem[];
   speaker?: { component: string; anchor?: string };
+  /** draw a ▁ ground line across the interior floor */
+  ground?: boolean;
+  /** 'two-shot': ground on, characters placed from the edges on the floor */
+  layout?: 'two-shot';
+  /** characters for the two-shot layout (merged into content with side set) */
+  cast?: { id: string; side?: 'left' | 'right' | 'center' }[];
 }
 
 export interface Dialogue {
@@ -122,10 +130,15 @@ const BORDERS = {
   heavy: { tl: '┏', t: '━', tr: '┓', bl: '┗', b: '━', br: '┛', v: '┃' },
   ascii: { tl: '+', t: '-', tr: '+', bl: '+', br: '+', b: '-', v: '|' },
 };
-const BUBBLE_STYLE = {
+const BUBBLE_STYLE: Record<string, { tl: string; t: string; tr: string; bl: string; b: string; br: string; v: string }> = {
   round: { tl: '╭', t: '─', tr: '╮', bl: '╰', b: '─', br: '╯', v: '│' },
   shout: { tl: '┏', t: '━', tr: '┓', bl: '┗', b: '━', br: '┛', v: '┃' },
+  // dashed border — quiet/aside speech
+  whisper: { tl: '.', t: '┄', tr: '.', bl: '.', b: '┄', br: '.', v: '┆' },
 };
+// Thought bubbles: round borders but the tail is bubbles shrinking toward the
+// speaker (o → ˙) instead of the solid ▼ pointer.
+const THOUGHT_TAIL = ['o', '˙'];
 const TAIL_DOWN = '▼'; // solid triangle — ∨ (logical OR) sits too small/high in the pinned font
 
 // === Parametric chibi (cell-space; box width adapts to glyph widths) ===
@@ -142,15 +155,13 @@ const CHIBI = {
     sleepy: '○', love: '‿', dizzy: '○', proud: '‿', embarrassed: '‿',
     suspicious: '~',
   },
-  // ˘ (not ◡) — every chibi glyph must exist in the bundled font or the
-  // CJK fallback; glyph presence is verified at raster time.
-  CLOSED: {
-    happy: '˘', sad: '─', panic: '─', angry: '─', smug: '˘', dead: '─',
-    thinking: '─', shocked: '─', neutral: '─', excited: '˘', confused: '─',
-    sleepy: '─', love: '˘', dizzy: '─', proud: '˘', embarrassed: '─',
-    suspicious: '─',
-  },
 };
+
+// Away-side eye for directional faces: a small dot (near eye = mood eye).
+// Deliberately NOT a "closed eye" glyph — ˘ is a diacritic that floats high
+// and reads as noise, and ─ (full-cell line) visually fuses with the box
+// border. The bullet is mid-height and present in the bundled font.
+const FAR_EYE = '•';
 
 /** Body poses: the arms row under the face box. Point flips with dir. */
 const CHIBI_POSES: Record<string, string> = {
@@ -165,10 +176,9 @@ const CHIBI_POSES: Record<string, string> = {
 function chibiLines(mood: string, dir: string, pose = 'basic'): string[] {
   const eye = CHIBI.EYE[mood] ?? CHIBI.EYE.neutral;
   const mouth = CHIBI.MOUTH[mood] ?? CHIBI.MOUTH.neutral;
-  const closed = CHIBI.CLOSED[mood] ?? CHIBI.CLOSED.neutral;
   let left = eye, right = eye;
-  if (dir === 'left') right = closed;
-  else if (dir === 'right') left = closed;
+  if (dir === 'left') right = FAR_EYE;
+  else if (dir === 'right') left = FAR_EYE;
   const face = [left, ' ', mouth, ' ', right];
   const faceW = face.reduce((n, ch) => n + codepointWidth(ch), 0);
   const w = faceW + 2; // borders
@@ -247,6 +257,12 @@ class Grid {
   w: number;
   h: number;
   g: GridSlot[][];
+  // Interior origin: callers use interior coordinates (0,0 = first cell inside
+  // the border); the offset maps them to grid cells so the border — drawn last
+  // — can never overwrite content (this exact overwrite used to eat every
+  // bubble's top border row).
+  ox = 1;
+  oy = 1;
 
   constructor(w: number, h: number) {
     this.w = w;
@@ -254,22 +270,35 @@ class Grid {
     this.g = Array.from({ length: h }, () => Array(w).fill(null));
   }
   /** Stamp cells; returns collisions with pre-existing glyphs. */
+  /** Background stamp (ground lines): no collision reporting, later stamps
+   *  may overwrite it freely. */
+  stampBg(x: number, y: number, cellsRows: GridSlot[][]): void {
+    for (let r = 0; r < cellsRows.length; r++) {
+      const row = cellsRows[r];
+      for (let c = 0; c < row.length; c++) {
+        const gx = this.ox + x + c, gy = this.oy + y + r;
+        if (gx < 0 || gy < 0 || gx >= this.w || gy >= this.h) continue;
+        this.g[gy][gx] = row[c].cont ? { cont: true } : { ...row[c], bg: true };
+      }
+    }
+  }
+
   stamp(x: number, y: number, cellsRows: GridSlot[][]): { row: number; col: number; got: string }[] {
     const hits = [];
     for (let r = 0; r < cellsRows.length; r++) {
       const row = cellsRows[r];
       for (let c = 0; c < row.length; c++) {
         if (row[c].cont) continue;
-        const gx = x + c, gy = y + r;
+        const gx = this.ox + x + c, gy = this.oy + y + r;
         if (gx < 0 || gy < 0 || gx >= this.w || gy >= this.h) continue;
         const cur = this.g[gy][gx];
-        if (cur && !cur.cont && cur.ch !== ' ') hits.push({ row: gy, col: gx, got: cur.ch });
+        if (cur && !cur.cont && !cur.bg && cur.ch !== ' ') hits.push({ row: gy, col: gx, got: cur.ch });
       }
     }
     for (let r = 0; r < cellsRows.length; r++) {
       const row = cellsRows[r];
       for (let c = 0; c < row.length; c++) {
-        const gx = x + c, gy = y + r;
+        const gx = this.ox + x + c, gy = this.oy + y + r;
         if (gx < 0 || gy < 0 || gx >= this.w || gy >= this.h) continue;
         this.g[gy][gx] = row[c].cont ? { cont: true } : { ...row[c] };
       }
@@ -277,9 +306,10 @@ class Grid {
     return hits;
   }
   bounds(x: number, y: number, w: number, h: number): { fitsX: boolean; fitsY: boolean; needW: number; needH: number } {
+    const iw = this.w - 2, ih = this.h - 2;
     return {
-      fitsX: x >= 0 && x + w <= this.w,
-      fitsY: y >= 0 && y + h <= this.h,
+      fitsX: x >= 0 && x + w <= iw,
+      fitsY: y >= 0 && y + h <= ih,
       needW: x + w, needH: y + h,
     };
   }
@@ -377,13 +407,28 @@ function composePanel(panel: Panel, dialogue: Dialogue[], issues: Issue[]): Comp
   const Wi = W - 2, Hi = H - 2;
   const gc = (r, c) => ({ row: r + 1, col: c + 1 }); // 1-based, border-inclusive
 
+  // --- Ground line + two-shot layout ---
+  const twoShot = panel.layout === 'two-shot';
+  if (panel.ground || twoShot) {
+    // ▁ renders at the bottom of its cell → reads as a floor the characters
+    // stand on. Stamped as background: components overwrite it without
+    // triggering collision issues.
+    g.stampBg(0, Hi - 1, [Array.from({ length: Wi }, () => ({ ch: '\u2581', w: 1, bg: true as const }))]);
+  }
+  const castItems: ContentItem[] = (panel.cast ?? []).map((c, i) => ({
+    type: 'component' as const,
+    id: c.id,
+    side: c.side ?? (i === 0 ? 'left' : i === 1 ? 'right' : 'center'),
+  }));
+
   // --- Components & text ---
   const placed = new Map(); // component id -> {x, y, w, h}
-  for (const item of panel.content ?? []) {
+  for (const item of [...castItems, ...(panel.content ?? [])]) {
     if (item.type === 'text') {
       const cs = toCells(String(item.text ?? ''));
       const w = cs.reduce((n, c) => n + c.w, 0);
-      const x = item.x ?? 0, y = item.y ?? 0;
+      const x = item.x ?? 0;
+      const y = item.y === 'floor' ? Hi - 1 : (item.y ?? 0);
       const b = g.bounds(x, y, w, 1);
       if (!b.fitsX || !b.fitsY) {
         issues.push({
@@ -428,7 +473,16 @@ function composePanel(panel: Panel, dialogue: Dialogue[], issues: Issue[]): Comp
       }
       const rows = padCells(res.lines);
       const cw = rows[0].length, chh = rows.length;
-      const x = item.x ?? 0, y = item.y ?? 0;
+      let x: number, y: number;
+      if (item.side) {
+        x = item.side === 'right' ? Wi - 1 - cw
+          : item.side === 'center' ? Math.max(0, Math.floor((Wi - cw) / 2))
+          : 1;
+        y = Hi - chh; // standing on the floor
+      } else {
+        x = item.x ?? 0;
+        y = item.y === 'floor' ? Hi - chh : (item.y ?? 0);
+      }
       const b = g.bounds(x, y, cw, chh);
       if (!b.fitsX || !b.fitsY) {
         issues.push({
@@ -500,9 +554,16 @@ function composePanel(panel: Panel, dialogue: Dialogue[], issues: Issue[]): Comp
       const tailRow = bubbleY + bh;
       const speaker = sp?.component ? placed.get(sp.component) : undefined;
       // Proportional tail: │ connector rows from the bubble down to just
-      // above the speaker, ∨ tip at the end. No room (speaker adjacent to or
+      // above the speaker, ▼ tip at the end. No room (speaker adjacent to or
       // overlapping the tail row) means no tail — never overwrite the speaker.
-      if (speaker && speaker.y > tailRow) {
+      const isThought = (d.style ?? 'round') === 'thought';
+      if (isThought) {
+        // bubble chain o → ˙ toward the speaker
+        g.stamp(tailCol, tailRow, [[{ ch: THOUGHT_TAIL[0], w: 1 }]]);
+        if (tailRow + 1 < Hi && (!speaker || speaker.y > tailRow + 1)) {
+          g.stamp(tailCol, tailRow + 1, [[{ ch: THOUGHT_TAIL[1], w: 1 }]]);
+        }
+      } else if (speaker && speaker.y > tailRow) {
         const tipRow = Math.min(speaker.y - 1, Hi - 1);
         for (let r = tailRow; r < tipRow; r++) {
           g.stamp(tailCol, r, [[{ ch: '│', w: 1 }]]);

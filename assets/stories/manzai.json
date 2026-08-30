@@ -1,0 +1,16 @@
+{
+  "name": "manzai",
+  "structure": "boke/tsukkomi — two-character setup → punchline → reaction loops",
+  "use_for": "gag conversations: misunderstandings, puns, one character being absurd, the other correcting",
+  "roles": {
+    "boke": "The funny man. Says the silly thing, misses the obvious, takes words literally. Moods: confused, happy, excited, dizzy. Faces the tsukkomi.",
+    "tsukkomi": "The straight man. Retorts sharply, corrects, occasionally despairs. Moods: smug, shocked, angry, dead. Faces the boke. Shout-style bubbles fit the big retorts."
+  },
+  "rhythm": [
+    "Panel 1: boke states something absurd matter-of-factly (round bubble).",
+    "Panel 2: tsukkomi's first reaction — short retort or disbelief (round or whisper).",
+    "Panel 3: boke doubles down — escalates the absurdity (this is the biggest laugh line).",
+    "Panel 4: tsukkomi's full retort (shout) + reaction FX on the boke (fx/sweat, fx/q)."
+  ],
+  "staging": "Put both characters in every panel with layout: two-shot, facing each other; the boke's tail points at their own bubble, the tsukkomi's at theirs. Alternate which side speaks first."
+}

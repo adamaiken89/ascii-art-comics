@@ -3,100 +3,55 @@
   "panels": [
     {
       "panelId": 0,
-      "width": 36,
-      "height": 12,
+      "width": 36, "height": 14,
       "content": [
-        {
-          "type": "component",
-          "id": "chibi-sad-center",
-          "x": 4,
-          "y": 4
-        },
-        {
-          "type": "component",
-          "id": "coffee",
-          "x": 20,
-          "y": 6
-        },
-        {
-          "type": "text",
-          "text": "Zzz",
-          "x": 26,
-          "y": 5
-        }
+        { "type": "component", "id": "bed", "x": 16, "y": "floor" },
+        { "type": "component", "id": "chibi-sleepy-center", "x": 4, "y": "floor" },
+        { "type": "component", "id": "fx/zzz", "x": 2, "y": 4 }
       ],
-      "speaker": {
-        "component": "chibi-sad-center"
-      }
+      "speaker": { "component": "chibi-sleepy-center" }
     },
     {
       "panelId": 1,
-      "width": 36,
-      "height": 13,
-      "border": "heavy",
-      "content": [
-        {
-          "type": "component",
-          "id": "chibi-happy-right",
-          "x": 22,
-          "y": 4
-        },
-        {
-          "type": "component",
-          "id": "preset-office",
-          "x": 0,
-          "y": 0
-        }
+      "width": 36, "height": 14,
+      "layout": "two-shot",
+      "cast": [
+        { "id": "chibi-happy-left" },
+        { "id": "chibi-sleepy-right" }
       ],
-      "speaker": {
-        "component": "chibi-happy-right"
-      }
+      "content": [
+        { "type": "component", "id": "coffee", "x": 16, "y": "floor" }
+      ],
+      "speaker": { "component": "chibi-happy-left" }
     },
     {
       "panelId": 2,
-      "width": 36,
-      "height": 11,
+      "width": 36, "height": 14,
       "content": [
-        {
-          "type": "component",
-          "id": "chibi-panic-left",
-          "x": 3,
-          "y": 3
-        },
-        {
-          "type": "component",
-          "id": "laptop",
-          "x": 12,
-          "y": 5
-        },
-        {
-          "type": "component",
-          "id": "face-love",
-          "x": 22,
-          "y": 4
-        }
+        { "type": "component", "id": "chibi-panic-left", "side": "left" },
+        { "type": "component", "id": "laptop", "x": 20, "y": "floor" },
+        { "type": "component", "id": "fx/em", "x": 13, "y": 3 }
       ],
-      "speaker": {
-        "component": "chibi-panic-left"
-      }
+      "speaker": { "component": "chibi-panic-left" }
+    },
+    {
+      "panelId": 3,
+      "width": 36, "height": 14,
+      "layout": "two-shot",
+      "cast": [
+        { "id": "chibi-panic-left" },
+        { "id": "chibi-smug-right-point" }
+      ],
+      "content": [
+        { "type": "component", "id": "fx/sweat", "x": 8, "y": 4 }
+      ],
+      "speaker": { "component": "chibi-smug-right-point" }
     }
   ],
   "dialogue": [
-    {
-      "panelId": 0,
-      "text": "Monday again? 死線 today…",
-      "align": "left"
-    },
-    {
-      "panelId": 1,
-      "text": "Deadline? What deadline?",
-      "align": "right",
-      "style": "shout"
-    },
-    {
-      "panelId": 2,
-      "text": "The deploy is live in 10 minutes!!",
-      "align": "left"
-    }
+    { "panelId": 0, "text": "…five more minutes…", "align": "center", "style": "thought" },
+    { "panelId": 1, "text": "Morning! You look half asleep.", "align": "left" },
+    { "panelId": 2, "text": "The deploy is LIVE in ten minutes!!", "align": "left", "style": "shout" },
+    { "panelId": 3, "text": "Relax. Today is Sunday.", "align": "right" }
   ]
 }
