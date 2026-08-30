@@ -1,0 +1,11 @@
+{
+  "panels": [
+    { "panelId": 0, "width": 20, "height": 10, "content": [
+      { "type": "component", "id": "chibi-happy-left", "x": 4, "y": 2 }
+    ] },
+    { "panelId": 1, "width": 20, "height": 10, "content": [
+      { "type": "component", "id": "chibi-happy-right", "x": 4, "y": 2 }
+    ] }
+  ],
+  "dialogue": []
+}

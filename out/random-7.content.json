@@ -1,0 +1,141 @@
+{
+  "title": "Bo & Mo: daily4",
+  "panels": [
+    {
+      "panelId": 0,
+      "width": 36,
+      "height": 14,
+      "ground": true,
+      "content": [
+        {
+          "type": "component",
+          "id": "chibi-happy-right",
+          "side": "center"
+        },
+        {
+          "type": "component",
+          "id": "preset-living-room",
+          "x": 0,
+          "y": 0
+        }
+      ]
+    },
+    {
+      "panelId": 1,
+      "width": 36,
+      "height": 14,
+      "ground": true,
+      "layout": "two-shot",
+      "content": [
+        {
+          "type": "component",
+          "id": "chibi-neutral-left",
+          "side": "right"
+        },
+        {
+          "type": "component",
+          "id": "chibi-confused-right",
+          "side": "left"
+        }
+      ]
+    },
+    {
+      "panelId": 2,
+      "width": 36,
+      "height": 14,
+      "ground": true,
+      "layout": "two-shot",
+      "content": [
+        {
+          "type": "component",
+          "id": "chibi-shocked-right",
+          "side": "left"
+        },
+        {
+          "type": "component",
+          "id": "chibi-dizzy-left",
+          "side": "right"
+        },
+        {
+          "type": "component",
+          "id": "fx/em",
+          "x": 9,
+          "y": 4
+        }
+      ]
+    },
+    {
+      "panelId": 3,
+      "width": 36,
+      "height": 14,
+      "ground": true,
+      "layout": "two-shot",
+      "content": [
+        {
+          "type": "component",
+          "id": "chibi-dead-left",
+          "side": "right"
+        },
+        {
+          "type": "component",
+          "id": "chibi-sad-right",
+          "side": "left"
+        },
+        {
+          "type": "component",
+          "id": "fx/sweat",
+          "x": 25,
+          "y": 4
+        },
+        {
+          "type": "component",
+          "id": "preset-living-room",
+          "x": 0,
+          "y": 0
+        }
+      ]
+    }
+  ],
+  "dialogue": [
+    {
+      "panelId": 0,
+      "text": "A perfect day for a walk.",
+      "align": "left",
+      "style": "thought",
+      "label": "Bo",
+      "speaker": {
+        "component": "chibi-happy-right"
+      }
+    },
+    {
+      "panelId": 1,
+      "text": "Did you feed the cat yet?",
+      "align": "right",
+      "style": "round",
+      "label": "Mo",
+      "speaker": {
+        "component": "chibi-neutral-left"
+      }
+    },
+    {
+      "panelId": 2,
+      "text": "The cat locked us out?!",
+      "align": "left",
+      "style": "shout",
+      "label": "Bo",
+      "speaker": {
+        "component": "chibi-shocked-right"
+      }
+    },
+    {
+      "panelId": 3,
+      "text": "Someday we'll get it right. Someday.",
+      "align": "right",
+      "style": "round",
+      "label": "Mo",
+      "speaker": {
+        "component": "chibi-dead-left"
+      }
+    }
+  ]
+}

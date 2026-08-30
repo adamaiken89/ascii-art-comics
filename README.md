@@ -41,7 +41,7 @@ kaomoji differently; the PNG is the source of truth.
 - `chibi-<mood>-<dir>[-<pose>]` — parametric character: 3-row face box + simple body
   (arms `╱│╲`, torso, legs), 6 rows total. 16 moods × 3 directions (center/left/right) ×
   poses (`basic`, `up` = arms raised, `point` = pointing, flips with direction). Box width
-  adapts to 2-cell glyphs (sad's `﹏` widens the box instead of breaking it).
+  adapts to wider faces (embarrassed's `^///^` widens the box instead of breaking it).
 - `face-<mood>` — kaomoji line from `assets/faces.json`.
 - `fx/*` — reaction glyphs (sweat, zzz, anger, `!!`, `??`, heart, note).
 - Library ids (`prop/coffee`, `prop/cat`, `scene/sun`, `gesture/thumbs-up`, `body/shrug`, …)
@@ -54,7 +54,9 @@ kaomoji differently; the PNG is the source of truth.
 - Story beats for daily conversation comics: `assets/stories/daily4.json`
   (kishōtenketsu) and `assets/stories/manzai.json` (boke/tsukkomi).
 
-Full content-JSON schema and issue-type reference: `SKILL.md`.
+Vocabulary glyphs are grounded in external references (kaomoji datasets, asciiart.eu) —
+see `references/vocabulary-sources.md`. Full content-JSON schema and issue-type
+reference: `SKILL.md`.
 Runnable fixtures: `assets/examples/fixtures/ascii/`.
 
 ## Sample comic
@@ -66,27 +68,30 @@ reaction FX, and a two-character Sunday punchline.
 
 ![Monday Morning ascii pipeline](assets/examples/comics/ascii/monday-morning-ascii.png)
 
+## Random comic generator
+
+Fortune-style harness over the same validated pipeline — the Cowsay+Fortune pattern:
+
+```bash
+bun scripts/random-comic.ts --seed 7 --structure daily4 -o out/lucky
+bun scripts/random-comic.ts --seed 42 --structure manzai -o out/gag
+```
+
+Picks a story structure (`assets/stories/`), samples one line per beat from the line
+banks (`assets/lines/*.json` — editable: more lines = more variety), casts two named
+characters with beat-guided moods, and renders through compose → validate → repair →
+raster. Same seed = byte-identical comic. `--json-only` stops after writing the
+content JSON (for agent callers who want to inspect/edit before rendering).
+
 ## Tests
 
 ```bash
 npm test
 ```
 
-All checks pass:
-- ASCII pipeline: showcase render, CJK/wrap torture with repair loop, overlap repair loop,
-  unresolvable-component raster block, **PNG+TXT golden parity**, and a **JS↔Python
-  width-table parity** check
-- Legacy SVG path: 7 comic render tests, 1 comic fixture, component validator (99), showcase
-
-## Legacy SVG path (v0.2)
-
-`scripts/comic-render.ts` + `scripts/render-comic-svg.py` remain usable — render to your
-own output path (the committed `assets/examples/comics/` holds only current
-ascii-pipeline outputs):
-
-```bash
-python3 scripts/render-comic-svg.py assets/examples/fixtures/monday-morning-comic.json out.svg
-```
+All checks pass: showcase render, CJK/wrap torture with repair loop, overlap repair loop,
+unresolvable-component raster block, **PNG+TXT golden parity**, and a **JS↔Python
+width-table parity** check.
 
 ## Structure
 
@@ -99,8 +104,6 @@ scripts/
   width-parity.ts                 # JS↔Python width-table parity guard
   lib/cellwidth.ts                # THE width rule (TS) — EAW table generated from unicodedata
   lib/eaw-ranges.ts               # GENERATED — do not hand-edit
-  comic-render.ts                 # legacy: SVG renderer
-  template-render.ts              # legacy: template path
   test.sh                         # full test suite
 assets/
   fonts/JetBrainsMono-Regular.ttf # pinned OFL monospace font

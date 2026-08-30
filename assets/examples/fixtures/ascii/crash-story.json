@@ -1,5 +1,5 @@
 {
-  "title": "Monday Morning",
+  "title": "碼農的一天",
   "panels": [
     {
       "panelId": 0,
@@ -8,21 +8,15 @@
       "content": [
         {
           "type": "component",
-          "id": "bed",
-          "x": 16,
+          "id": "chibi-happy-center",
+          "x": 8,
           "y": "floor"
         },
         {
           "type": "component",
-          "id": "chibi-sleepy-center",
-          "x": 4,
+          "id": "laptop",
+          "x": 20,
           "y": "floor"
-        },
-        {
-          "type": "component",
-          "id": "fx/zzz",
-          "x": 2,
-          "y": 4
         }
       ]
     },
@@ -30,20 +24,17 @@
       "panelId": 1,
       "width": 36,
       "height": 14,
-      "layout": "two-shot",
-      "cast": [
-        {
-          "id": "chibi-happy-right"
-        },
-        {
-          "id": "chibi-sleepy-left"
-        }
-      ],
       "content": [
         {
           "type": "component",
-          "id": "coffee",
-          "x": 16,
+          "id": "chibi-neutral-center",
+          "x": 8,
+          "y": "floor"
+        },
+        {
+          "type": "component",
+          "id": "laptop",
+          "x": 20,
           "y": "floor"
         }
       ]
@@ -55,8 +46,9 @@
       "content": [
         {
           "type": "component",
-          "id": "chibi-panic-right",
-          "side": "left"
+          "id": "chibi-panic-center",
+          "x": 8,
+          "y": "floor"
         },
         {
           "type": "component",
@@ -67,8 +59,8 @@
         {
           "type": "component",
           "id": "fx/em",
-          "x": 10,
-          "y": 5
+          "x": 16,
+          "y": 4
         }
       ]
     },
@@ -76,16 +68,25 @@
       "panelId": 3,
       "width": 36,
       "height": 14,
-      "layout": "two-shot",
-      "cast": [
+      "content": [
         {
-          "id": "chibi-panic-right"
+          "type": "component",
+          "id": "chibi-dead-center",
+          "x": 8,
+          "y": "floor"
         },
         {
-          "id": "chibi-smug-left-point"
-        }
-      ],
-      "content": [
+          "type": "component",
+          "id": "laptop",
+          "x": 20,
+          "y": "floor"
+        },
+        {
+          "type": "component",
+          "id": "fx/smoke",
+          "x": 20,
+          "y": 7
+        },
         {
           "type": "component",
           "id": "fx/sweat",
@@ -98,40 +99,40 @@
   "dialogue": [
     {
       "panelId": 0,
-      "text": "…five more minutes…",
+      "text": "我寫好代碼了!",
       "align": "center",
-      "style": "thought",
-      "label": "Bo",
+      "label": "碼農",
       "speaker": {
-        "component": "chibi-sleepy-center"
+        "component": "chibi-happy-center"
       }
     },
     {
       "panelId": 1,
-      "text": "Morning! You look half asleep.",
-      "align": "left",
-      "label": "Mo",
+      "text": "點擊執行…",
+      "align": "center",
+      "style": "thought",
+      "label": "碼農",
       "speaker": {
-        "component": "chibi-happy-right"
+        "component": "chibi-neutral-center"
       }
     },
     {
       "panelId": 2,
-      "text": "The deploy is LIVE in ten minutes!!",
-      "align": "left",
+      "text": "ERROR 404!! 99+ bugs!!",
+      "align": "center",
       "style": "shout",
-      "label": "Bo",
+      "label": "碼農",
       "speaker": {
-        "component": "chibi-panic-right"
+        "component": "chibi-panic-center"
       }
     },
     {
       "panelId": 3,
-      "text": "Relax. Today is Sunday.",
-      "align": "right",
-      "label": "Mo",
+      "text": "……重開機。",
+      "align": "center",
+      "label": "碼農",
       "speaker": {
-        "component": "chibi-smug-left-point"
+        "component": "chibi-dead-center"
       }
     }
   ]

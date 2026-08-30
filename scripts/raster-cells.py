@@ -202,8 +202,18 @@ def raster(compose_result, out_prefix, font_size=20, jpeg_quality=90,
     draw = ImageDraw.Draw(img)
 
     if title:
-        tw = draw.textlength(title, font=font)
-        draw.text(((W - tw) / 2, MARGIN // 2), title, font=font, fill="#222")
+        # Title goes through the same per-glyph font resolution as panel
+        # content — CJK titles must not raster as .notdef boxes.
+        title_map = {}
+        for ch in set(title):
+            cp = ord(ch)
+            title_map[ch] = next(
+                (fb for fb, cps in chain if cps is None or cp in cps), font)
+        tw = sum(draw.textlength(ch, font=title_map[ch]) for ch in title)
+        tx = (W - tw) / 2
+        for ch in title:
+            draw.text((tx, MARGIN // 2), ch, font=title_map[ch], fill="#222")
+            tx += draw.textlength(ch, font=title_map[ch])
 
     # --- Draw char by char at exact cell origins ---
     y_px = title_h + MARGIN

@@ -1,0 +1,123 @@
+{
+  "structure": "manzai",
+  "comment": "Line banks for boke/tsukkomi two-handers. boke = absurd one, tsukkomi = straight man. Beats: b1 setup, t1 disbelief, b2 escalation, t2 full retort (shout).",
+  "names": [
+    "Bo",
+    "Mo",
+    "Ai",
+    "Jo",
+    "Taro",
+    "Nana"
+  ],
+  "scenes": [
+    "living-room",
+    "kitchen",
+    "street",
+    "office",
+    "cafe",
+    "home",
+    "outdoors"
+  ],
+  "fx": {
+    "panic": "fx/em",
+    "sad": "fx/sweat",
+    "shocked": "fx/em",
+    "dizzy": "fx/q",
+    "confused": "fx/q",
+    "love": "fx/heart",
+    "angry": "fx/anger",
+    "sleepy": "fx/zzz",
+    "dead": "fx/sweat",
+    "embarrassed": "fx/sweat"
+  },
+  "beats": {
+    "boke1": [
+      {
+        "text": "I put the milk back in the cupboard.",
+        "style": "round",
+        "mood": "confused"
+      },
+      {
+        "text": "I named every rice grain. This one is Kevin.",
+        "style": "round",
+        "mood": "happy"
+      },
+      {
+        "text": "I told the elevator my problems. It gets me.",
+        "style": "round",
+        "mood": "happy"
+      },
+      {
+        "text": "Sundays are just pre-Mondays, right?",
+        "style": "round",
+        "mood": "smug"
+      }
+    ],
+    "tsukkomi1": [
+      {
+        "text": "…say that again, slowly.",
+        "style": "round",
+        "mood": "shocked"
+      },
+      {
+        "text": "No. Absolutely not.",
+        "style": "round",
+        "mood": "angry"
+      },
+      {
+        "text": "That explains the smell.",
+        "style": "round",
+        "mood": "dead"
+      },
+      {
+        "text": "Is that why the cat is mad at you?",
+        "style": "round",
+        "mood": "suspicious"
+      }
+    ],
+    "boke2": [
+      {
+        "text": "And THEN I watered the plants with soda!",
+        "style": "round",
+        "mood": "proud"
+      },
+      {
+        "text": "Kevin said he wants a bigger bowl.",
+        "style": "round",
+        "mood": "happy"
+      },
+      {
+        "text": "The elevator recommended a vacation.",
+        "style": "round",
+        "mood": "excited"
+      },
+      {
+        "text": "So I scheduled my alarm for PM instead!",
+        "style": "round",
+        "mood": "proud"
+      }
+    ],
+    "tsukkomi2": [
+      {
+        "text": "I'm living with a box of chaos!!",
+        "style": "shout",
+        "mood": "angry"
+      },
+      {
+        "text": "Kevin is a RICE GRAIN!!",
+        "style": "shout",
+        "mood": "angry"
+      },
+      {
+        "text": "We live on the THIRD FLOOR!!",
+        "style": "shout",
+        "mood": "panic"
+      },
+      {
+        "text": "That's TODAY'S problem — wait, NO!!",
+        "style": "shout",
+        "mood": "dizzy"
+      }
+    ]
+  }
+}

@@ -1,0 +1,158 @@
+{
+  "structure": "daily4",
+  "comment": "Line banks for kishōtenketsu daily-conversation comics. Each beat entry: text, style, mood (speaker's chibi mood for that panel). 'other' = the non-speaking character's mood.",
+  "names": [
+    "Bo",
+    "Mo",
+    "Ai",
+    "Jo",
+    "Taro",
+    "Nana"
+  ],
+  "scenes": [
+    "bedroom",
+    "kitchen",
+    "cafe",
+    "living-room",
+    "home",
+    "street",
+    "office",
+    "outdoors"
+  ],
+  "fx": {
+    "panic": "fx/em",
+    "sad": "fx/sweat",
+    "shocked": "fx/em",
+    "dizzy": "fx/q",
+    "confused": "fx/q",
+    "love": "fx/heart",
+    "angry": "fx/anger",
+    "sleepy": "fx/zzz",
+    "dead": "fx/sweat"
+  },
+  "beats": {
+    "ki": [
+      {
+        "text": "…five more minutes…",
+        "style": "thought",
+        "mood": "sleepy"
+      },
+      {
+        "text": "Morning already?",
+        "style": "thought",
+        "mood": "shocked"
+      },
+      {
+        "text": "Today feels like a long day…",
+        "style": "thought",
+        "mood": "neutral"
+      },
+      {
+        "text": "Coffee. Then everything.",
+        "style": "thought",
+        "mood": "dead"
+      },
+      {
+        "text": "A perfect day for a walk.",
+        "style": "thought",
+        "mood": "happy"
+      }
+    ],
+    "sho": [
+      {
+        "text": "Morning! You look half asleep.",
+        "style": "round",
+        "mood": "happy",
+        "other": "sleepy"
+      },
+      {
+        "text": "I made extra tea, want some?",
+        "style": "round",
+        "mood": "happy",
+        "other": "neutral"
+      },
+      {
+        "text": "You will not believe what happened.",
+        "style": "round",
+        "mood": "excited",
+        "other": "shocked"
+      },
+      {
+        "text": "Did you feed the cat yet?",
+        "style": "round",
+        "mood": "neutral",
+        "other": "confused"
+      },
+      {
+        "text": "Rain again. Typical Monday.",
+        "style": "round",
+        "mood": "sad",
+        "other": "neutral"
+      }
+    ],
+    "ten": [
+      {
+        "text": "The meeting is in TEN minutes!!",
+        "style": "shout",
+        "mood": "panic",
+        "other": "shocked"
+      },
+      {
+        "text": "Wait — that was TODAY?!",
+        "style": "shout",
+        "mood": "shocked",
+        "other": "panic"
+      },
+      {
+        "text": "The cat locked us out?!",
+        "style": "shout",
+        "mood": "shocked",
+        "other": "dizzy"
+      },
+      {
+        "text": "I ate your lunch by mistake…",
+        "style": "whisper",
+        "mood": "embarrassed",
+        "other": "shocked"
+      },
+      {
+        "text": "It's raining and I left the window open!",
+        "style": "shout",
+        "mood": "panic",
+        "other": "panic"
+      }
+    ],
+    "ketsu": [
+      {
+        "text": "Relax. Today is Sunday.",
+        "style": "round",
+        "mood": "smug",
+        "other": "shocked"
+      },
+      {
+        "text": "Good thing you're cute when you panic.",
+        "style": "round",
+        "mood": "smug",
+        "other": "embarrassed"
+      },
+      {
+        "text": "Someday we'll get it right. Someday.",
+        "style": "round",
+        "mood": "dead",
+        "other": "sad"
+      },
+      {
+        "text": "Tea first. Crisis after.",
+        "style": "round",
+        "mood": "happy",
+        "other": "relieved-ish"
+      },
+      {
+        "text": "The cat says: not my problem.",
+        "style": "round",
+        "mood": "smug",
+        "other": "dizzy"
+      }
+    ]
+  }
+}

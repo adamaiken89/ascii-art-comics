@@ -100,6 +100,10 @@ export interface Dialogue {
   align?: 'left' | 'center' | 'right';
   style?: string;
   maxWidth?: number;
+  /** speaker ref for THIS line (falls back to panel.speaker); the tail points here */
+  speaker?: { component: string; anchor?: string };
+  /** speaker name shown in the bubble's top border: ╭─ Mo ───╮ */
+  label?: string;
 }
 
 export interface ComicInput {
@@ -141,27 +145,44 @@ const BUBBLE_STYLE: Record<string, { tl: string; t: string; tr: string; bl: stri
 const THOUGHT_TAIL = ['o', '˙'];
 const TAIL_DOWN = '▼'; // solid triangle — ∨ (logical OR) sits too small/high in the pinned font
 
-// === Parametric chibi (cell-space; box width adapts to glyph widths) ===
-const CHIBI = {
-  EYE: {
-    happy: '◕', sad: '╥', panic: '⊙', angry: '╬', smug: '◑', dead: '×',
-    thinking: '◐', shocked: '◎', neutral: '•', excited: '★', confused: '◔',
-    sleepy: '–', love: '♥', dizzy: '@', proud: '^', embarrassed: '◆',
-    suspicious: '●',
-  },
-  MOUTH: {
-    happy: '‿', sad: '﹏', panic: '○', angry: '︵', smug: '‿', dead: '_',
-    thinking: '~', shocked: '○', neutral: '_', excited: '▽', confused: '⌄',
-    sleepy: '○', love: '‿', dizzy: '○', proud: '‿', embarrassed: '‿',
-    suspicious: '~',
-  },
+// === Parametric chibi (cell-space) ===
+// Faces use ONLY canonical ASCII kaomoji forms (the ^_^ / T_T / O_O family
+// found in every kaomoji dictionary) — symmetric, instantly readable, and
+// free of the geometric Unicode symbols that raster as abstract noise in the
+// pinned font. Direction is expressed by shifting the face inside the box,
+// never by changing eye glyphs.
+const CHIBI_FACE: Record<string, string> = {
+  happy: '^_^',
+  sad: 'T_T',
+  panic: 'O_O',
+  angry: '>#<',
+  smug: '¬_¬', // classic side-eye; ¬ is verified in the bundled font
+  dead: 'x_x',
+  thinking: '-_-',
+  shocked: '0_0',
+  neutral: '._.',
+  excited: '*_*',
+  confused: '?_?',
+  sleepy: '-.-',
+  love: '^3^',
+  dizzy: '@_@',
+  proud: '^o^',
+  embarrassed: '^///^', // blush slashes — widest face; the box adapts
+  suspicious: '<_<',
 };
 
-// Away-side eye for directional faces: a small dot (near eye = mood eye).
-// Deliberately NOT a "closed eye" glyph — ˘ is a diacritic that floats high
-// and reads as noise, and ─ (full-cell line) visually fuses with the box
-// border. The bullet is mid-height and present in the bundled font.
-const FAR_EYE = '•';
+/**
+ * Gaze metric: horizontal offset of the face inside the box interior
+ * (interior width = w - 2). Left-facing → face at column 0; right-facing →
+ * face flush right; center → centered. Pure + exported so tests can assert
+ * gaze direction without rendering.
+ */
+export function faceOffset(faceW: number, w: number, dir: string): number {
+  const inner = w - 2;
+  if (dir === 'left') return 0;
+  if (dir === 'right') return inner - faceW;
+  return Math.max(0, Math.floor((inner - faceW) / 2));
+}
 
 /** Body poses: the arms row under the face box. Point flips with dir. */
 const CHIBI_POSES: Record<string, string> = {
@@ -174,21 +195,35 @@ const CHIBI_POSES: Record<string, string> = {
  *  Width derived from actual glyph cell widths, so a 2-cell mouth (﹏) widens
  *  the box instead of breaking it; the body centers under the box. */
 function chibiLines(mood: string, dir: string, pose = 'basic'): string[] {
-  const eye = CHIBI.EYE[mood] ?? CHIBI.EYE.neutral;
-  const mouth = CHIBI.MOUTH[mood] ?? CHIBI.MOUTH.neutral;
-  let left = eye, right = eye;
-  if (dir === 'left') right = FAR_EYE;
-  else if (dir === 'right') left = FAR_EYE;
-  const face = [left, ' ', mouth, ' ', right];
-  const faceW = face.reduce((n, ch) => n + codepointWidth(ch), 0);
-  const w = faceW + 2; // borders
+  const face = CHIBI_FACE[mood] ?? CHIBI_FACE.neutral;
+  const faceW = cells(face);
+  // Directional faces get two extra cells (one per side) so the box stays
+  // odd-width: head, neck notch, and body share one exact center column.
+  const w = faceW + 2 + (dir === 'center' ? 0 : 2);
+  const xoff = faceOffset(faceW, w, dir);
+  const faceRow = ' '.repeat(xoff) + face;
   const pad = '─'.repeat(w - 2);
-  const cx = Math.floor((w - 1) / 2); // body center column
-  const arms = pose === 'point' && dir === 'left' ? '╱│─' : CHIBI_POSES[pose] ?? CHIBI_POSES.basic;
-  const lead = ' '.repeat(Math.max(0, cx - 1));
-  const body = [lead + arms, ' '.repeat(cx) + '│', lead + '╱ ╲'];
+  const cx = Math.floor((w - 1) / 2); // body center column (box center)
+  const inner = w - 2;
+  // Arms scale with the head (`╱│╲` narrow, `╱─│─╲` when there is room) so a
+  // wide head doesn't overhang a skinny body.
+  const armW = inner >= 5 ? 5 : 3;
+  const half = (armW - 1) / 2;
+  let arms = '╱' + '─'.repeat(half - 1) + '│' + '─'.repeat(half - 1) + '╲';
+  // Point arm extends toward the gaze: dashes on the looked-at side.
+  if (pose === 'point') arms = dir === 'left' ? '─'.repeat(armW - 2) + '│╲' : '╱│' + '─'.repeat(armW - 2);
+  // Each body row is anchored so its center glyph (│ / ┴) sits exactly on cx:
+  // symmetric arms have their │ at index `half`, point arms at index 1.
+  const leadArms = ' '.repeat(Math.max(0, cx - (pose === 'point' ? 1 : half)));
+  const leadLegs = ' '.repeat(Math.max(0, cx - 1));
+  // ┴ in the legs row is the hip joint: it sits directly under the torso │.
+  const body = [leadArms + arms, ' '.repeat(cx) + '│', leadLegs + '╱┴╲'];
+  // Neck notch: ┬ in the box bottom connects the head to the torso.
+  const padArr = pad.split('');
+  padArr[Math.max(0, cx - 1)] = '┬';
   const fit = (row: string) => row + ' '.repeat(Math.max(0, w - cells(row)));
-  return [`╭${pad}╮`, `│${face.join('')}│`, `╰${pad}╯`, ...body.map(fit)];
+  const fitFace = (row: string) => row + ' '.repeat(Math.max(0, inner - cells(row)));
+  return [`╭${pad}╮`, `│${fitFace(faceRow)}│`, `╰${padArr.join('')}╯`, ...body.map(fit)];
 }
 
 function loadJson(p: string): any | null {
@@ -221,7 +256,7 @@ function resolveComponent(id: string): { lines: string[] } | { preset: any } | n
     if (!f) return null;
     return { lines: [f.glyph] };
   }
-  if ((m = id.match(/^preset[:\-](\w+)$/))) {
+  if ((m = id.match(/^preset[:\-]([\w-]+)$/))) {
     const preset = asciiLib().scene_presets?.[m[1]];
     if (!preset) return null;
     return { preset };
@@ -382,10 +417,25 @@ function wrapText(text: string, maxCells: number): Cell[][] {
   return lines.length ? lines : [[{ ch: ' ', w: 1 }]];
 }
 
-function buildBubbleCells(lines: Cell[][], style: { tl: string; t: string; tr: string; bl: string; br: string; b: string; v: string }, bw: number): GridSlot[][] {
-  const rows = [
-    [{ ch: style.tl, w: 1 }, ...Array(bw - 2).fill({ ch: style.t, w: 1 }), { ch: style.tr, w: 1 }],
-  ];
+function buildBubbleCells(lines: Cell[][], style: { tl: string; t: string; tr: string; bl: string; br: string; b: string; v: string }, bw: number, label?: string): GridSlot[][] {
+  // Speaker tag: ╭─ Mo ──────╮ — the label rides the top border so every
+  // bubble names its owner.
+  const inner = bw - 2;
+  // The label may contain wide glyphs (碼農) — the row MUST go through
+  // expandRows so each wide char gets its continuation column, like text rows.
+  let topCells: Cell[];
+  if (label) {
+    const tag = ` ${label} `;
+    const tagW = cells(tag);
+    const dash = inner - tagW - 1; // one leading dash
+    topCells = dash >= 0
+      ? [{ ch: style.tl, w: 1 }, { ch: style.t, w: 1 }, ...toCells(tag),
+          ...Array(dash).fill({ ch: style.t, w: 1 }), { ch: style.tr, w: 1 }]
+      : [{ ch: style.tl, w: 1 }, ...Array(inner).fill({ ch: style.t, w: 1 }), { ch: style.tr, w: 1 }];
+  } else {
+    topCells = [{ ch: style.tl, w: 1 }, ...Array(inner).fill({ ch: style.t, w: 1 }), { ch: style.tr, w: 1 }];
+  }
+  const rows = [...expandRows([topCells])];
   for (const line of lines) {
     const pad = bw - 2 - line.reduce((n, c) => n + c.w, 0);
     rows.push(...expandRows([[{ ch: style.v, w: 1 }, ...line, ...Array(pad).fill({ ch: ' ', w: 1 }), { ch: style.v, w: 1 }]]));
@@ -467,7 +517,10 @@ function composePanel(panel: Panel, dialogue: Dialogue[], issues: Issue[]): Comp
             issues.push({ type: 'component_out_of_bounds', panel: pid, row: my + 1, col: mx + 1, severity: 'warning', expected: `${member.id} (${mw}x${mh}) inside ${Wi}x${Hi}`, got: `needs ${b.needW}x${b.needH}`, fix: 'grow panel' });
             continue;
           }
-          g.stamp(mx, my, mp);
+          // Scene presets are BACKDROPS: stamped as background, they never
+          // collide with bubbles/characters (a window behind a bubble is
+          // normal staging) and can be overwritten freely.
+          g.stampBg(mx, my, mp);
         }
         continue;
       }
@@ -516,7 +569,10 @@ function composePanel(panel: Panel, dialogue: Dialogue[], issues: Issue[]): Comp
     const maxTextW = Math.max(4, Math.min(Wi - 4, d.maxWidth ?? Wi - 4));
     const lines = wrapText(String(d.text ?? ''), maxTextW);
     const textW = Math.max(...lines.map((l) => l.reduce((n, c) => n + c.w, 0)));
-    const bw = textW + 2;
+    // The bubble is as wide as the text or the speaker tag, whichever wins.
+    const label = d.label;
+    const labelW = label ? cells(` ${label} `) + 3 : 0; // tl + tag + tr + dash
+    const bw = Math.max(textW + 2, labelW);
     const bh = lines.length + 2;
     const totalH = bh + 1; // tail row
     const x = d.align === 'right' ? Math.max(0, Wi - bw - 1)
@@ -524,7 +580,7 @@ function composePanel(panel: Panel, dialogue: Dialogue[], issues: Issue[]): Comp
       : Math.min(1, Wi - bw);
 
     let tailCol = null;
-    const sp = panel.speaker;
+    const sp = d.speaker ?? panel.speaker; // per-line speaker wins
     if (sp?.component && placed.has(sp.component)) {
       const p = placed.get(sp.component);
       tailCol = p.x + Math.floor(p.w / 2);
@@ -546,7 +602,7 @@ function composePanel(panel: Panel, dialogue: Dialogue[], issues: Issue[]): Comp
       bubbleY += totalH;
       continue;
     }
-    const hits = g.stamp(x, bubbleY, buildBubbleCells(lines, style, bw));
+    const hits = g.stamp(x, bubbleY, buildBubbleCells(lines, style, bw, label));
     if (hits.length) {
       issues.push({ type: 'bubble_overlap', panel: pid, ...gc(hits[0].row, hits[0].col), severity: 'error', expected: 'empty cell', got: hits[0].got, fix: 'grow panel height so content clears the bubble area' });
     }
@@ -631,4 +687,4 @@ function main(): void {
   process.stdout.write(JSON.stringify(result, null, 2) + '\n');
 }
 
-main();
+if (import.meta.main) main();

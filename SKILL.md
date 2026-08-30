@@ -38,7 +38,11 @@ Comic generator. **PNG/JPEG via the ASCII-intermediate pipeline is default** —
     }
   ],
   "dialogue": [
-    { "panelId": 0, "text": "…", "align": "left|center|right", "style": "round|shout|thought|whisper" }
+    { "panelId": 0, "text": "…", "align": "left|center|right",
+      "style": "round|shout|thought|whisper",
+      "label": "Mo",                                  // speaker name in the bubble border
+      "speaker": { "component": "chibi-happy-right" } // per-line tail target (falls back to panel.speaker)
+    }
   ]
 }
 ```
@@ -50,12 +54,13 @@ Panel-level conveniences:
 - `ground: true` — draw a `▁` floor line across the panel.
 - `layout: "two-shot"` + `cast: [{id, side?}]` — two characters facing each other on the floor (first defaults `left`, second `right`); classic staging for conversations.
 - Bubble styles: `round` (default), `shout` (heavy border), `thought` (round + drifting `o ˙` tail — inner monologue), `whisper` (dashed — asides).
+- Attribution: give every dialogue a `label` (rendered as `╭─ Mo ──╮` in the border) and a `speaker` ref so the tail points at the right character. Consistency rule: one bubble style per character per comic; `shout` only for the one big retort.
 
 ## Component vocabulary
 
-- `chibi-<mood>-<dir>[-<pose>]` — parametric character: 3-row face box + simple body (arms `╱│╲`, torso, legs), 6 rows total. 16 moods (happy, sad, panic, angry, smug, dead, thinking, shocked, neutral, excited, confused, sleepy, love, dizzy, proud, embarrassed, suspicious) × 3 directions (center/left/right) × poses (`basic`, `up` = arms raised `╲│╱`, `point` = pointing, flips with direction). Box width adapts to 2-cell glyphs (e.g. sad's `﹏`) instead of breaking. (happy, sad, panic, angry, smug, dead, thinking, shocked, neutral, excited, confused, sleepy, love, dizzy, proud, embarrassed, suspicious) × 3 directions (center/left/right). Box width adapts to 2-cell glyphs (e.g. sad's `﹏`) instead of breaking.
+- `chibi-<mood>-<dir>[-<pose>]` — parametric character: 3-row face box + simple body (arms `╱│╲`, torso, legs), 6 rows total. 16 moods (happy, sad, panic, angry, smug, dead, thinking, shocked, neutral, excited, confused, sleepy, love, dizzy, proud, embarrassed, suspicious) × 3 directions (center/left/right) × poses (`basic`, `up` = arms raised `╲│╱`, `point` = pointing, flips with direction). Faces are canonical ASCII kaomoji (`^_^`, `T_T`, `O_O`, `>#<`, `¬_¬`, `x_x`, `0_0`, `*_*`, `^o^`, `?_?`, `-.-`, `@_@`, `._.`, `^3^`, `<_<`, `^///^`) — always symmetric; direction shifts the face inside the box. Box width adapts to wider faces (`^///^`) instead of breaking. (happy, sad, panic, angry, smug, dead, thinking, shocked, neutral, excited, confused, sleepy, love, dizzy, proud, embarrassed, suspicious) × 3 directions (center/left/right). Faces are canonical ASCII kaomoji (`^_^`, `T_T`, `O_O`, `>#<`, `¬_¬`, `x_x`, `0_0`, `*_*`, `^o^`, `?_?`, `-.-`, `@_@`, `._.`, `^3^`, `<_<`, `^///^`) — always symmetric; direction shifts the face inside the box. Box width adapts to wider faces (`^///^`) instead of breaking.
 - `face-<mood>` — kaomoji line from `assets/faces.json`.
-- `fx/<name>` — reaction glyphs: `sweat` (`;`), `zzz`, `anger` (`≡≡≡`), `em` (`!!`), `q` (`??`), `heart`, `note`. Place near the head; use sparingly (one per panel).
+- `fx/<name>` — reaction glyphs: `sweat` (`;;`), `zzz` (`z Z`), `anger` (3-row vein cross), `em` (`!!`), `q` (`??`), `heart`, `note`. Place at head height, touching the head box (one row above / one column beside it) — a floating fx reads as random noise. Use sparingly: at most one per panel.
 - `prop/<name>` — daily-life props: bed, table, chair, tv, cat, bread, noodles, umbrella, bag, window, plant, laptop, coffee, book, phone, … (full list in `assets/ascii-library.json`).
 - `preset-<name>` — scene backdrops: `bedroom`, `kitchen`, `cafe`, `living-room`, `home`, `street`, `office`, `night`, `storm`, `outdoors`.
 - Library ids (`prop/coffee` or bare `coffee`, `scene/sun`, `gesture/thumbs-up`, `body/shrug`, …) — ASCII art in `assets/ascii-library.json`.
@@ -74,6 +79,13 @@ Panel-level conveniences:
 | `glyph_missing` / `cjk_font_missing` | rasterizer font coverage | warning; add `--cjk-font` |
 
 `severity: "error"` blocks rasterization; warnings still render.
+
+## Random comic generator
+
+`bun scripts/random-comic.ts --seed N --structure daily4|manzai -o out/prefix` — samples
+line banks (`assets/lines/*.json`) per story beat, casts two characters, and runs the
+validated pipeline. Seeded = reproducible. Extend variety by adding lines to the banks —
+never by inventing glyphs (see `references/vocabulary-sources.md`).
 
 ## Story structure (daily conversation comics)
 
@@ -106,6 +118,7 @@ content.json ─→ scripts/compose.ts          (cell grid, borders, bubbles, co
 
 ## Pointer map
 
+- **Vocabulary building reference (sources + canonical forms) → `references/vocabulary-sources.md`** — cite a source before adding/changing any glyph
 - Width rule + EAW table → `scripts/lib/cellwidth.ts`, `scripts/lib/eaw-ranges.ts`
 - Border sets, gutter math → `references/panels.md`
 - Wrap rules per language → `references/dialogue.md`

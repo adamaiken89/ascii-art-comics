@@ -15,7 +15,8 @@
     "build:library": "bun scripts/build-library.ts",
     "generate:component-svgs": "bun scripts/generate-component-svgs.ts",
     "width:parity": "bun scripts/width-parity.ts",
-    "test": "bash scripts/test.sh"
+    "test": "bash scripts/test.sh",
+    "random:comic": "bun scripts/random-comic.ts"
   },
   "dependencies": {
     "grapheme-splitter": "^1.0.4",

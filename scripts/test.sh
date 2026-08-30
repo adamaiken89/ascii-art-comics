@@ -330,6 +330,71 @@ else
   FAIL=1
 fi
 
+# Gaze direction: faceOffset metric (hard-coded expectations) + rendered faces
+# must shift toward the looking direction.
+if bun -e '
+const m = await import("./scripts/compose.ts");
+const cases = [[3, 5, "center", 0], [3, 7, "left", 0], [3, 7, "right", 2],
+               [5, 7, "center", 0], [5, 9, "left", 0], [5, 9, "right", 2]];
+for (const [fw, w, dir, want] of cases) {
+  const got = m.faceOffset(fw, w, dir);
+  if (got !== want) { console.error(`faceOffset(${fw},${w},${dir}) = ${got}, want ${want}`); process.exit(1); }
+}
+console.log("ok");
+' > /dev/null 2>&1; then
+  echo "  PASS  gaze metric faceOffset"
+else
+  echo "  FAIL  gaze metric faceOffset"
+  FAIL=1
+fi
+dir_txt="$TMP/direction/direction.txt"
+python3 scripts/render-ascii-comic.py assets/examples/fixtures/ascii/direction.json -o "$TMP/direction/direction" > /dev/null 2>&1 || true
+if grep -q "│^_^  │" "$dir_txt" && grep -q "│  ^_^│" "$dir_txt"; then
+  echo "  PASS  gaze rendering: left-facing shifts left, right-facing shifts right"
+else
+  echo "  FAIL  gaze rendering direction"
+  FAIL=1
+fi
+
+# Chibi connectivity: ┬ (neck) → │ (torso) → ┴ (hips) must share one column.
+pycol='import sys
+rows=[l.rstrip("\n") for l in open(sys.argv[1],encoding="utf-8") if l.strip()]
+ok=True
+for i,r in enumerate(rows):
+    if "┬" in r:
+        c=r.index("┬")
+        seg=rows[i+1:i+4]
+        if not (len(seg)==3 and all(len(s)>c and s[c]=="│" for s in seg[:2]) and seg[2][c]=="┴"):
+            print(f"disconnected chibi at line {i}: col {c}"); ok=False
+sys.exit(0 if ok else 1)'
+if python3 scripts/render-ascii-comic.py assets/examples/fixtures/ascii/direction.json -o "$TMP/direction/direction" > /dev/null 2>&1 \
+   && python3 -c "$pycol" "$TMP/direction/direction.txt" 2>/dev/null; then
+  echo "  PASS  chibi connectivity (┬→│→┴ one column)"
+else
+  echo "  FAIL  chibi connectivity"
+  FAIL=1
+fi
+
+# --- Random comic generator: determinism + ok ---
+echo ""
+echo "--- random generator ---"
+RC=scripts/random-comic.ts
+bun "$RC" --seed 42 --structure manzai -o "$TMP/rc-a" > /dev/null 2>&1 || true
+bun "$RC" --seed 42 --structure manzai -o "$TMP/rc-b" > /dev/null 2>&1 || true
+if cmp -s "$TMP/rc-a.txt" "$TMP/rc-b.txt" && cmp -s "$TMP/rc-a.png" "$TMP/rc-b.png"; then
+  echo "  PASS  random: same seed → byte-identical output"
+else
+  echo "  FAIL  random: same seed must reproduce identical output"
+  FAIL=1
+fi
+ok42=$(bun "$RC" --seed 42 --structure daily4 -o "$TMP/rc-c" 2>/dev/null | python3 -c "import sys,json; print(json.load(sys.stdin)['ok'])" || echo False)
+if [ "$ok42" = "True" ]; then
+  echo "  PASS  random: daily4 seed 42 renders clean"
+else
+  echo "  FAIL  random: daily4 seed 42 must render ok"
+  FAIL=1
+fi
+
 echo ""
 if [ $FAIL -eq 0 ]; then
   echo "  ALL PASS"
