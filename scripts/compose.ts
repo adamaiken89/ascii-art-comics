@@ -562,6 +562,27 @@ function composePanel(panel: Panel, dialogue: Dialogue[], issues: Issue[]): Comp
   }
 
   // --- Bubbles (top of interior, stacked) ---
+  // Voice-style consistency: each SPEAKER keeps one spoken style across the
+  // story (round/shout/whisper; thought is exempt — inner monologue, same
+  // border family). Warns when a character's own lines mix spoken styles.
+  const stylesByLabel = new Map<string, Set<string>>();
+  for (const d of dialogue) {
+    if ((d.style ?? 'round') === 'thought') continue;
+    const who = d.label ?? `panel:${d.panelId}`;
+    if (!stylesByLabel.has(who)) stylesByLabel.set(who, new Set());
+    stylesByLabel.get(who)!.add(d.style ?? 'round');
+  }
+  for (const [who, styles] of stylesByLabel) {
+    if (styles.size > 1 && !composeWarned) {
+      composeWarned = true;
+      issues.push({
+        type: 'style_inconsistent', severity: 'warning',
+        expected: `one spoken bubble style for "${who}"`,
+        got: [...styles].sort().join(' + '),
+        fix: 'keep the same style for all of a character’s spoken lines; vary mood instead',
+      });
+    }
+  }
   const panelDialogue = dialogue.filter((d) => d.panelId === pid);
   let bubbleY = 0;
   for (const d of panelDialogue) {
@@ -643,7 +664,10 @@ function composePanel(panel: Panel, dialogue: Dialogue[], issues: Issue[]): Comp
   return { panelId: pid, width: W, height: H, ascii };
 }
 
+let composeWarned = false;
+
 function compose(input: ComicInput): ComposeResult {
+  composeWarned = false;
   const issues = [];
   const panels = input.panels ?? [];
   if (panels.length === 0) {

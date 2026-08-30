@@ -120,7 +120,6 @@
       "panelId": 2,
       "text": "ERROR 404!! 99+ bugs!!",
       "align": "center",
-      "style": "shout",
       "label": "碼農",
       "speaker": {
         "component": "chibi-panic-center"

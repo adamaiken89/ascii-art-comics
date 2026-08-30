@@ -54,7 +54,8 @@ Panel-level conveniences:
 - `ground: true` — draw a `▁` floor line across the panel.
 - `layout: "two-shot"` + `cast: [{id, side?}]` — two characters facing each other on the floor (first defaults `left`, second `right`); classic staging for conversations.
 - Bubble styles: `round` (default), `shout` (heavy border), `thought` (round + drifting `o ˙` tail — inner monologue), `whisper` (dashed — asides).
-- Attribution: give every dialogue a `label` (rendered as `╭─ Mo ──╮` in the border) and a `speaker` ref so the tail points at the right character. Consistency rule: one bubble style per character per comic; `shout` only for the one big retort.
+- Attribution: give every dialogue a `label` (rendered as `╭─ Mo ──╮` in the border) and a `speaker` ref so the tail points at the right character.
+- **Style consistency:** one spoken style per story (default `round` — do not mix `shout`/`whisper`; the composer warns on `style_inconsistent`). `thought` is exempt (inner monologue, same border family).
 
 ## Component vocabulary
 

@@ -100,11 +100,11 @@
       "panelId": 0,
       "text": "…five more minutes…",
       "align": "center",
-      "style": "thought",
       "label": "Bo",
       "speaker": {
         "component": "chibi-sleepy-center"
-      }
+      },
+      "style": "thought"
     },
     {
       "panelId": 1,
@@ -119,7 +119,6 @@
       "panelId": 2,
       "text": "The deploy is LIVE in ten minutes!!",
       "align": "left",
-      "style": "shout",
       "label": "Bo",
       "speaker": {
         "component": "chibi-panic-right"
